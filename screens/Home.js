@@ -30,16 +30,20 @@ const Home = () => {
   return (
       <SafeAreaView className="bg-backgr h-full">
         
-        <View className="pt-20 pb-5 mt-40 ml-10 "> 
-          <Text className=" text-3xl pb-1 font-bold text-textColor">Better U</Text>
-          <Text className="text-xl font-bold text-textColor">Time to let go of your worries DEAR!</Text>
+        <View className="pt-20 pb-5 mt-40 ml-10 font-inter"> 
+          <Text className=" text-3xl pb-1  text-textColor font-interSBold" style={styles.titleText}>Better U</Text>
+          <Text className="text-xl  text-textColor font-regular">Time to let go of your worries DEAR!</Text>
           <Text className="text-xl font-bold text-textColor">{disArr[index%disArr.length]}</Text>
         </View>
-        <View className="mb-25">
-          <Button title='Proceed'color="#1d253b" onPress={()=>navigation.navigate('Signup')} />
-          <Text>Aready have an account?</Text>
-          <Button title='Login' color="#1d253b" onPress={()=>{navigation.navigate('Login')}}/>
+        <View className="mx-14 px-14 rounded-full" >
+        <Button className='mx-5 rounded' title='Proceed'color="#1d253b" onPress={()=>navigation.navigate('Signup')} />
         </View>
+          <Text className="text-xl pl-14 ml-7 pt-12 mt-14 pb-2 text-textColor font-regular">Already have an account?</Text>
+          <View className="mx-14 px-14 " >
+          <Button title='Login' color="#1d253b" onPress={()=>{navigation.navigate('Login')}}/>
+  
+          </View>
+          
         
       </SafeAreaView>
   
@@ -49,6 +53,16 @@ const Home = () => {
 
 export default Home;
 
+const styles= StyleSheet.create({
+  titleText:{
+    fontFamily:'inter-bold'
+  },
+  text:{
+    fontFamily:'inter-regular'
+  },
+  btn:{
 
+  }
+})
 
 

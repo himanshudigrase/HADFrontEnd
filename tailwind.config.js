@@ -13,6 +13,11 @@ module.exports = {
       'sans': ['ui-sans-serif', 'system-ui'],
       'serif': ['ui-serif', 'Georgia'],
       'mono': ['ui-monospace', 'SFMono-Regular'],
+      'inter':['inter-black'],
+      'interBold':['inter-bold'],
+      'interRegular':['inter-regular'],
+      'interSBold':['inter-semibold']
+
     },
     extend: {
       colors: {
@@ -22,4 +27,5 @@ module.exports = {
     },
   },
   plugins: [],
+  assets:['./assets/fonts']
 }
