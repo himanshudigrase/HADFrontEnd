@@ -3,11 +3,11 @@ import React,{useLayoutEffect,useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const DemoData = () => {
+const DemoData = ({route}) => {
     const [name,setName] = useState('Enter your name');
     const [age,setAge] = useState('Enter your age here');
     const [gender,setGender] = useState('Male/Female/Others')
-    
+    {console.log(route)}
   const navigation = useNavigation();
 
     useLayoutEffect(() => {
@@ -18,13 +18,15 @@ const DemoData = () => {
     }, [])
   
   return (
+    
     <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
+     
       <View> 
         <Text>Let's know more about you!</Text>
       <TextInput title="Username" onChangeText={(name) =>setName(name)}
             placeholder="Enter you name"
         />
-        <TextInput title="Age" onChangeText={(age) =>setAge(age)}
+        <TextInput  title="Age" onChangeText={(age) =>setAge(age)}
             placeholder="Enter you Age"/>
         <TextInput title="Gender" onChangeText={(gender) =>setGender(gender)}
             placeholder="Enter you gender"/>
