@@ -2,6 +2,7 @@ import { View, Text, Button, TextInput } from 'react-native'
 import React,{useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Input from '../components/Input';
 
 const Signup = () => {
   const [fname,setFname] = useState('');
@@ -56,9 +57,12 @@ const Signup = () => {
 
     if(isValid){
       navigation.navigate('DemoData',{
+        fname:fname,
+        lname:lname,
         email:email,
         password:password,
-        confirmPassword:confirmPassword
+        confirmPassword:confirmPassword,
+        roleID:3
         }
       )
     }
@@ -85,11 +89,36 @@ const Signup = () => {
   return (
     <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
       <View> 
-       <TextInput placeholder='First Name' title="fname" onChangeText={handleFNameChange} value={fname}/>
-        <TextInput placeholder='Last Name' title="lname" onChangeText={handleLNameChange} value={lname}/>
-        <TextInput placeholder='Username/Email' title="Username" onChangeText={handleEmailChange} value={email}/>
-        <TextInput placeholder='Password' title="password" onChangeText={handlePasswordChange} value={password}/>
-        <TextInput placeholder='Confirm password' title="Confirm Password" onChangeText={handleConfirmPasswordChange} value={confirmPassword}/>
+        <Input label="First Name" otherProps={{
+          onChangeText:handleFNameChange,
+          placeholder:'First Name',
+          value:fname
+        }}/> 
+       {/* <TextInput placeholder='First Name' title="fname" onChangeText={handleFNameChange} value={fname}/> */}
+       <Input label="Last Name" otherProps={{
+          onChangeText:handleLNameChange,
+          placeholder:'Last Name',
+          value:lname
+        }}/> 
+        {/* <TextInput placeholder='Last Name' title="lname" onChangeText={handleLNameChange} value={lname}/>*/}
+         <Input label="Email ID" otherProps={{
+          onChangeText:handleEmailChange,
+          placeholder:'abc@gmail.com',
+          value:email
+        }}/> 
+        {/* <TextInput placeholder='Username/Email' title="Username" onChangeText={handleEmailChange} value={email}/>  */}
+        <Input label="Password" otherProps={{
+          onChangeText:handlePasswordChange,
+          placeholder:'Password',
+          value:password
+        }}/> 
+        {/* <TextInput placeholder='Password' title="password" onChangeText={handlePasswordChange} value={password}/> */}
+        <Input label="Confirm Password" otherProps={{
+          onChangeText:handleConfirmPasswordChange,
+          placeholder:'Confirm Password',
+          value:confirmPassword
+        }}/> 
+        {/* <TextInput placeholder='Confirm password' title="Confirm Password" onChangeText={handleConfirmPasswordChange} value={confirmPassword}/> */}
         <Button title='Continue' color="#1d253b" onPress={ handleSubmit}/>
        {/* {isValid && redirect} */}
     </View>

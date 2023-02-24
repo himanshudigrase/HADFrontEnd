@@ -7,6 +7,7 @@ module.exports = {
    "./screens/Signup.{js,jsx,ts,tsx}",
    "./screens/Dashboard.{js,jsx,ts,tsx}",
    "./screens/MedHistory.{js,jsx,ts,tsx}",
+    "./components/Input.{js,jsx,ts,tsx}"
 ],
   theme: {
     fontFamily: {
