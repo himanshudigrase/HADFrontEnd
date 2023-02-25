@@ -2,12 +2,33 @@ import { View, Text, Button, TextInput } from 'react-native'
 import React,{useLayoutEffect,useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Input from '../components/Input';
+ import signupService from '../services/signupService'
+
+
+
 
 const DemoData = ({route}) => {
-   // const [name,setName] = useState('Enter your name');
-    const [age,setAge] = useState('Enter your DOB here');
-    const [gender,setGender] = useState('Male/Female/Others')
-    {console.log(route)}
+   
+    const [inputValues, setInputValues] = useState({
+      dob:'',
+      gender:'',
+      })
+      const [doc,setDoc] = useState(false);
+    // console.log(route);
+
+      function inputChangedHandler(inputIdentifier,enteredValue){
+        setInputValues((curInputValues)=>{
+          return {
+            ...curInputValues,
+            [inputIdentifier]:enteredValue
+          };
+        });
+      }
+      const handleDoc = (text)=>{
+        if(text == 'Y')setDoc(true)
+      }
+
   const navigation = useNavigation();
 
     useLayoutEffect(() => {
@@ -17,6 +38,47 @@ const DemoData = ({route}) => {
     
     }, [])
   
+  const detailsObj = {
+    email:route.params.demodet.email,
+    password:route.params.demodet.password,
+    userRole:{
+      roleId:route.params.demodet.roleID,
+    },
+    
+    demographics:{
+      userId:0,
+      firstName:route.params.fname,
+      lastName:route.params.lname,
+      gender:inputValues.gender,
+      dob:inputValues.dob,
+      age:0
+    }}
+    let userId =0; 
+
+  const submitHandler = async()=>{
+   try{
+    console.log(detailsObj)
+     userId = await signupService.signup(detailsObj);
+
+    console.log(userId);
+    console.log(userId.response.userId);
+
+    if(userId.success === true){
+      console.log("here");
+        (()=>navigation.navigate('MedHistory',{
+            userId:userId.response.userId,
+          
+            wants_doc:doc
+        }))();
+    }
+  }catch(exception){
+    //console.log(exception);
+    (()=>navigation.navigate('MedHistory',{
+     // userId:userId.response.userId,
+    
+      wants_doc:doc
+  }))();
+  }}  
   return (
     
     <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
@@ -26,14 +88,26 @@ const DemoData = ({route}) => {
       {/* <TextInput title="Username" onChangeText={(name) =>setName(name)}
             placeholder="Enter you name"
         /> */}
-        <TextInput  title="Age" onChangeText={(age) =>setAge(age)}
-            placeholder="Enter you Age"/>
-        <TextInput title="Gender" onChangeText={(gender) =>setGender(gender)}
-            placeholder="Enter you Gender"/>
-        <Button title='Continue' color="#1d253b" onPress={()=>navigation.navigate('MedHistory',{
-            age:age,
-            gender:gender
-        })}/>
+        
+
+        <Input label="Enter DOB" otherProps ={{
+             title:"DOB", onChangeText:inputChangedHandler.bind(this,'dob'),
+             placeholder:"DD/MM/YYYY", value : inputValues.dob
+        }}/>
+
+        <Input label="Enter Gender" otherProps ={{
+             title:"Gender", onChangeText:inputChangedHandler.bind(this,'gender'),
+             placeholder:"M/F/Others", value : inputValues.gender
+        }}/>
+
+        <Input label="Do you want Doctor now?" otherProps ={{
+             title:"DoctorW", onChangeText:handleDoc,
+             placeholder:"Type Y/N", value : doc
+        }}/>
+        
+        <Button title='Continue' color="#1d253b" onPress= {submitHandler}
+        
+        />
     </View>
     </SafeAreaView>
   )
