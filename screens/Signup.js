@@ -129,19 +129,19 @@ const Signup = () => {
           placeholder:'abc@gmail.com',
           value:inputValues.email
         }}/> 
-        {/* <TextInput placeholder='Username/Email' title="Username" onChangeText={handleEmailChange} value={email}/>  */}
+        
         <Input label="Password" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'password') ,
           placeholder:'Password',
           value:inputValues.password
         }}/> 
-        {/* <TextInput placeholder='Password' title="password" onChangeText={handlePasswordChange} value={password}/> */}
+        
         <Input label="Confirm Password" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'confirmPassword') ,
           placeholder:'Confirm Password',
           value:inputValues.confirmPassword
         }}/> 
-        {/* <TextInput placeholder='Confirm password' title="Confirm Password" onChangeText={handleConfirmPasswordChange} value={confirmPassword}/> */}
+        
         <Button title='Continue' color="#1d253b" onPress={ handleSubmit}/>
        
     </View>

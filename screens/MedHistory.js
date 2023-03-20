@@ -83,22 +83,28 @@ today = dd + '/' + mm + '/' + yyyy;
     
     const submitHandler = async()=>{
       try{
-       console.log(medHistDet)
-        res = await signUpService.submiDetails(medHistDet);
-        console.log(res)
-       if(res.success === true){
-         console.log("here");
-           (()=>navigation.navigate('Dashboard',{
-               userId:res,
-             
+       
+      //  res = await signUpService.submiDetails(medHistDet);  //-- uncomment this if checking on backend
+     // console.log(res)                                        
+      //  if(res.success === true){
+      //    console.log("In MedHost");
+      //      (()=>navigation.navigate('Dashboard',{
+      //         demographics:res.response.demographics,
+      //         patient:res.response.patient,
+      //         medicalHistory:res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
+      //         userRole:res.response.userRole
+
                
-           }))();
-       }
+      //      }))();
+      //  }
+
+
+      (()=>navigation.navigate('Dashboard'))();      // comment this on backend testing
      }catch(exception){
       console.log(exception)
-    //    (()=>navigation.navigate('Dashboard'))();
+       
       }}
-
+  
   return (
     <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
       <View> 
@@ -106,7 +112,7 @@ today = dd + '/' + mm + '/' + yyyy;
         
         <Input label="Height" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'height') ,
-          placeholder:'eg: 6\'12',
+          placeholder:'eg: 172',
           value:inputValues.height
         }}/> 
         <Input label="Weight" otherProps={{
