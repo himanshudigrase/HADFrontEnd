@@ -13,12 +13,14 @@ import Dashboard from './screens/Dashboard';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
 import { Provider as PaperProvider } from 'react-native-paper';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BottomNavbar from './navigator/BottomNavbar';
+
+
+
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -76,9 +78,9 @@ export default function App() {
             <Stack.Screen name="Signup" component={Signup}/>
             <Stack.Screen name="DemoData" component={DemoData}/>
             <Stack.Screen name="MedHistory" component={MedHistory}/>
-            <Tab.Navigator></Tab.Navigator>
-            <Stack.Screen name="Dashboard" component={Dashboard}/>         
+            <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/> 
            </Stack.Navigator>
+       
         </PaperProvider>
       </NavigationContainer>
     );
