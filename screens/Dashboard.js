@@ -2,8 +2,11 @@ import { View, Text, Button, TextInput } from 'react-native'
 import React,{useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Appbar } from 'react-native-paper';
+
 import Categories from '../components/Categories';
+import Header from '../components/Header';
+
+
 const Dashboard = ({route}) => {
   const navigation = useNavigation();
    useLayoutEffect(() => {
@@ -16,11 +19,7 @@ const Dashboard = ({route}) => {
   console.log(route);
   return (
     <View className=" bg-backgr h-full ">
-    <Appbar.Header>
-      <Appbar.Action icon="menu"/>
-      <Appbar.Content title="Welcome User" />
-      <Appbar.Action icon="cog"/>
-    </Appbar.Header>
+    <Header/>
     <View className="">
       <Text></Text>
     <Categories />
@@ -28,7 +27,7 @@ const Dashboard = ({route}) => {
     {/* <Text>Recent Activity</Text> */}
     
     
-    
+    {/* <BottomNavbar/> */}
     </View>
     // <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
     //   <View> 
