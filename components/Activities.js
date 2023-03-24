@@ -1,8 +1,8 @@
 import {ScrollView } from 'react-native'
 import React from 'react'
-import CategoryCard from './CategoryCard'
+import ActivityCard from './ActivityCard'
 
-const Categories = () => {
+const Activities = () => {
   return (
     <ScrollView 
     contentContainerStyle={{
@@ -13,32 +13,32 @@ const Categories = () => {
     showsHorizontalScrollIndicator={false}
     >
       
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
 
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
-      <CategoryCard
+      <ActivityCard
       imgUrl="https://links.papareact.com/gn7"
       title="Testing 1"
       />
@@ -46,4 +46,4 @@ const Categories = () => {
   )
 }
 
-export default Categories
+export default Activities

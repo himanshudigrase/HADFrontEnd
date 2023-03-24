@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect,useCallback } from 'react';
+import React, { useState,useEffect,useCallback, useContext } from 'react';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { NativeWindStyleSheet } from "nativewind";
 import HomeScreen from './screens/Home'
@@ -12,8 +12,11 @@ import MedHistory from './screens/MedHistory';
 import Dashboard from './screens/Dashboard';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
-import { Provider as PaperProvider } from 'react-native-paper';
+import { ActivityIndicator, Provider as PaperProvider } from 'react-native-paper';
 import BottomNavbar from './navigator/BottomNavbar';
+
+import { View } from 'react-native';
+import { AuthContext,} from './context/AuthContext';
 
 
 
@@ -24,6 +27,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+ // const {userToken} = useContext(AuthContext);
 
   useEffect(() => {
     async function prepare() {
@@ -68,21 +72,29 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
+  // if(isLoading){
+  //   <View className='flex-1 justifyContent-center'>
+  //     <ActivityIndicator size={'large'}/>
+  //   </View>
+  // }
 
     return (
-      <NavigationContainer  onLayout={onLayoutRootView}>
+      // <AuthContext>
+        <NavigationContainer  onLayout={onLayoutRootView}>
          <PaperProvider>
-          <Stack.Navigator  onLayout={onLayoutRootView}>       
+          <Stack.Navigator  onLayout={onLayoutRootView} options={{headerShown:false}}>   
+            {/* {userToken!=null ? <Stack.Screen name="Login" component={Login}/>: <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/>}     */}
             <Stack.Screen  name="Home" component={HomeScreen} />
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen name="Signup" component={Signup}/>
             <Stack.Screen name="DemoData" component={DemoData}/>
             <Stack.Screen name="MedHistory" component={MedHistory}/>
             <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/> 
-           </Stack.Navigator>
-       
+           </Stack.Navigator>     
         </PaperProvider>
       </NavigationContainer>
+     // {/* </AuthContext> */}
+      
     );
   
   

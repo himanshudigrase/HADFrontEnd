@@ -9,7 +9,10 @@ module.exports = {
    "./screens/MedHistory.{js,jsx,ts,tsx}",
     "./components/Input.{js,jsx,ts,tsx}",
     "./components/Categories.{js,jsx,ts,tsx}",
-    "./components/CategoryCard.{js,jsx,ts,tsx}"
+    "./components/CategoryCard.{js,jsx,ts,tsx}",
+    "./components/Blogs.{js,jsx,ts,tsx}",
+    "./components/BlogCard.{js,jsx,ts,tsx}"
+
 ],
   theme: {
     fontFamily: {

@@ -1,10 +1,12 @@
 import { View, Text, Button, TextInput } from 'react-native'
-import React,{useLayoutEffect} from 'react'
+import React,{useContext, useLayoutEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
+  const {login} = useContext(AuthContext);
   const navigation = useNavigation();
 
     useLayoutEffect(() => {

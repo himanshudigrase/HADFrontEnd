@@ -1,11 +1,11 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, Button, TextInput, ScrollView } from 'react-native'
 import React,{useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Categories from '../components/Categories';
+import Activities from '../components/Activities';
 import Header from '../components/Header';
-
+import Blogs from '../components/Blogs';
 
 const Dashboard = ({route}) => {
   const navigation = useNavigation();
@@ -20,14 +20,23 @@ const Dashboard = ({route}) => {
   return (
     <View className=" bg-backgr h-full ">
     <Header/>
-    <View className="">
-      <Text></Text>
-    <Categories />
-    </View>
-    {/* <Text>Recent Activity</Text> */}
-    
-    
-    {/* <BottomNavbar/> */}
+
+    <ScrollView contentContainerStyle={{
+        padding:15,
+        paddingTop:10
+    }}
+    vertical
+    showsVerticalScrollIndicator={true}>
+      <View className="">
+        <Text>My Activities</Text>
+        <Activities />
+      </View>
+      <View>
+        <Text>Blogs</Text>
+        <Blogs />
+      </View>
+      
+    </ScrollView>
     </View>
     // <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
     //   <View> 

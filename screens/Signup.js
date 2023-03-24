@@ -115,31 +115,36 @@ const Signup = () => {
         <Input label="First Name" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'fname') ,
           placeholder:'First Name',
-          value:inputValues.fname
+          value:inputValues.fname,
+          secureTextEntry: false
         }}/> 
        {/* <TextInput placeholder='First Name' title="fname" onChangeText={handleFNameChange} value={fname}/> */}
        <Input label="Last Name" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'lname') ,
           placeholder:'Last Name',
+          secureTextEntry: false,
           value:inputValues.lname
         }}/> 
         {/* <TextInput placeholder='Last Name' title="lname" onChangeText={handleLNameChange} value={lname}/>*/}
          <Input label="Email ID" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'email') ,
           placeholder:'abc@gmail.com',
-          value:inputValues.email
+          value:inputValues.email,
+          secureTextEntry: false
         }}/> 
         
         <Input label="Password" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'password') ,
           placeholder:'Password',
-          value:inputValues.password
+          value:inputValues.password,
+          secureTextEntry: true
         }}/> 
         
         <Input label="Confirm Password" otherProps={{
           onChangeText:inputChangedHandler.bind(this,'confirmPassword') ,
           placeholder:'Confirm Password',
-          value:inputValues.confirmPassword
+          value:inputValues.confirmPassword,
+          secureTextEntry: true
         }}/> 
         
         <Button title='Continue' color="#1d253b" onPress={ handleSubmit}/>
