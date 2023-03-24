@@ -10,7 +10,7 @@ const BlogCard = ({name,imgUrl,designation}) => {
     <Card.Title title={name} 
     subtitle={designation} style={{alignContent:'center'}} titleStyle={{color:'rgba(255,255,255,0.9)'}}
      left={(props) =>
-      <Avatar.Icon size={50} icon="settings" color='rgba(255,255,255,0.9)' /> }>
+      <Avatar.Icon size={50} icon="folder" color='rgba(255,255,255,0.9)' /> }>
     </Card.Title>
     
     <Card.Content>

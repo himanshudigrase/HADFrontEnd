@@ -2,29 +2,30 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { StarIcon,MapPinIcon } from 'react-native-heroicons/solid'
+import { Card,Button,Avatar } from 'react-native-paper';
+
 
 const DoctorCard = ({
-    id,imgUrl,title,short_description
+    id,name,qualification,specialization,experience,imgUrl
 }) => {
   return (
-    <TouchableOpacity className="flex-row m-2"> 
-      <Image
-        source={{
-            uri:imgUrl
-        }}
-        className="h-40 w-40 rounded-sn"
-      />
-      <View className="px-3 pb-4">
-        <Text className="font-bold text-lg pt-2">{title}</Text>
-        <View className="flex-row items-center space-x-1">
-            <StarIcon color="#00CCBB" opacity={0.5} size={22}/>
-            <Text className="text-gray-500">
-                <Text>deqafault</Text>
-                <Text>{short_description}</Text>
-            </Text>
-        </View>
-      
-      </View>
+    <TouchableOpacity className="m-2"> 
+      <Card className="">
+    
+    <Card.Title className="m-3" title={name} subtitle={qualification} 
+   style={{alignContent:'center',margin:12}} 
+     left={(props) =>
+      <Avatar.Image className="" size={70} icon={imgUrl} /> }>
+    </Card.Title>
+    
+    <Card.Content className="ml-8">
+      <Text >{experience}</Text>
+      <Text >{specialization}</Text>
+    </Card.Content>
+    <Card.Actions>
+      <Button>Chat</Button>
+    </Card.Actions>
+  </Card>
 
     </TouchableOpacity>
   )

@@ -8,10 +8,12 @@ module.exports = {
    "./screens/Dashboard.{js,jsx,ts,tsx}",
    "./screens/MedHistory.{js,jsx,ts,tsx}",
     "./components/Input.{js,jsx,ts,tsx}",
-    "./components/Categories.{js,jsx,ts,tsx}",
-    "./components/CategoryCard.{js,jsx,ts,tsx}",
+    "./components/Doctor.{js,jsx,ts,tsx}",
+    "./components/DoctorCard.{js,jsx,ts,tsx}",
     "./components/Blogs.{js,jsx,ts,tsx}",
-    "./components/BlogCard.{js,jsx,ts,tsx}"
+    "./components/BlogCard.{js,jsx,ts,tsx}",
+    "./components/Activities.{js,jsx,ts,tsx}",
+    "./components/ActivityCard.{js,jsx,ts,tsx}",
 
 ],
   theme: {

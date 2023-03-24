@@ -1,55 +1,36 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 //import { ArDoctorRightIcon } from 'react-native-heroicons/outline'
 import DoctorCard from './DoctorCard'
-
+// import {doctorData} from '../dummyData/doctor'
+const doctorData = require('../dummyData/doctor')
+console.log(doctorData.doctor);
 const FeaturedDoctor = () => {
+    const [doctors,setDoctors] = useState([]);
+
+    useEffect(()=>{
+        let doctors = doctorData.doctor;
+        setDoctors(doctors);
+    },[]);
   return (
     <View>
-            {/* Doctor Cards */}
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
-            short_description="hghkg"
-            />
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
             
-            short_description="fs"
-            />
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
-           
-            short_description="fds"
-            />
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
-          
-            short_description="fds"
-            />
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
-   
-            short_description="fds"
-            />
-            <DoctorCard 
-            id="123"
-            imgUrl="https://links.papareact.com/gn7"
-            title="Japa"
-         
-            short_description="fds"
-            />
-       
-    
+        {        
+            
+            doctors.map((doctor,key) => {
+              //  console.log(doctor)
+                return(
+                <DoctorCard 
+                key = {doctor.id}
+                name = {doctor.name}
+                qualification = {doctor.qualification}
+                experience = {doctor.experience}
+                imgUrl= {doctor.image}
+                specialization = {doctor.specialization}
+                />
+                )
+            })
+        }
     
     </View>
   )
