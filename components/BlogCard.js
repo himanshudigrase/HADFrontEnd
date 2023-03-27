@@ -2,23 +2,20 @@ import { View,  TouchableOpacity,Text } from 'react-native'
 import React from 'react'
 import { Avatar, Button, Card } from 'react-native-paper';
 
-const BlogCard = ({name,imgUrl,designation}) => {
+const BlogCard = ({title,imgUrl,information}) => {
   return (
-    <TouchableOpacity className="flex-row m-2">
-   <Card>
+    <TouchableOpacity className=" m-2">
+   <Card color='black'>
     
-    <Card.Title title={name} 
-    subtitle={designation} style={{alignContent:'center'}} titleStyle={{color:'rgba(255,255,255,0.9)'}}
-     left={(props) =>
-      <Avatar.Icon size={50} icon="folder" color='rgba(255,255,255,0.9)' /> }>
+    <Card.Title title={title} 
+     style={{alignContent:'center'}}>
     </Card.Title>
-    
-    <Card.Content>
-      <Text variant="titleLarge">Card title</Text>
-      <Text variant="bodyMedium">Card content</Text>
+    {/* <Card.Cover source={{ uri: imgUrl }} /> */}
+    <Card.Content color='red'>
+      <Text className="text-red">{information}</Text>
     </Card.Content>
     <Card.Actions>
-      <Button>Chat</Button>
+      <Button>Read More</Button>
     </Card.Actions>
   </Card></TouchableOpacity>
   )

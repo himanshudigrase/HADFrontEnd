@@ -1,9 +1,10 @@
 import React,{createContext, useEffect, useState} from "react";
-//import AsyncStorage from '@react-native-community/async-storage';
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) =>{
+
     const [isLoading,setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState(null);
 
@@ -37,8 +38,9 @@ export const AuthProvider = ({children}) =>{
 
     return(
         // with this provider we can pass any value to any screen
-        <AuthContext.Provider value={{login,logout,isLoading,userToken}}>
+        <AuthContext.Provider value={{isLoading,userToken,login,logout}}>
             {children}
+            {console.log(AuthContext)}
         </AuthContext.Provider>
     )
 }

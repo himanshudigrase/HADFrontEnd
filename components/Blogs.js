@@ -1,27 +1,32 @@
 import {ScrollView ,View} from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
+const blogData = require('../dummyData/blogs')
+
+
 
 const Blogs = () => {
+ const [blogs,setBlogs] = useState([]);
+
+  useEffect(() =>{
+    let blogs = blogData.blog;
+    setBlogs(blogs);
+  })
   return (
     <View className="">
       
-      <BlogCard className=""
-      imgUrl="https://links.papareact.com/gn7"
-      title="Testing 1"
-      />
-      <BlogCard
-      imgUrl="https://links.papareact.com/gn7"
-      title="Testing 1"
-      />
-      <BlogCard
-      imgUrl="https://links.papareact.com/gn7"
-      title="Testing 1"
-      />
-      <BlogCard
-      imgUrl="https://links.papareact.com/gn7"
-      title="Testing 1"
-      />
+      {
+        blogs.map((blog,key) =>{
+          return(
+            <BlogCard
+            key={blog.id}
+            title = {blog.title}
+            information = {blog.information}
+            imgUrl = {blog.imgUrl}
+            />
+          )
+        })
+      }
     </View>
   )
 }

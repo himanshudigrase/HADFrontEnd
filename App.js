@@ -1,24 +1,22 @@
-
+import 'react-native-gesture-handler';
 import React, { useState,useEffect,useCallback, useContext } from 'react';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { NativeWindStyleSheet } from "nativewind";
-import HomeScreen from './screens/Home'
+// import HomeScreen from './screens/Home'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
-import Login from './screens/Login';
-import DemoData from './screens/DemoData';
-import Signup from './screens/Signup'
-import MedHistory from './screens/MedHistory';
-import Dashboard from './screens/Dashboard';
+import Signup from './screens/Signup';
+import HomeScreen from './screens/Home'
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
-import { ActivityIndicator, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
+import DrawerStack from './navigator/DrawerStack';
+import {AuthProvider} from './context/AuthContext';
+import { AuthContext } from './context/AuthContext';
+import AppStack from './navigator/AppStack';
+import AuthStack from './navigator/AuthStack';
+import AppNav from './navigator/AppNav';
 import BottomNavbar from './navigator/BottomNavbar';
-
-import { View } from 'react-native';
-import { AuthContext,} from './context/AuthContext';
-
-
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -27,7 +25,8 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
- // const {userToken} = useContext(AuthContext);
+   //const {isLoading,userToken} = useContext(AuthContext);
+   
 
   useEffect(() => {
     async function prepare() {
@@ -45,7 +44,7 @@ export default function App() {
         
         });
         // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
+        // experience. 
         await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -72,28 +71,39 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
-  // if(isLoading){
-  //   <View className='flex-1 justifyContent-center'>
-  //     <ActivityIndicator size={'large'}/>
-  //   </View>
-  // }
+ 
 
     return (
-      // <AuthContext>
-        <NavigationContainer  onLayout={onLayoutRootView}>
+       <AuthProvider>
+         <NavigationContainer  onLayout={onLayoutRootView} options={{headerShown:false}}> 
          <PaperProvider>
+
+         {/* <AppNav/> */}
           <Stack.Navigator  onLayout={onLayoutRootView} options={{headerShown:false}}>   
-            {/* {userToken!=null ? <Stack.Screen name="Login" component={Login}/>: <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/>}     */}
-            <Stack.Screen  name="Home" component={HomeScreen} />
-            <Stack.Screen name="Login" component={Login}/>
-            <Stack.Screen name="Signup" component={Signup}/>
-            <Stack.Screen name="DemoData" component={DemoData}/>
-            <Stack.Screen name="MedHistory" component={MedHistory}/>
-            <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/> 
-           </Stack.Navigator>     
+               
+           
+              {/* Auth Stack Below  */}
+             {/* <Stack.Screen  name="Home" component={HomeScreen} /> 
+            
+             <Stack.Screen name="Signup" component={Signup}/> */}
+             <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown:false}}/> 
+             <Stack.Screen name="AppStack" component={AppStack} options={{headerShown:false}}/>
+              
+             
+       
+              {/* AppStack below */}
+            {/* <Stack.Screen name="DemoData" component={DemoData}/>
+            <Stack.Screen name="MedHistory" component={MedHistory}/>*/}
+           
+
+ 
+            <Stack.Screen name="Drawer" component={DrawerStack}/>
+           </Stack.Navigator>   
+             
         </PaperProvider>
-      </NavigationContainer>
-     // {/* </AuthContext> */}
+     </NavigationContainer> 
+      </AuthProvider>
+     
       
     );
   

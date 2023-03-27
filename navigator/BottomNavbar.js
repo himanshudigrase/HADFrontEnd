@@ -2,7 +2,7 @@ import Dashboard from '../screens/Dashboard';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import breath from '../screens/breath';
 const Tab = createBottomTabNavigator();
-import Saved from '../screens/DoctorList';
+import Experts from '../screens/DoctorList';
 import Settings from '../screens/Settings';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { IconButton, MD3Colors } from 'react-native-paper';
@@ -19,7 +19,7 @@ export default function BottomNavbar(){
                 else if(route.name === "Breathe"){
                     iconName = focused ? 'head-snowflake' : 'head-snowflake-outline'
                 }
-                else if(route.name=="Saved"){
+                else if(route.name=="Experts"){
                     iconName= focused ? 'bookmark' : 'bookmark-outline'
                 }
                 else if(route.name=="Settings"){
@@ -30,7 +30,7 @@ export default function BottomNavbar(){
         })}>
             <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false}}/>
             <Tab.Screen name="Breathe" component={breath} options={{headerShown:false}}/>
-            <Tab.Screen name='Saved' component={Saved} options={{headerShown:false}}/>
+            <Tab.Screen name='Experts' component={Experts} options={{headerShown:false}}/>
             <Tab.Screen name='Settings' component={Settings} options={{headerShown:false}}/>
         </Tab.Navigator>
     );
