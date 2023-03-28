@@ -40,7 +40,7 @@ export const AuthProvider = ({children}) =>{
         // with this provider we can pass any value to any screen
         <AuthContext.Provider value={{isLoading,userToken,login,logout}}>
             {children}
-            {console.log(AuthContext)}
+            {/* {console.log(AuthContext)} */}
         </AuthContext.Provider>
     )
 }

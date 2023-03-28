@@ -13,7 +13,7 @@ module.exports = {
     "./components/Blogs.{js,jsx,ts,tsx}",
     "./components/BlogCard.{js,jsx,ts,tsx}",
     "./components/Activities.{js,jsx,ts,tsx}",
-    "./components/ActivityCard.{js,jsx,ts,tsx}",
+    "./components/AssignmentCard.{js,jsx,ts,tsx}",
     "./screens/DoctorList.{js,jsx,ts,tsx}",
     "./screens/breath.{js,jsx,ts,tsx}",
     "./components/Header.{js,jsx,ts,tsx}",
@@ -33,6 +33,7 @@ module.exports = {
       colors: {
         'backgr': '#f8f2eb',
         'textColor':'#1d253b',
+        'texttt':'ffa500'
       },
     },
   },

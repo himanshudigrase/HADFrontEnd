@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { StyleSheet, Text, View, Dimensions, Animated } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const circleWidth = width / 2;
 export default function App() {
+
   const move = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(1)).current;
   Animated.loop(

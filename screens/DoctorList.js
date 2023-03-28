@@ -15,7 +15,7 @@ const DoctorList = () => {
     vertical
     showsVerticalScrollIndicator={true}>
       <View className="">
-        <Text>Doctors</Text>
+        <Text>Chooose from our best Doctors</Text>
         <FeaturedDoctor />
       </View>    
     </ScrollView>

@@ -28,14 +28,12 @@ const Assignments = () => {
             id = {assignment.id}
             title = {assignment.title}
             information = {assignment.information}
+            imgUrl = {assignment.imgUrl}
             />
           )
         })
       }
-      {/* <ActivityCard
-      imgUrl="https://links.papareact.com/gn7"
-      title="Testing 1"
-      /> */}
+
      
     </ScrollView>
   )

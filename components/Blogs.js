@@ -1,7 +1,7 @@
 import {ScrollView ,View} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
-const blogData = require('../dummyData/blogs')
+ const blogData = require('../dummyData/blogs')
 
 
 
@@ -10,6 +10,7 @@ const Blogs = () => {
 
   useEffect(() =>{
     let blogs = blogData.blog;
+    //console.log(blogs)
     setBlogs(blogs);
   })
   return (
@@ -20,9 +21,11 @@ const Blogs = () => {
           return(
             <BlogCard
             key={blog.id}
+            author = {blog.author}
             title = {blog.title}
             information = {blog.information}
-            imgUrl = {blog.imgUrl}
+            imgUrl = {blog.image}
+            description = {blog.description}
             />
           )
         })
