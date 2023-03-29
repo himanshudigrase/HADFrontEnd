@@ -11,8 +11,8 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
 import { Provider as PaperProvider } from 'react-native-paper';
 import DrawerStack from './navigator/DrawerStack';
-import {AuthProvider} from './context/AuthContext';
-import { AuthContext } from './context/AuthContext';
+ //import {AuthProvider} from './context/AuthContext';
+import {AuthContext}  from './context/AuthContext';
 import AppStack from './navigator/AppStack';
 import AuthStack from './navigator/AuthStack';
 import AppNav from './navigator/AppNav';
@@ -25,7 +25,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-   //const {isLoading,userToken} = useContext(AuthContext);
+  const {isLoading,userToken,login,logout} = useContext(AuthContext);
    
 
   useEffect(() => {
@@ -82,21 +82,10 @@ export default function App() {
           <Stack.Navigator  onLayout={onLayoutRootView} options={{headerShown:false}}>   
                
            
-              {/* Auth Stack Below  */}
-             {/* <Stack.Screen  name="Home" component={HomeScreen} /> 
-            
-             <Stack.Screen name="Signup" component={Signup}/> */}
+             
              <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown:false}}/> 
              <Stack.Screen name="AppStack" component={AppStack} options={{headerShown:false}}/>
-              
-             
-       
-              {/* AppStack below */}
-            {/* <Stack.Screen name="DemoData" component={DemoData}/>
-            <Stack.Screen name="MedHistory" component={MedHistory}/>*/}
-           
-
- 
+            
             <Stack.Screen name="Drawer" component={DrawerStack}/>
            </Stack.Navigator>   
              
