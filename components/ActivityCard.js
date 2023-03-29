@@ -4,32 +4,33 @@ import { Avatar, Button, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { height } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
-const qaUrl = require('../assets/images/Assignments/QA.jpg')
 
-
-const AssignmentCard = ({id, information, title ,imgUrl}) => {
+const ActivityCard = ({type, description, name,itemLevel}) => {
 
   const navigation = useNavigation();
   return (
     <TouchableOpacity className="mr-3 mb-3" >
-      <View className=" font-interSBold">
-      <Card   onPress={()=>{
-        console.log(imgUrl)
-        if(id%2 === 1)
-        navigation.navigate('Activity');
-        else navigation.navigate('Post');
+      <View className=" font-interSBold bg-white">
+      <Card className=""  onPress={()=>{
+        navigation.navigate('Activity',{
+          name:name,
+          description:description,
+          type:type,
+          itemLevel:itemLevel
+        });
+       
         }}>
           
-          <Card.Cover style={{height:150}} source={require('../assets/images/Assignments/QA.jpg')}/>
-        <Card.Title  title={title}
-          style={styles.titleText} titleStyle={{color:'brown'}}>
+          {/* <Card.Cover style={{height:150}} /> */}
+        <Card.Title  title={name}  style={styles.titleText}
+          titleStyle={{color:'brown'}} >
         </Card.Title>
 
         <Card.Content className="text-red font-interSBold">
-          <Text className='text-textColor font-interSBold'>{information}</Text>
+          <Text className='text-textColor font-interSBold'>{description}</Text>
         </Card.Content>
-        <Card.Actions>
-          <Button>Read More</Button>
+        <Card.Actions style={{alignItems:'center'}}>
+          <Button>Level: {itemLevel}</Button>
         </Card.Actions>
       </Card>
       </View>
@@ -38,7 +39,7 @@ const AssignmentCard = ({id, information, title ,imgUrl}) => {
   )
 }
 
-export default AssignmentCard;
+export default ActivityCard;
 
 const styles= StyleSheet.create({
   titleText:{

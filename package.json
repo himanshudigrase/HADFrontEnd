@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "miragejs": "^0.1.47",
     "tailwindcss": "^3.2.4"
   },
   "private": true

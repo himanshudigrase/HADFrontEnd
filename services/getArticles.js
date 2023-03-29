@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // The API endpoint where login data is sent to
-const newsApiUrl = l
+const newsApiUrl = `https://newsapi.org/v2/everything?q=depression&apiKey=`
 
 const articlesJson = async () => {
   // Send the login credential data to the loginBaseUrl API endpoint as an HTTP POST request

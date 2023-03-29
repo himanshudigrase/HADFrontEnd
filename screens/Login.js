@@ -17,19 +17,26 @@ const Login = () => {
     }, [])
   
   return (
-    <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
-      <View> 
-        <Input label="Username" otherProps={{
-          placeholder:"Email ID"
+    <SafeAreaView className="justify-center items-center bg-backgr h-full ">
+      
+        <Text className="text-textColor text-2xl font-interSBold">Sign In using your email</Text>
+        <View className="flex mt-4">
+        <Input className="mt-34" label="" otherProps={{
+          placeholder:"Enter your email"
         }}/>
-        <Text>{test}</Text>
         
-        <Input label="Password" otherProps={{
-          placeholder:"Password"
+        
+        <Input label="" otherProps={{
+          placeholder:"Enter your Password"
         }}/>
-        <Button title='Continue' color="#1d253b" onPress={()=>navigation.navigate('AppStack',{screen:'Dashboard'})}/>
+        </View>
         
-    </View>
+        <Button title='Continue' color="#1d253b" onPress={()=>
+          navigation.navigate('AppStack',{screen:'Dashboard'})
+          
+          }/>
+        
+  
     </SafeAreaView>
   )
 }

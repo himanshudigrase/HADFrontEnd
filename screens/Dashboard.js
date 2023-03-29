@@ -1,12 +1,47 @@
 import { View, Text, Button, TextInput, ScrollView } from 'react-native'
-import React,{useLayoutEffect, useState} from 'react'
+import React,{useLayoutEffect, useState,useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 import Activities from '../components/Activities';
 import Header from '../components/Header';
 import Blogs from '../components/Blogs';
+import getAssignments from '../services/assignments';
 
 const Dashboard = ({route}) => {
+
+  const [doctorAssigned,setdoctorAssigned] = useState(false);
+  const [activityDisplay,setActivityDisplay] = useState([]); // state of activities
+
+  let activitiesToDisplay=[];
+  let prvsActivities = activityDisplay;
+  
+
+  useEffect(() => {
+    console.log("yes");
+    (async function toFetchAssignments(){
+      console.log("inside")
+      try{
+
+        activitiesToDisplay = await getAssignments();
+        console.log("inside try");
+        
+        console.log(activitiesToDisplay)
+        console.log("inside try2");
+        activitiesToDisplay.forEach(activity =>{
+          prvsActivities.push(activity);
+        })
+        console.log('prvsActivities')
+        console.log(prvsActivities);
+        setActivityDisplay(prvsActivities);
+        setdoctorAssigned(true);
+      } catch(error){
+        console.error(error);
+      }
+    })();
+  },[])
+  
+  
+  //console.log(activityDisplay);
   const navigation = useNavigation();
    useLayoutEffect(() => {
       navigation.setOptions({
@@ -15,8 +50,10 @@ const Dashboard = ({route}) => {
     
     }, [])
   console.log("In dashboard now")
-  console.log(route);
+  //console.log(route);
   return (
+    // <Text>bfjsdbkj</Text>
+    <>
     <View className="h-full bg-backgr w-full">
     <Header/>
 
@@ -26,10 +63,14 @@ const Dashboard = ({route}) => {
     }}
     vertical
     showsVerticalScrollIndicator={true}>
-      <View className="">
-        <Text>My Activities</Text>
-        <Activities />
-      </View>
+      {doctorAssigned? 
+      <View className="">       
+        <Text>My Assignments</Text>
+        {/* {activitiesToDisplay.forEach(activityToDisplay => { */}
+          <Activities arrayOfActivities = {activityDisplay}/>
+        {/*  })} */}
+      </View> : <Text>Choose from our best doctors</Text>}
+      
       <Text>Blogs</Text>
       <View className="w-full">  
         <Blogs className="w-screen"/>
@@ -37,6 +78,8 @@ const Dashboard = ({route}) => {
       
     </ScrollView>
     </View>
+    </>
+    
   )
 }
 

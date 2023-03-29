@@ -1,18 +1,53 @@
 import axios from 'axios'
 import { commonUrl } from './commonUrl'
-// The API endpoint where login data is sent to
-const assignmentsUrl = commonUrl + `/assignment/`
 
-const postAssignment = async (assignmentNumber,user) => {
-  // Send the assignmentId to the assignmentsUrl API endpoint as an HTTP GET request
-  // Note the async-await
-  const response = await axios.post(user + assignmentsUrl + 'add', assignmentNumber)
+// The API endpoint where login data is sent to
+const assignmentsUrl = commonUrl 
+
+const getAssignments = async (userId) => {
   
-  return response.data
+  const response = await axios.get( assignmentsUrl + '/patients/'+3+'/assignments'); // for integration
+  let assgns = response.data.response; 
+
+  // below code to fetch 
+  let arrOfActivities = [];
+                              
+      assgns.forEach(assgn => {
+        // here i dont have to bother about item type , considering every item to display
+        arrOfActivities.push(
+          { 
+            id:assgn.item.itemId,
+            type:assgn.item.type,
+            name: assgn.item.activity.name, 
+            description:assgn.item.activity.description,
+            itemLevel:assgn.itemLevel
+          })
+      }); 
+
+      // console.log(arrOfActivities);
+
+  return arrOfActivities;
 }
 
 
 
-// Export the method as an object so that it can be accessible outside this file as a service
-const exportObject = { postAssignment }
-export default exportObject
+// console.log(getAssignments);
+
+export default getAssignments
+
+
+
+
+
+
+
+// arrOfActivities = [{
+//   itemId:1,
+//   itemLevel:2
+// },{
+//   itemId:1,
+//   itemLevel:4
+// },{
+//   itemId:2,
+//   itemLevel:1
+// }]

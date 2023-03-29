@@ -12,7 +12,7 @@ const DemoData = ({route}) => {
    
     const [inputValues, setInputValues] = useState({
       dob:'',
-      gender:'',
+      sex:'',
       })
       const [doc,setDoc] = useState(false);
     // console.log(route);
@@ -47,9 +47,9 @@ const DemoData = ({route}) => {
     
     demographics:{
       userId:0,
-      firstName:route.params.fname,
-      lastName:route.params.lname,
-      gender:inputValues.gender,
+      fname:route.params.fname,
+      lName:route.params.lname,
+      sex:inputValues.sex,
       dob:inputValues.dob,
       age:0
     }}
@@ -96,8 +96,8 @@ const DemoData = ({route}) => {
         }}/>
 
         <Input label="Enter Gender" otherProps ={{
-             title:"Gender", onChangeText:inputChangedHandler.bind(this,'gender'),
-             placeholder:"M/F/Others", value : inputValues.gender
+             title:"Gender", onChangeText:inputChangedHandler.bind(this,'sex'),
+             placeholder:"M/F/Others", value : inputValues.sex
         }}/>
 
         <Input label="Do you want Doctor now?" otherProps ={{

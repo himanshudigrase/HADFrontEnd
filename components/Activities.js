@@ -1,16 +1,26 @@
 import {ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import AssignmentCard from './AssignmentCard'
-const assignmentData = require('../dummyData/assignment');
+import ActivityCard from './ActivityCard'
+import activities from '../services/activity';
+const assgnDummy  = require('../dummyData/assignment');
+const activityData = require('../dummyData/activity');
 
-const Assignments = () => {
-   const [assignments,setAssignments] = useState([]);
+const Activity = (arrayOfActivities) => {
+  console.log(arrayOfActivities);
+   const [activities,setActivity] = useState([]);
+   const [afterUseEffect,setAfterUseEffect] = useState(false);
 
-
+    // API call to get assignments of patients only if they are assigned to any doctor
+    //let assgns = await activities.getActivities(userId);         //// ---> uncomment this while integration
+    
+  
+  
    useEffect(()=>{
-    let assignments = assignmentData.assignment;
-    setAssignments(assignments);
+
+    let activities = activityData.activity;
+    setActivity(activities);
    })
+   
   return (
     <ScrollView 
     contentContainerStyle={{
@@ -21,22 +31,23 @@ const Assignments = () => {
     showsHorizontalScrollIndicator={false}
     >
       {
-        assignments.map((assignment,key) =>{
+        arrayOfActivities.arrayOfActivities.map((activity,key) =>{
           return(
-            <AssignmentCard
-            key={assignment.id}
-            id = {assignment.id}
-            title = {assignment.title}
-            information = {assignment.information}
-            imgUrl = {assignment.imgUrl}
+           
+            <ActivityCard
+            key={activity.id}
+            type = {activity.type}
+            name = {activity.name}
+            description = {activity.description}
+            itemLevel = {activity.itemLevel}
             />
           )
         })
-      }
-
+      } 
+      
      
     </ScrollView>
   )
 }
 
-export default Assignments
+export default Activity

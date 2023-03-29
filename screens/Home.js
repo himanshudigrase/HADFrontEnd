@@ -31,7 +31,7 @@ const Home = () => {
   return (
       <SafeAreaView className="bg-backgr h-full">
         
-        <View className="pt-20 pb-5 mt-40 ml-10"> 
+        <View className="pt-20 pb-5 mt-20 ml-5"> 
           <Text className=" text-3xl pb-1  text-textColor font-interSBold tracking-wide" style={styles.titleText}>better U.</Text>
           <Text className="text-xl  text-textColor font-regular mt-2">Time to let go of your worries DEAR!</Text>
           <Text className="text-xl font-bold text-textColor">{disArr[index%disArr.length]}</Text>
