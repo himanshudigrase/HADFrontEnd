@@ -3,29 +3,36 @@ import React from 'react'
 import { Avatar, Button, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-const BlogCard = ({ author,title, imgUrl, information ,description}) => {
+const BlogCard = ({ author, title, imgUrl, information, description }) => {
 
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity className=" m-2" onPress={() => {
+    <TouchableOpacity className=" m-1" onPress={() => {
       navigation.navigate('Blogs', {
-        title, imgUrl, description,author,information
+        
+          title:title, 
+          imgUrl:imgUrl,
+          description:description,
+          author:author, 
+          information:information
+        
+        
       })
     }}>
-      <Card color='black'>
-
-        <Card.Title title={title}
-         subtitle={author}
-          style={{ alignContent: 'center' }} titleStyle={{color:'',fontFamily:'inter-extrabold'}} subtitleStyle={{fontFamily:'inter-light'}}>
-        </Card.Title>
-        {/* <Card.Cover source={{ uri: imgUrl }} /> */}
-        <Card.Content color='red'>
-          <Text className="text-red">{information}</Text>
-        </Card.Content>
-        <Card.Actions>
-          <Button>Read More</Button>
-        </Card.Actions>
+      <Card className='pt-2 pl-2 flex-row h-36' >
+      <View className='flex-row'>
+      <Card.Cover className='flex h-28 w-1/4' source={{ uri: imgUrl }} />
+      <Card.Content className='flex w-3/4'>
+        
+        <View className=''>
+          <Text className=' text-textColor font-interSBold'>{title.substring(0,100)}</Text>
+          <Text >{author}</Text>           
+          {/* <Text className="text-red">{information}</Text> */}           
+        </View>
+      </Card.Content>
+      </View>
+      
       </Card>
     </TouchableOpacity>
   )

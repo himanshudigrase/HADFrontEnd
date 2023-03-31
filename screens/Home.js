@@ -42,7 +42,7 @@ const Home = () => {
         </View>
           <Text className="text-xl pl-14 ml-7 pt-12 mt-14 pb-2 text-textColor font-regular">Already have an account?</Text>
           <View className="mx-14 px-14 " >
-          <Button className='mt-5' mode="contained" buttonColor="#1d253b" onPress={()=>{navigation.navigate('AuthStack',{screen:'Login'})}}>Login</Button>
+          <Button className='mt-5' mode="contained" buttonColor="#1d253b" onPress={()=>{navigation.navigate('Login')}}>Login</Button>
   
           </View>
           

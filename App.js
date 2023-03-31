@@ -1,22 +1,12 @@
-import 'react-native-gesture-handler';
-import React, { useState,useEffect,useCallback, useContext } from 'react';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NativeWindStyleSheet } from "nativewind";
-// import HomeScreen from './screens/Home'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
-import Signup from './screens/Signup';
-import HomeScreen from './screens/Home'
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
 import { Provider as PaperProvider } from 'react-native-paper';
-import DrawerStack from './navigator/DrawerStack';
- //import {AuthProvider} from './context/AuthContext';
-import {AuthContext}  from './context/AuthContext';
-import AppStack from './navigator/AppStack';
-import AuthStack from './navigator/AuthStack';
+import { AuthProvider } from './context/AuthContext';
 import AppNav from './navigator/AppNav';
-import BottomNavbar from './navigator/BottomNavbar';
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -25,23 +15,21 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const {isLoading,userToken,login,logout} = useContext(AuthContext);
-   
 
   useEffect(() => {
     async function prepare() {
       try {
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
-          'inter-black':require('./assets/fonts/Inter-Black.ttf'),
-          'inter-bold':require('./assets/fonts/Inter-Bold.ttf'),
-          'inter-extrabold':require('./assets/fonts/Inter-ExtraBold.ttf'),
-          'inter-extralight':require('./assets/fonts/Inter-ExtraLight.ttf'),
-          'inter-light':require('./assets/fonts/Inter-Light.ttf'),
-          'inter-medium':require('./assets/fonts/Inter-Medium.ttf'),
-          'inter-regular':require('./assets/fonts/Inter-Regular.ttf'),
-          'inter-semibold':require('./assets/fonts/Inter-SemiBold.ttf')
-        
+          'inter-black': require('./assets/fonts/Inter-Black.ttf'),
+          'inter-bold': require('./assets/fonts/Inter-Bold.ttf'),
+          'inter-extrabold': require('./assets/fonts/Inter-ExtraBold.ttf'),
+          'inter-extralight': require('./assets/fonts/Inter-ExtraLight.ttf'),
+          'inter-light': require('./assets/fonts/Inter-Light.ttf'),
+          'inter-medium': require('./assets/fonts/Inter-Medium.ttf'),
+          'inter-regular': require('./assets/fonts/Inter-Regular.ttf'),
+          'inter-semibold': require('./assets/fonts/Inter-SemiBold.ttf')
+
         });
         // Artificially delay for two seconds to simulate a slow loading
         // experience. 
@@ -71,31 +59,20 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
- 
 
-    return (
-       <AuthProvider>
-         <NavigationContainer  onLayout={onLayoutRootView} options={{headerShown:false}}> 
-         <PaperProvider>
 
-         {/* <AppNav/> */}
-          <Stack.Navigator  onLayout={onLayoutRootView} options={{headerShown:false}}>   
-               
-           
-             
-             <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown:false}}/> 
-             <Stack.Screen name="AppStack" component={AppStack} options={{headerShown:false}}/>
-            
-            <Stack.Screen name="Drawer" component={DrawerStack}/>
-           </Stack.Navigator>   
-             
-        </PaperProvider>
-     </NavigationContainer> 
-      </AuthProvider>
-     
-      
-    );
-  
-  
+  return (
+    <AuthProvider>
+      <PaperProvider>
+
+        <AppNav />
+
+      </PaperProvider>
+    </AuthProvider>
+
+
+  );
+
+
 }
 

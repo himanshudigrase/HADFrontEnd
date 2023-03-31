@@ -4,7 +4,6 @@ import breath from '../screens/breath';
 const Tab = createBottomTabNavigator();
 import Experts from '../screens/DoctorList';
 import Settings from '../screens/Settings';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { IconButton, MD3Colors } from 'react-native-paper';
 export default function BottomNavbar(){
     return(
@@ -20,10 +19,10 @@ export default function BottomNavbar(){
                     iconName = focused ? 'head-snowflake' : 'head-snowflake-outline'
                 }
                 else if(route.name=="Experts"){
-                    iconName= focused ? 'bookmark' : 'bookmark-outline'
+                    iconName= focused ? 'account-tie' : 'account-tie-outline'
                 }
                 else if(route.name=="Settings"){
-                    iconName = focused ? 'cog' : 'cog-outline'
+                    iconName = focused ? 'bookmark' : 'bookmark-outline'
                 }
                 return <IconButton icon={iconName} size={24} color={color}/>
             }

@@ -1,6 +1,4 @@
-import React, { useState,useEffect,useCallback, useContext } from 'react';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { NativeWindStyleSheet } from "nativewind";
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
@@ -10,20 +8,15 @@ import MedHistory from '../screens/MedHistory';
 
 const Stack = createNativeStackNavigator();
 
-
 const AuthStack = () => {
-    return(
+    return(       
         <Stack.Navigator options={{headerShown:false}}>
             <Stack.Screen name="Home" component={Home}/>
             <Stack.Screen name="Login" component={Login}/>
             <Stack.Screen name="Signup" component={Signup}/>
             <Stack.Screen name="DemoData" component={DemoData}/>
             <Stack.Screen name="MedHistory" component={MedHistory}/>
-        </Stack.Navigator>
-            
-        
+        </Stack.Navigator>       
     )
 }
-
-
 export default AuthStack;

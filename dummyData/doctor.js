@@ -1,7 +1,7 @@
 export const doctor = [
     {
         id:1,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -10,7 +10,7 @@ export const doctor = [
     },
     {
         id:2,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -19,7 +19,7 @@ export const doctor = [
     },
     {
         id:3,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -28,7 +28,7 @@ export const doctor = [
     },
     {
         id:4,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -36,7 +36,7 @@ export const doctor = [
         
     },{
         id:5,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -45,7 +45,7 @@ export const doctor = [
     },
     {
         id:6,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,
@@ -53,7 +53,7 @@ export const doctor = [
         
     },{
         id:7,
-        name:"A",
+        name:"Doctor 1",
         qualification: "Phd",
         specialization:"Physio",
         experience: 5,

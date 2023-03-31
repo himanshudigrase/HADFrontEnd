@@ -9,15 +9,16 @@ import { useNavigation } from '@react-navigation/native';
 const Header = () => {
   const navigation = useNavigation();
   return (
-    <View>
-      <Appbar.Header>
-      <Appbar.Action icon="menu" /> 
-      {/* onPress={() => navigation.dispatch(DrawerActions.openDrawer())} */}
-      <Appbar.Content title="Welcome User" />
+    
+    <Appbar.Header style={{}}>
+      <Appbar.Action icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}/>       
+      <Appbar.Content style={{}} title="better U" />
       <Appbar.Action icon="bell"/>
     </Appbar.Header>
-    </View>
+    
   )
 }
 
 export default Header
+
+

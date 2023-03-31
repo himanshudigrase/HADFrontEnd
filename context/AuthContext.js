@@ -7,15 +7,16 @@ export const AuthProvider = ({children}) =>{
 
     const [isLoading,setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState(null);
-
-    const login = () =>{
-        
-        setIsLoading(true);
-        setuserToken('tokeenn');
-        AsyncStorage.setItem('userToken','userToken');
-        setIsLoading(false);
+    
+    const login = (receivedToken) =>{
+        console.log('logging in');
+        setIsLoading(true);       
+        setuserToken(receivedToken)
+       AsyncStorage.setItem('userToken',receivedToken);
+     
     }
     const logout = () =>{
+        console.log('Logout')
         setIsLoading(true);
         setuserToken(null);
         AsyncStorage.removeItem('userToken');
@@ -35,13 +36,14 @@ export const AuthProvider = ({children}) =>{
 
     useEffect(()=>{
         isLoggedIn();
-    },[]);
+    },[userToken]);
 
     return(
         // with this provider we can pass any value to any screen
         <AuthContext.Provider value={{isLoading,userToken,login,logout}}>
-            {children}
-            {/* {console.log(AuthContext)} */}
+            
+            { children}
+            
         </AuthContext.Provider>
     )
 }

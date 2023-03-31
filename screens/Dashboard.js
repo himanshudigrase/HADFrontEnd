@@ -17,21 +17,21 @@ const Dashboard = ({route}) => {
   
 
   useEffect(() => {
-    console.log("yes");
+   // console.log("yes");
     (async function toFetchAssignments(){
-      console.log("inside")
+   //   console.log("inside")
       try{
 
         activitiesToDisplay = await getAssignments();
-        console.log("inside try");
+       // console.log("inside try");
         
-        console.log(activitiesToDisplay)
-        console.log("inside try2");
+        //console.log(activitiesToDisplay)
+       // console.log("inside try2");
         activitiesToDisplay.forEach(activity =>{
           prvsActivities.push(activity);
         })
-        console.log('prvsActivities')
-        console.log(prvsActivities);
+        //console.log('prvsActivities')
+       // console.log(prvsActivities);
         setActivityDisplay(prvsActivities);
         setdoctorAssigned(true);
       } catch(error){
@@ -54,7 +54,7 @@ const Dashboard = ({route}) => {
   return (
     // <Text>bfjsdbkj</Text>
     <>
-    <View className="h-full bg-backgr w-full">
+    <View className="h-full bg-white w-full">
     <Header/>
 
     <ScrollView contentContainerStyle={{
@@ -65,13 +65,13 @@ const Dashboard = ({route}) => {
     showsVerticalScrollIndicator={true}>
       {doctorAssigned? 
       <View className="">       
-        <Text>My Assignments</Text>
+        <Text className='font-interSBold text-xl'>My Assignments</Text>
         {/* {activitiesToDisplay.forEach(activityToDisplay => { */}
           <Activities arrayOfActivities = {activityDisplay}/>
         {/*  })} */}
       </View> : <Text>Choose from our best doctors</Text>}
       
-      <Text>Blogs</Text>
+      <Text className='font-interSBold text-xl'>Blogs</Text>
       <View className="w-full">  
         <Blogs className="w-screen"/>
       </View>
