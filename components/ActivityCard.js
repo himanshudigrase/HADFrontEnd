@@ -1,21 +1,26 @@
-import { View, TouchableOpacity, Text, Image,StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, Image,StyleSheet,Alert } from 'react-native'
 import React from 'react'
 import { Avatar, Button, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
-const ActivityCard = ({type, description, name,itemLevel}) => {
+const ActivityCard = ({type, description, name,itemLevel,mode}) => {
 
   const navigation = useNavigation();
   return (
     <TouchableOpacity className="mr-3 mb-3" >
       
-      <Card style={{
+      <Card mode={mode} style={{
         height:180,
         flexDirection:'column',
         justifyContent:'space-between',
     width: Dimensions.get('window').width / 2
   }} onPress={()=>{
+    mode === 'contained'? 
+    Alert.alert('Disabled', 'Please complete previous level of this activity', [
+      
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]):
         navigation.navigate('Activity',{
           name:name,
           description:description,

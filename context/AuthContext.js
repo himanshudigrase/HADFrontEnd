@@ -7,7 +7,15 @@ export const AuthProvider = ({children}) =>{
 
     const [isLoading,setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState(null);
-    
+    const [fname,setFname] = useState(null);
+    const [lname,setLname] = useState(null);
+    const [isSmoker,setIsSmoker] = useState(false);
+    const [isDrinker,setIsDrinker] = useState(false);
+    const [height,setHeight] = useState(null);
+    const [weight,setWeight] = useState(null);
+    const [dob,setDob] = useState(null);
+    const [email,setEmail] = useState(null);
+
     const login = (receivedToken) =>{
         console.log('logging in');
         setIsLoading(true);       

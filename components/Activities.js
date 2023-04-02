@@ -40,6 +40,7 @@ const Activity = (arrayOfActivities) => {
             name = {activity.name}
             description = {activity.description}
             itemLevel = {activity.itemLevel}
+            mode = {activity.itemLevel == 1 ? 'elevated': 'contained'}
             />
           )
         })
