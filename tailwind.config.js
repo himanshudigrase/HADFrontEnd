@@ -19,7 +19,10 @@ module.exports = {
     "./components/ActivityCard.{js,jsx,ts,tsx}",
     "./components/Header.{js,jsx,ts,tsx}",
     "./components/CustomDrawer.{js,jsx,ts,tsx}",
-    
+    "./components/FeaturedMF.{js,jsx,ts,tsx}",
+    "./components/MFCard.{js,jsx,ts,tsx}",
+    "./components/MFCard.js",
+    "./screens/MF.js"
     
 ],
   theme: {
