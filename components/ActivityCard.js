@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, Text, Image,StyleSheet,Alert } from 'react-native'
 import React from 'react'
-import { Avatar, Button, Card } from 'react-native-paper';
+import { Avatar, Button, Card ,Divider} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
@@ -10,10 +10,12 @@ const ActivityCard = ({type, description, name,itemLevel,mode}) => {
   return (
     <TouchableOpacity className="mr-3 mb-3" >
       
-      <Card mode={mode} style={{
+      <Card className=' shadow-none bg-backgr' mode={mode} style={{
         height:180,
+        
         flexDirection:'column',
-        justifyContent:'space-between',
+        justifyContent:'space-evenly',
+        alignItems:'center',
     width: Dimensions.get('window').width / 2
   }} onPress={()=>{
     mode === 'contained'? 
@@ -34,20 +36,18 @@ const ActivityCard = ({type, description, name,itemLevel,mode}) => {
         {/* <Card.Title  title={name}  style={styles.titleText}
           titleStyle={{color:'brown',flexWrap:'wrap',flexShrink:1 }} >
         </Card.Title> */}
-        <View className='flex-column justify-between'>
-        <Text className=' h-16 ml-4 text-textColor text-lg font-bold' >{name}</Text>
-
-        <Card.Content >
-          <Text className=' text-textColor font-interRegular'>{description}</Text>
+        <View className='pt-2 flex items-start'>
+        <Text className=' h-16 text-textColor text-base font-interSBold pl-4' >{name}</Text>
+        
+        <Card.Content className=''>
+          <Text className=' text-textColor font-interRegular '>{description}</Text>
         </Card.Content>
 
-        <Button className='alignItem-center'>Level: {itemLevel}</Button>
+        <Button mode='contained-tonal' className='m-2 mr-6 ml-6'>Level: {itemLevel}</Button>
 
         </View>
         
-      </Card>
-     
-      
+      </Card>    
     </TouchableOpacity>
   )
 }
