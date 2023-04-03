@@ -1,23 +1,24 @@
 import React, { useRef, useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, Animated } from "react-native";
 import { Button } from "react-native-paper";
+import { set } from "react-native-reanimated";
 
 const { width, height } = Dimensions.get("window");
 const circleWidth = width / 2;
 export default function App() {
 
-  const [startTimer, setStartTimer] = useState(3);
+  const [startbreath, setStartbreath] = useState(false);
   const move = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(1)).current;
 
 
-  useEffect(() => {
-    if (startTimer > 0) {
-      const intervalId = setInterval(() => {
-        setStartTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-      return () => clearInterval(intervalId);
-    } else {
+  // useEffect(() => {
+    // if (startTimer > 0) {
+    //   const intervalId = setInterval(() => {
+    //     setStartTimer((prevTimer) => prevTimer - 1);
+    //   }, 1000);
+    //   return () => clearInterval(intervalId);
+    // } else {
       Animated.loop(
         Animated.sequence([
           Animated.parallel([
@@ -48,8 +49,8 @@ export default function App() {
           ]),
         ])
       ).start();
-    }
-  }, [startTimer]);
+    
+  // }, [startTimer]);
 
   const translate = move.interpolate({
     inputRange: [0, 1],
@@ -64,7 +65,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {startTimer > 0 ? <Text >{startTimer}</Text>
+      {startbreath === false  ? <Button mode='contained' style={{marginRight:180,marginBottom:280}} onPress = {()=>setStartbreath(true)} >Start</Button>
         : (<>
           <Animated.View
             style={{
@@ -130,9 +131,10 @@ export default function App() {
               ></Animated.View>
             );
           })}
-        </>)
-   
-        }
+      <Button style={{marginRight:180}} mode="contained" onPress={()=>setStartbreath(false)}>Stop</Button>
+      </>)
+   }
+        
     </View>
     )
 }

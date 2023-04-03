@@ -30,6 +30,7 @@ const Blogs = () => {
             information = {blog.information}
             imgUrl = {blog.image}
             description = {blog.description}
+            publishedAt = {blog.publishedAt}
             />
           )
         })

@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 const Header = () => {
   const navigation = useNavigation();
   return (
-    <View>
+    <View className='ml-1'>
       <Appbar.Header style={{ backgroundColor: 'white', }}>
         <Appbar.Action icon="menu" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}/>       
         <Appbar.Content style={{}} title="better U." titleStyle={{ fontFamily: 'inter-semibold', fontSize: 22 }} />

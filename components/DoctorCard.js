@@ -12,18 +12,19 @@ const DoctorCard = ({
     <TouchableOpacity className="m-2"> 
       <Card className="">
     
-    <Card.Title className="m-3" title={name} subtitle= {'Qualification ' + qualification} 
+    <Card.Title className="m-2" title={name} subtitle= {'Qualification : ' + qualification} 
    style={{alignContent:'center',margin:11} } titleStyle={{color:'black', fontFamily:'inter-bold'}}
-     right={(props) =>
+   subtitleStyle = {{fontFamily:'inter-regular'}}  
+   right={(props) =>
       <Avatar.Image className="" size={70} source={require('../assets/images/user2.png')} style={{}} /> }>
     </Card.Title>
     
     <Card.Content className="ml-2">
-      <Text >Experience: {experience} yrs</Text>
-      <Text >Specialization: {specialization}</Text>
+      <Text className='font-interRegular'>Experience : {experience} yrs</Text>
+      <Text className='font-interRegular'>Specialization : {specialization}</Text>
     </Card.Content>
     <Card.Actions>
-      <Button>Chat</Button>
+      <Button mode='contained'>Book</Button>
     </Card.Actions>
   </Card>
 

@@ -4,7 +4,7 @@ import FeaturedMF from '../components/FeaturedMF'
 import Header from '../components/Header'
 const MFList = () => {
     return (
-      <View className=" bg-backgr h-full ">
+      <View className=" bg-white h-full ">
       <Header/>
       <ScrollView contentContainerStyle={{
           padding:15,
@@ -13,7 +13,7 @@ const MFList = () => {
       vertical
       showsVerticalScrollIndicator={true}>
         <View className="">
-          <Text>Let's Bust out some popular Myths</Text>
+          <Text className='font-interRegular text-lg ml-2'>Let's Bust out some popular Myths</Text>
           <FeaturedMF />
         </View>    
       </ScrollView>

@@ -99,7 +99,7 @@ today = dd + '/' + mm + '/' + yyyy;
       //  }
 
 
-      (()=>navigation.navigate('Dashboard'))();      // comment this on backend testing
+      (()=>navigation.navigate('Login'))();      // comment this on backend testing
      }catch(exception){
       console.log(exception)
        

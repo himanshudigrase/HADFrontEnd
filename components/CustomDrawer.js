@@ -10,9 +10,9 @@ const CustomDrawer = (props) => {
     
       <View className="flex-1">
         <DrawerContentScrollView {...props}>
-          <ImageBackground className="p-20">
+          <ImageBackground className="bg-backgr p-20">
             <Avatar.Image className="" source={require('../assets/images/user2.png')} />
-            <Text>User Test</Text>
+            <Text className='mt-4 text-colorr font-interBold'>User Test</Text>
           </ImageBackground>
           <DrawerItemList {...props} />
         </DrawerContentScrollView>

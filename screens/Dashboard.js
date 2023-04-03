@@ -54,24 +54,24 @@ const Dashboard = ({route}) => {
   return (
     // <Text>bfjsdbkj</Text>
     <>
-    <View className="h-full bg-white w-full">
+    <View className=" h-full bg-white w-full">
     <Header/>
 
     <ScrollView contentContainerStyle={{
-        padding:15,
+        padding:12,
         paddingTop:10
     }}
     vertical
     showsVerticalScrollIndicator={true}>
       {doctorAssigned? 
-      <View className="">       
-        <Text className='font-interSBold text-xl'>My Assignments</Text>
+      <View className="ml-2">       
+        <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
         {/* {activitiesToDisplay.forEach(activityToDisplay => { */}
           <Activities arrayOfActivities = {activityDisplay}/>
         {/*  })} */}
       </View> : <Text>Choose from our best doctors</Text>}
       
-      <Text className='font-interSBold text-xl'>Blogs</Text>
+      <Text className='ml-2 mb-2 font-interMedium text-lg'>Blogs</Text>
       <View className="w-full">  
         <Blogs className="w-screen"/>
       </View>

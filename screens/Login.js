@@ -44,7 +44,7 @@ const Login = () => {
       <Button title='Continue' color="#1d253b" onPress={() =>
       {
         let token = loginUser(email,password);
-        login(token)
+        login('dsad')
       }
         // navigation.navigate('AppStack',{screen:'Dashboard'})
         

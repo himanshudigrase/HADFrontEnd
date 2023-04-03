@@ -52,8 +52,8 @@ const FeaturedMF = () => {
                     return (
                         <View key={index}>
                             <TouchableOpacity onPress={() => handleImagePress(mf.id)}>
-                                <Image className='w-16 h-16 mb-2'
-                                    source={require('../assets/images/mfs.png')}
+                                <Image className='w-16 h-16 mt-2 mb-2 '
+                                   style={{borderWidth:1,borderColor:'black'}} source={require('../assets/images/mfs.png')}
                                 />
                             </TouchableOpacity>
                             {selectedImage === mf.id && (

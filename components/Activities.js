@@ -24,8 +24,10 @@ const Activity = (arrayOfActivities) => {
   return (
     <ScrollView 
     contentContainerStyle={{
-        paddingHorizontal:15,
-        paddingTop:10
+        marginRight:4,
+        paddingTop:10,
+        
+        
     }}
     horizontal
     showsHorizontalScrollIndicator={false}

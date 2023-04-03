@@ -6,7 +6,7 @@ import FeaturedDoctor from '../components/FeaturedDoctor'
 
 const DoctorList = () => {
   return (
-    <View className=" bg-backgr h-full ">
+    <View className=" bg-white h-full ">
     <Header/>
     <ScrollView contentContainerStyle={{
         padding:15,
@@ -15,7 +15,7 @@ const DoctorList = () => {
     vertical
     showsVerticalScrollIndicator={true}>
       <View className="">
-        <Text>Chooose from our best Doctors</Text>
+        <Text className='m-2 font-interMedium text-lg '>Chooose from our best Doctors</Text>
         <FeaturedDoctor />
       </View>    
     </ScrollView>

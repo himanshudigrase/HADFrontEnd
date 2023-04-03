@@ -17,7 +17,7 @@ function AppNav (){
 
     return(       
           <NavigationContainer>
-            {userToken  ? <DrawerStack/> :<AuthStack/> }
+            {userToken  ? <DrawerStack/> : <AuthStack/> }
           </NavigationContainer>       
     )
 }

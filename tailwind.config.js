@@ -45,7 +45,8 @@ module.exports = {
       colors: {
         'backgr': '#f8f2eb',
         'textColor':'#1d253b',
-        'texttt':'ffa500'
+        'colorr':'#012148',
+        'texttt':'#ffa500'
       },
     },
   },
