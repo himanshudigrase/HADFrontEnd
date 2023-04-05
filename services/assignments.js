@@ -8,7 +8,7 @@ const assignmentsUrl = commonUrl
 const getAssignments = async (patientId) => {
 
   try {
-    console.log("inside getAssignments");
+    
     const savedToken = await AsyncStorage.getItem('token');
     const response = await axios.get(assignmentsUrl + '/patients/' + patientId + '/assignments', {
       headers: { Authorization: `Bearer ${savedToken}` }
@@ -16,7 +16,11 @@ const getAssignments = async (patientId) => {
       .then(response => response.data.response);
 
     const assgns = response;
+    console.log(assgns);
+    const doctorId = assgns[0].doctor.doctorId;
 
+    await AsyncStorage.setItem('doctorId', doctorId.toString());
+    console.log(doctorId);
     let arrOfActivities = [];
 
     assgns.forEach(assgn => {

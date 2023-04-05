@@ -11,7 +11,7 @@ const loginUser = async (email, password) => {
   }
   try {
     const response = await axios.post(loginUrl + '/auth/login', data);
-    console.log(response.data);
+    //console.log(response.data);
     return response.data.token;
   } catch (e) {
     console.error(e);
@@ -21,9 +21,6 @@ const loginUser = async (email, password) => {
 const getID = async (email) => {
 
   try {
-    const reqData = {
-      email: email
-    }
     const savedToken = await AsyncStorage.getItem('token');
     let reqInstance = axios.create({
       headers: {
@@ -32,8 +29,8 @@ const getID = async (email) => {
     }
     )
     const response = await reqInstance.get(loginUrl + '/users/' + email);
-    console.log('id get' + response.data.response.userId);
-    return response.data.response.userId;
+    //console.log('id get' + response.data.response.userId);  -->           Sreekar's config for getting PId
+    return response.data.userId;
   } catch (e) {
     console.log(e);
   }

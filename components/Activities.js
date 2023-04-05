@@ -1,18 +1,19 @@
 import {ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ActivityCard from './ActivityCard'
-const assgnDummy  = require('../dummyData/assignment');
-const activityData = require('../dummyData/activity');
+
 
 const Activity = (arrayOfActivities) => {
-  console.log(arrayOfActivities);
-   const [activities,setActivity] = useState([]);
+ 
+  //  const [activities,setActivity] = useState([]);
   
-   useEffect(()=>{
-    let activities = activityData.activity;
-    setActivity(activities);
-   })
-   
+  //  useEffect(()=>{
+  //   let activities = arrayOfActivities.arrayOfActivities;
+  //   setActivity(activities);
+  //  },[activities])
+   arrayOfActivities.arrayOfActivities.forEach(activity => {
+    console.log(activity);
+   });
   return (
     <ScrollView 
     contentContainerStyle={{
@@ -25,11 +26,12 @@ const Activity = (arrayOfActivities) => {
     showsHorizontalScrollIndicator={false}
     >
       {
-        arrayOfActivities.arrayOfActivities.map((activity,key) =>{
+        arrayOfActivities.arrayOfActivities.map((activity) =>{
           return(
            
             <ActivityCard
-            key={activity.id}
+            key ={activity.id}
+            activityId = {activity.id}
             type = {activity.type}
             name = {activity.name}
             description = {activity.description}

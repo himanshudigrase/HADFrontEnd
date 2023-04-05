@@ -35,29 +35,23 @@ const Login = () => {
   }, [])
 
   async function getToken() {
-    const token = await loginService.loginUser(email, password);
-    console.log('getting token from backend'+token);
-    await AsyncStorage.setItem('token', token);
-  }
-  async function getPid() {
-    const patientId = await loginService.getID(email);
-    AsyncStorage.setItem('patientId', patientId.toString());
-  }
+    try{
+      const token = await loginService.loginUser(email, password);
+      await AsyncStorage.setItem('token', token);
+  
+      const patientId = await loginService.getID(email);
+      await AsyncStorage.setItem('patientId', patientId.toString());
 
-  async function loginToAuth(token) {
-    console.log('coming to here');
-    const from_storage = await AsyncStorage.getItem('token');
-    console.log('saved token ' + from_storage)
-    login(from_storage)
+      const from_storage = await AsyncStorage.getItem('token');
+    
+      login(from_storage)
+    }catch(e){
+      console.error(e);
+    }  
   }
-
+  
   async function handleSubmit() {
-    let token = await getToken();
-    let patientId = await getPid();
-    const from_storage = await AsyncStorage.getItem('patientId');
-    console.log('saved ppid ' + from_storage)
-    loginToAuth(token);
-
+    await getToken();
   }
 
 

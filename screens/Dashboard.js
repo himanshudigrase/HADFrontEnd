@@ -8,6 +8,7 @@ import Blogs from '../components/Blogs';
 import getAssignments from '../services/assignments';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import  {GetSortOrder}  from '../functions/sortFunctionActivity'; 
 
 const Dashboard = ({route}) => {
   const {name} = useContext(AuthContext);
@@ -21,21 +22,26 @@ const Dashboard = ({route}) => {
   useEffect(() => {
     (async function toFetchAssignments(){
       try{
-        const getPatient = await AsyncStorage.getItem('patientId')
+        const getPatient = await AsyncStorage.getItem('patientId');
         activitiesToDisplay = await getAssignments(getPatient);
+        
         activitiesToDisplay.forEach(activity =>{
+          //console.log(activity);
+          // if (!activitiesToDisplay.find(({assignmentId}) => assignmentId === activity.assignmentId))
           prvsActivities.push(activity);
+          
         })
-
+        prvsActivities.sort(GetSortOrder("itemLevel"))
         setActivityDisplay(prvsActivities);
         setdoctorAssigned(true);
       } catch(error){
         console.error(error);
       }
     })();
-  },[])
+  },[activityDisplay])
   
   const navigation = useNavigation();
+  
    useLayoutEffect(() => {
       navigation.setOptions({
         headerShown: false

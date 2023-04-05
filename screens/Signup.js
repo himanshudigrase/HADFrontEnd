@@ -58,7 +58,8 @@ const Signup = () => {
     setIsValid(true);
 
     if(isValid){ 
-      
+      // here we try yo store the data in Storage using AsyncStorage
+
       navigation.navigate('DemoData',{
        
           demodet:demoObj,
@@ -70,6 +71,11 @@ const Signup = () => {
       )
     }
   };
+
+  async 
+
+
+
 
   const validateEmail = (email) => {
     // Email validation regular expression

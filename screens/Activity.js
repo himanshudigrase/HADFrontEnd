@@ -1,15 +1,106 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import getQuestions from '../services/getQuestions'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ActivityIndicator, Button, Card, RadioButton } from 'react-native-paper'
 
-const Activity = () => {
+const Activity = ({ route }) => {
+
+  const [questionsAssigned, setQuestionsAssigned] = useState(false);      // to check if questions are loaded yet or not
+  const [questionDisplay, setQuestionDisplay] = useState([]);             // to dynamically dispaly question  , was not necessay
+  const [currentIndex, setCurrentIndex] = useState(0);                    // to dynamically display the question card according to question Index
+  const [checked, setChecked] = useState(null);                           // to check status of radio button
+  const [choicesSelected, setChoicesSelected] = useState([]);
+  const [pId,setPid] = useState(null);
+  let disabledB;                                                         // to disable the button unless user selects an option
+  let questionsToDisplay = [];                                            // to store response of API call 
+  let choicesSelectedTillNow = [];
+  let responseToSend = {};                                                // to store response which needs to send
+  const activityId = route.params.activityId;
+  let getPatient;
+  // this function handles the post request of choices
   
+
+  // this hook fetches our questions for a particular patientId and activityId
+  useEffect(() => {
+    (async function toFetchQuestions() {
+      try {
+        getPatient = await AsyncStorage.getItem('patientId');
+        questionsToDisplay = await getQuestions(getPatient, activityId);
+        
+        // waiting until we get response
+        if (questionsToDisplay != [] && questionsToDisplay != undefined && questionsToDisplay != '') {
+          setQuestionDisplay(questionsToDisplay);
+
+          setPid(getPatient);
+         // console.log(responseToSend);
+          setQuestionsAssigned(true);
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [])
+
+
+
+
   return (
-    <View>
-      <Text>You are currently on  activity performing level  tasks</Text>
-      <Text>Further info about about your task : </Text>
-      <Text>Type:  description: </Text>      
-    </View>
+    <>
+      {
+
+        !questionsAssigned ? <ActivityIndicator size={40} className='pt-80 ' /> 
+        :
+          <View>
+            {currentIndex != questionDisplay.length ? 
+
+            <Card>
+              <Card.Content>
+                <Text>{questionDisplay[currentIndex].question}</Text>
+                {Object.keys(questionDisplay[currentIndex].options).map((key) => (                 
+                  <View key={key} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <RadioButton
+                      value={key}
+                      status={checked === key ? 'checked' : 'unchecked'}
+                      onPress={() => setChecked(key)}
+                    />
+                    <Text>{questionDisplay[currentIndex].options[key]}</Text>
+                  </View>
+                ))}
+              </Card.Content>
+              <Card.Actions>
+                {checked === null ? disabledB = true : disabledB = false}
+                <Button disabled={disabledB} onPress={() => { 
+                  choicesSelectedTillNow = choicesSelected
+                  choicesSelectedTillNow.push({"questionId":currentIndex+1,"choice":checked}); 
+                  setChoicesSelected(choicesSelectedTillNow);
+                   setCurrentIndex(currentIndex + 1);
+                    setChecked(null); }}>Next</Button>
+              </Card.Actions>
+            </Card> 
+            : 
+
+            <Card>
+              <Card.Content>
+                <Text>Congratulations!! You have completed the activity. Click Submit to submit the responses.</Text>
+              </Card.Content>
+              <Card.Actions>
+                <Button onPress={() =>{responseToSend["choices"] = choicesSelected; 
+                responseToSend["patientId"] = parseInt(pId);         
+                responseToSend["activityId"] = activityId;
+                console.log(responseToSend);}}>Submit</Button>
+              </Card.Actions>
+
+            </Card>}
+
+
+          </View>
+
+      }
+    </>
+
   )
 }
 
-export default Activity
+export default Activity;

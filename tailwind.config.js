@@ -9,7 +9,10 @@ module.exports = {
    "./screens/Dashboard.{js,jsx,ts,tsx}",
    "./screens/MedHistory.{js,jsx,ts,tsx}",
    "./screens/DoctorList.{js,jsx,ts,tsx}",
+   "./screens/Activity.{js,jsx,ts,tsx}",
    "./screens/breath.{js,jsx,ts,tsx}",
+   "./screens/MF.{js,jsx,ts,tsx}",
+    "./screens/Chat.{js,jsx,ts,tsx}",
     "./components/Input.{js,jsx,ts,tsx}",
     "./components/Doctor.{js,jsx,ts,tsx}",
     "./components/DoctorCard.{js,jsx,ts,tsx}",
@@ -22,7 +25,7 @@ module.exports = {
     "./components/FeaturedMF.{js,jsx,ts,tsx}",
     "./components/MFCard.{js,jsx,ts,tsx}",
     "./components/MFCard.js",
-    "./screens/MF.js"
+    
     
 ],
   theme: {

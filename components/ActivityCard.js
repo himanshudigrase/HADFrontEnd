@@ -4,8 +4,8 @@ import { Avatar, Button, Card, Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
-const ActivityCard = ({ type, description, name, itemLevel, mode }) => {
-
+const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) => {
+//console.log("key"+activityId);
   const navigation = useNavigation();
   return (
     <TouchableOpacity className="mr-3 mb-3" >
@@ -23,6 +23,7 @@ const ActivityCard = ({ type, description, name, itemLevel, mode }) => {
             { text: 'OK', onPress: () => console.log('OK Pressed') },
           ]) :
           navigation.navigate('Activity', {
+            activityId: activityId,
             name: name,
             description: description,
             type: type,
