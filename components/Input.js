@@ -1,7 +1,6 @@
 import { Text, TextInput, View } from "react-native";
 
 function Input({onChange, label,otherProps}){
-
     const handleChange = (text) => {
         if (onChange) {
           onChange(text);

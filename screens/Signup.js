@@ -1,10 +1,12 @@
 import { View, Text, Button, TextInput } from 'react-native'
-import React,{useLayoutEffect, useState} from 'react'
+import React,{useContext, useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
+import { AuthContext } from '../context/AuthContext';
 
 const Signup = () => {
+  const {fname,lname,email} = useContext(AuthContext);
    const [isValid, setIsValid] = useState(false);
    const [inputValues, setInputValues] = useState({
     fname:'',

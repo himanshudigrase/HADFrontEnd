@@ -4,8 +4,6 @@ import React from 'react'
 import { DrawerActions } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native';
 
-
-
 const Header = () => {
   const navigation = useNavigation();
   return (
@@ -17,8 +15,6 @@ const Header = () => {
       </Appbar.Header>
       <Divider  />
     </View>
-
-
   )
 }
 

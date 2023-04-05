@@ -11,14 +11,6 @@ export default function App() {
   const move = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(1)).current;
 
-
-  // useEffect(() => {
-    // if (startTimer > 0) {
-    //   const intervalId = setInterval(() => {
-    //     setStartTimer((prevTimer) => prevTimer - 1);
-    //   }, 1000);
-    //   return () => clearInterval(intervalId);
-    // } else {
       Animated.loop(
         Animated.sequence([
           Animated.parallel([

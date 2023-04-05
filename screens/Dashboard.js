@@ -1,37 +1,32 @@
 import { View, Text, Button, TextInput, ScrollView } from 'react-native'
-import React,{useLayoutEffect, useState,useEffect} from 'react'
+import React,{useLayoutEffect, useState,useEffect, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 import Activities from '../components/Activities';
 import Header from '../components/Header';
 import Blogs from '../components/Blogs';
 import getAssignments from '../services/assignments';
+import { AuthContext } from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Dashboard = ({route}) => {
-
+  const {name} = useContext(AuthContext);
   const [doctorAssigned,setdoctorAssigned] = useState(false);
-  const [activityDisplay,setActivityDisplay] = useState([]); // state of activities
+  const [activityDisplay,setActivityDisplay] = useState([]); 
 
   let activitiesToDisplay=[];
   let prvsActivities = activityDisplay;
   
 
   useEffect(() => {
-   // console.log("yes");
     (async function toFetchAssignments(){
-   //   console.log("inside")
       try{
-
-        activitiesToDisplay = await getAssignments();
-       // console.log("inside try");
-        
-        //console.log(activitiesToDisplay)
-       // console.log("inside try2");
+        const getPatient = await AsyncStorage.getItem('patientId')
+        activitiesToDisplay = await getAssignments(getPatient);
         activitiesToDisplay.forEach(activity =>{
           prvsActivities.push(activity);
         })
-        //console.log('prvsActivities')
-       // console.log(prvsActivities);
+
         setActivityDisplay(prvsActivities);
         setdoctorAssigned(true);
       } catch(error){
@@ -40,8 +35,6 @@ const Dashboard = ({route}) => {
     })();
   },[])
   
-  
-  //console.log(activityDisplay);
   const navigation = useNavigation();
    useLayoutEffect(() => {
       navigation.setOptions({
@@ -49,11 +42,9 @@ const Dashboard = ({route}) => {
       });
     
     }, [])
-  console.log("In dashboard now")
-  //console.log(route);
+
   return (
-    // <Text>bfjsdbkj</Text>
-    <>
+  
     <View className=" h-full bg-white w-full">
     <Header/>
 
@@ -66,9 +57,7 @@ const Dashboard = ({route}) => {
       {doctorAssigned? 
       <View className="ml-2">       
         <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
-        {/* {activitiesToDisplay.forEach(activityToDisplay => { */}
           <Activities arrayOfActivities = {activityDisplay}/>
-        {/*  })} */}
       </View> : <Text>Choose from our best doctors</Text>}
       
       <Text className='ml-2 mb-2 font-interMedium text-lg'>Blogs</Text>
@@ -78,40 +67,10 @@ const Dashboard = ({route}) => {
       
     </ScrollView>
     </View>
-    </>
+
     
   )
 }
 
 export default Dashboard;
 
-
-// {
-//   "message":"Patient details added.",
-//   "response":{
-//      "demographics":{
-//         "age":123,
-//         "dob":"04/05/1899",
-//         "firstName":"last",
-//         "gender":"M",
-//         "lastName":"prolly",
-//         "userId":41
-//      },
-//      "email":"agf@gmail.com",
-//      "password":"12345678",
-//      "patient":{
-//         "joiningDate":"25/02/2023",
-//         "medicalHistory":[
-//            "Object"
-//         ],
-//         "patientId":41,
-//         "wantsDoc":false
-//      },
-//      "userId":41,
-//      "userRole":{
-//         "roleId":3,
-//         "roleType":"Patient"
-//      }
-//   },
-//   "success":true
-// }

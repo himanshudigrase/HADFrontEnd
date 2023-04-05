@@ -1,5 +1,4 @@
 import AuthStack from "./AuthStack";
-import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
@@ -9,15 +8,16 @@ import DrawerStack from './DrawerStack';
 function AppNav (){
     const {userToken,isLoading} = useContext(AuthContext);
 
-    if(isLoading){
-        <View className='flex-1 justifyContent-center'>
-          <ActivityIndicator size={'large'} color='blue'/>
-        </View>
-      }
+  //   if(isLoading){
+  //       return (<View className='flex-1 justifyContent-center'>
+  //         <ActivityIndicator size={'large'} color='blue'/>
+  //       </View>
+  //       );
+  //     }
 
     return(       
           <NavigationContainer>
-            {userToken  ? <DrawerStack/> : <AuthStack/> }
+            {userToken !==null  ? <DrawerStack/> : <AuthStack/> }
           </NavigationContainer>       
     )
 }
