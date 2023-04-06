@@ -18,8 +18,12 @@ const Activity = ({ route }) => {
   let responseToSend = {};                                                // to store response which needs to send
   const activityId = route.params.activityId;
   let getPatient;
-  // this function handles the post request of choices
-  
+
+
+  // this function handles the put request of choices
+  async function handleSubmit(responseToSend){
+    
+  }
 
   // this hook fetches our questions for a particular patientId and activityId
   useEffect(() => {
@@ -52,20 +56,20 @@ const Activity = ({ route }) => {
 
         !questionsAssigned ? <ActivityIndicator size={40} className='pt-80 ' /> 
         :
-          <View>
+          <View className='bg-white h-full'>
             {currentIndex != questionDisplay.length ? 
 
-            <Card>
+            <Card className=' m-10 mt-32'>
               <Card.Content>
-                <Text>{questionDisplay[currentIndex].question}</Text>
+                <Text className='text-colorr font-interMedium mb-4'>{questionDisplay[currentIndex].question}</Text>
                 {Object.keys(questionDisplay[currentIndex].options).map((key) => (                 
                   <View key={key} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <RadioButton
+                    <RadioButton className='font-interMedium '
                       value={key}
                       status={checked === key ? 'checked' : 'unchecked'}
                       onPress={() => setChecked(key)}
                     />
-                    <Text>{questionDisplay[currentIndex].options[key]}</Text>
+                    <Text className='ml-1'>{questionDisplay[currentIndex].options[key]}</Text>
                   </View>
                 ))}
               </Card.Content>
@@ -83,7 +87,7 @@ const Activity = ({ route }) => {
 
             <Card>
               <Card.Content>
-                <Text>Congratulations!! You have completed the activity. Click Submit to submit the responses.</Text>
+                <Text>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
               </Card.Content>
               <Card.Actions>
                 <Button onPress={() =>{responseToSend["choices"] = choicesSelected; 

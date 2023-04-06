@@ -1,7 +1,6 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { StarIcon, MapPinIcon } from 'react-native-heroicons/solid'
 import { Card, Button, Avatar } from 'react-native-paper';
 
 
