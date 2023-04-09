@@ -56,6 +56,7 @@ export default function App() {
 
 
   return (
+    <View className='h-full bg-backgr'>
     <View style={styles.container}>
       {startbreath === false  ? <Button mode='contained' style={{marginRight:180,marginBottom:280}} onPress = {()=>setStartbreath(true)} >Start</Button>
         : (<>
@@ -128,7 +129,9 @@ export default function App() {
    }
         
     </View>
+    </View>
     )
+    
 }
 
 const styles = StyleSheet.create({

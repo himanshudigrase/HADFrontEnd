@@ -30,6 +30,7 @@ export default function ChatComponent(props) {
     name: 'Alice',
     photoUrl: 'https://cdn-icons-png.flaticon.com/512/1533/1533506.png',
     role: 'default',
+    locale:'hi-IN'
   };
 
   const other = {

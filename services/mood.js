@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { commonUrl } from './commonUrl'
 const moodUrl = commonUrl 
-
-const postMood = async (patientId,mood) => {
+import AsyncStorage
+ from '@react-native-async-storage/async-storage'
+const postMoodService = async (patientId,mood) => {
 
   try{
     const savedToken = await AsyncStorage.getItem('token');
@@ -18,5 +19,5 @@ const postMood = async (patientId,mood) => {
   }
 }
 
-const exportObject = { postMood }
-export default exportObject
+
+export default postMoodService

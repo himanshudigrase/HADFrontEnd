@@ -4,7 +4,7 @@ import breath from '../screens/breath';
 const Tab = createBottomTabNavigator();
 import Experts from '../screens/DoctorList';
 import MFList from '../screens/MF';
-import { IconButton, MD3Colors } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import ChatComponent from '../screens/Chat';
 export default function BottomNavbar(){
     return(
@@ -31,7 +31,7 @@ export default function BottomNavbar(){
                 return <IconButton icon={iconName} size={24} color={color}/>
             }
         })}>
-            <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false}}/>
+            <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false,tabBarShowLabel:false}}/>
             <Tab.Screen name="Breathe" component={breath} options={{headerShown:false}}/>
             <Tab.Screen name='Experts' component={Experts} options={{headerShown:false}}/>
             <Tab.Screen name='Myths' component={MFList} options={{headerShown:false}}/>

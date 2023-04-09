@@ -5,9 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import signupService from '../services/signupService'
 
-
-
-
 const DemoData = ({ route }) => {
 
   const [inputValues, setInputValues] = useState({
