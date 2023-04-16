@@ -2,7 +2,7 @@ import { Button } from 'react-native-paper';
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Button = () => {
+const CustomButton = ({props,title}) => {
   return (
     <View>
       <Button {...props}>{title}</Button>
@@ -10,4 +10,4 @@ const Button = () => {
   )
 }
 
-export default Button
+export default CustomButton

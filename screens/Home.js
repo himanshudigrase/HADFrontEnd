@@ -29,19 +29,19 @@ const Home = () => {
   return (
     <SafeAreaView className="relative bg-backgr h-full">
 
-      <View className="fixed pt-20 pb-5 mt-20 ml-5">
+      <View className="fixed pt-20 pb-5 mt-20 ml-6">
         <Text className=" text-3xl pb-1  text-textColor font-interSBold tracking-wide" style={styles.titleText}>better U.</Text>
         <Text className="text-xl  text-textColor font-regular mt-2">Time to let go of your worries DEAR!</Text>
         <Text className="text-xl font-bold text-textColor mt-1">{disArr[index % disArr.length]}</Text>
       </View>
-      <View className="fixed mx-14 px-10 mt-10 rounded-10" >
-        <Button buttonColor='#1d253b' mode="contained" onPress={() => navigation.navigate('Signup')}>Proceed</Button>
-      </View>
+      
+        <Button className='mt-10 ml-5 rounded-md w-65 mr-4' buttonColor='#1d253b' mode="contained" onPress={() => navigation.navigate('TandC')}>Sign Up</Button>
+     
       <Text className="text-xl pl-14 ml-4 pt-2 mt-14 pb-2 text-textColor font-regular">Already have an account?</Text>
-      <View className="mx-14 px-14 " >
-        <Button className='mt-5' mode="contained" buttonColor="#1d253b" onPress={() => { navigation.navigate('Login') }}>Login</Button>
+      
+        <Button className='ml-5 mt-8 rounded-md w-65 mr-4' mode="contained" buttonColor="#1d253b" onPress={() => { navigation.navigate('Login') }}>Login</Button>
 
-      </View>
+      
 
 
     </SafeAreaView>

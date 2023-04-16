@@ -10,12 +10,12 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
   return (
     <TouchableOpacity className="mr-3 mb-3" >
 
-      <Card className=' shadow-none bg-backgr' mode={mode} style={{
+      <Card className=' border border-black-600 shadow-none bg-white' mode={mode} style={{
         height: 180,
 
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         width: Dimensions.get('window').width / 2
       }} onPress={() => {
         mode === 'contained' ?
@@ -32,11 +32,11 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
 
       }}>
         <View className='pt-2 flex items-start'>
-          <Text className=' h-16 text-textColor text-base font-interSBold pl-4' >{name}</Text>
+          <Text className=' h-8 text-textColor text-base font-interSBold pl-4' >{name}</Text>
           <Card.Content className=''>
-            <Text className=' text-textColor font-interRegular '>{description}</Text>
+            <Text className=' text-textColor font-interRegular pb-3'>{description}</Text>
           </Card.Content>
-          <Button mode='contained-tonal' className='m-2 mr-6 ml-6'>Level: {itemLevel}</Button>
+          <Button mode='outlined' textColor='black' className='m-1 mr-3 ml-3 rounded-md w-32 border-solid border-sky-600  '>Level: {itemLevel}</Button>
         </View>
       </Card>
     </TouchableOpacity>

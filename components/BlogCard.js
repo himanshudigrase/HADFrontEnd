@@ -21,7 +21,7 @@ const BlogCard = ({ publishedAt, author, title, imgUrl, information, description
 
       })
     }}>
-      <Card className='shadow-4xl border border-slate-200 pt-3 pl-3 flex-row h-36 bg-backgr' >
+      <Card className=' pt-3 pl-3 flex-row h-36 bg-white border border-black-600 shadow-none' >
         <View className='flex-row'>
           <Card.Cover className='mt-3 flex h-20 w-1/4' source={{ uri: imgUrl }} />
           <Card.Content className='flex w-3/4'>

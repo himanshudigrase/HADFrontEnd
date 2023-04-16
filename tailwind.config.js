@@ -14,6 +14,7 @@ module.exports = {
    "./screens/MF.{js,jsx,ts,tsx}",
    "./screens/MoodTracker.{js,jsx,ts,tsx}",
     "./screens/Chat.{js,jsx,ts,tsx}",
+    "./screens/TermsAndConditions.{js,jsx,ts,tsx}",
     "./components/Input.{js,jsx,ts,tsx}",
     "./components/Doctor.{js,jsx,ts,tsx}",
     "./components/DoctorCard.{js,jsx,ts,tsx}",
@@ -28,7 +29,7 @@ module.exports = {
     "./components/MFCard.js",
     "./components/MoodCard.{js,jsx,ts,tsx}",
     "./components/FeaturedMood.{js,jsx,ts,tsx}",
-    
+    "./components/Button.{js,jsx,ts,tsx}",
 ],
   theme: {
     fontFamily: {

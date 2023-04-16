@@ -5,7 +5,7 @@ import Home from '../screens/Home';
 import Signup from '../screens/Signup';
 import DemoData from '../screens/DemoData';
 import MedHistory from '../screens/MedHistory';
-
+import TermsAndConditions from '../screens/TermsAndConditions';
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
@@ -16,6 +16,7 @@ const AuthStack = () => {
             <Stack.Screen name="Signup" component={Signup}/>
             <Stack.Screen name="DemoData" component={DemoData}/>
             <Stack.Screen name="MedHistory" component={MedHistory}/>
+            <Stack.Screen name='TandC' component={TermsAndConditions} options={{headerShown:false}}/>
         </Stack.Navigator>       
     )
 }

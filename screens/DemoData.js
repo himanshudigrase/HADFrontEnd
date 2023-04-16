@@ -1,9 +1,11 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import signupService from '../services/signupService'
+import { Button } from 'react-native-paper';
+
 
 const DemoData = ({ route }) => {
 
@@ -65,7 +67,6 @@ const DemoData = ({ route }) => {
         console.log("here");
         (() => navigation.navigate('MedHistory', {
           userId: userId.response.userId,
-
           wants_doc: doc
         }))();
       }

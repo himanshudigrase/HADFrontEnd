@@ -18,15 +18,14 @@ export const AuthProvider = ({ children }) => {
 
     const login = (receivedToken) => {
         setIsLoading(true);
-        setuserToken(receivedToken)
-        
+        setuserToken(receivedToken)  
     }
 
-    const logout = () => {
+    const logout = async() => {
 
         setIsLoading(true);
         setuserToken(null);
-        AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('token');
         setIsLoading(false);
     }
 

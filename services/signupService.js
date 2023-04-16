@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+import { commonUrl } from './commonUrl'
 // The API endpoint where login data is sent to
-const loginBaseUrl = `https://03c8-103-156-19-229.in.ngrok.io/user/`
+const loginBaseUrl = commonUrl
 
 const signup = async (details) => {
   // Send the login credential data to the loginBaseUrl API endpoint as an HTTP POST request

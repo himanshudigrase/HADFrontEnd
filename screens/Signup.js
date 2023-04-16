@@ -1,9 +1,10 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import React,{useContext, useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
+import { Button } from 'react-native-paper';
 
 const Signup = () => {
   const {fname,lname,email} = useContext(AuthContext);
@@ -72,7 +73,7 @@ const Signup = () => {
     }
   };
 
-  async 
+ 
 
 
 
@@ -97,42 +98,42 @@ const Signup = () => {
   return (
     <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
       <View> 
-        <Input label="First Name" otherProps={{
+        <Input  otherProps={{
           onChangeText:inputChangedHandler.bind(this,'fname') ,
           placeholder:'First Name',
           value:inputValues.fname,
           secureTextEntry: false
         }}/> 
       
-       <Input label="Last Name" otherProps={{
+       <Input  otherProps={{
           onChangeText:inputChangedHandler.bind(this,'lname') ,
           placeholder:'Last Name',
           secureTextEntry: false,
           value:inputValues.lname
         }}/> 
      
-         <Input label="Email ID" otherProps={{
+         <Input  otherProps={{
           onChangeText:inputChangedHandler.bind(this,'email') ,
           placeholder:'abc@gmail.com',
           value:inputValues.email,
           secureTextEntry: false
         }}/> 
         
-        <Input label="Password" otherProps={{
+        <Input  otherProps={{
           onChangeText:inputChangedHandler.bind(this,'password') ,
           placeholder:'Password',
           value:inputValues.password,
           secureTextEntry: true
         }}/> 
         
-        <Input label="Confirm Password" otherProps={{
+        <Input  otherProps={{
           onChangeText:inputChangedHandler.bind(this,'confirmPassword') ,
           placeholder:'Confirm Password',
           value:inputValues.confirmPassword,
           secureTextEntry: true
         }}/> 
         
-        <Button title='Continue' color="#1d253b" onPress={ handleSubmit}/>
+        <Button  className='ml-5 mt-8 rounded-md w-65 mr-4' mode="contained" buttonColor="#1d253b" onPress={ handleSubmit}>Continue</Button>
        
     </View>
     </SafeAreaView>
