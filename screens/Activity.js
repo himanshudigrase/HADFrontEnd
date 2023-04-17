@@ -1,8 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text,Image,StyleSheet } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import getQuestions from '../services/getQuestions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ActivityIndicator, Button, Card, RadioButton } from 'react-native-paper'
+import { LinearGradient } from 'expo-linear-gradient';
+import MyButton from '../components/QuestionButton';
+import Header from '../components/Header';
 
 const Activity = ({ route }) => {
 
@@ -52,14 +55,19 @@ const Activity = ({ route }) => {
 
   return (
     <>
+<Image style={styles.bgImage} source={require('../assets/images/hori.png')} />
       {
 
         !questionsAssigned ? <ActivityIndicator size={40} className='pt-80 ' /> 
         :
-          <View className='bg-white h-full'>
+        <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
+           
+          <View className='h-full'>
+          
+          <Header/>
             {currentIndex != questionDisplay.length ? 
 
-            <Card className=' m-10 mt-32'>
+            <Card className='shadow-none m-10 mt-32 pb-3'>
               <Card.Content>
                 <Text className='text-colorr font-interMedium mb-4'>{questionDisplay[currentIndex].question}</Text>
                 {Object.keys(questionDisplay[currentIndex].options).map((key) => (                 
@@ -75,32 +83,32 @@ const Activity = ({ route }) => {
               </Card.Content>
               <Card.Actions>
                 {checked === null ? disabledB = true : disabledB = false}
-                <Button disabled={disabledB} onPress={() => { 
+                <MyButton disabled={disabledB} onPress={() => { 
                   choicesSelectedTillNow = choicesSelected
                   choicesSelectedTillNow.push({"questionId":currentIndex+1,"choice":checked}); 
                   setChoicesSelected(choicesSelectedTillNow);
                    setCurrentIndex(currentIndex + 1);
-                    setChecked(null); }}>Next</Button>
+                    setChecked(null); }} title='Next'></MyButton>
               </Card.Actions>
             </Card> 
             : 
 
-            <Card>
+            <Card className='shadow-none m-10 mt-32 pb-3'>
               <Card.Content>
-                <Text>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
+                <Text className='text-colorr font-interMedium mb-4'>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
               </Card.Content>
               <Card.Actions>
-                <Button onPress={() =>{responseToSend["choices"] = choicesSelected; 
+                <MyButton onPress={() =>{responseToSend["choices"] = choicesSelected; 
                 responseToSend["patientId"] = parseInt(pId);         
                 responseToSend["activityId"] = activityId;
-                console.log(responseToSend);}}>Submit</Button>
+                console.log(responseToSend);}} title='Submit'></MyButton>
               </Card.Actions>
 
             </Card>}
 
 
           </View>
-
+          </LinearGradient>
       }
     </>
 
@@ -108,3 +116,15 @@ const Activity = ({ route }) => {
 }
 
 export default Activity;
+
+const styles = StyleSheet.create({
+  bgImage: {
+    position: 'absolute',
+    left: '16%',
+    right: '-20%',
+    top: '16%',
+    bottom: '10.72%',
+    zIndex: -1,
+
+  },
+})

@@ -3,6 +3,9 @@ import React from 'react'
 import { Avatar, Button, Card, Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
+import MyButton from '../components/ActivityButton';
+
+
 
 const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) => {
 //console.log("key"+activityId);
@@ -10,7 +13,7 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
   return (
     <TouchableOpacity className="mr-3 mb-3" >
 
-      <Card className=' border border-black-600 shadow-none bg-white' mode={mode} style={{
+      <Card className='relative  shadow-none bg-white' mode={mode} style={{
         height: 180,
 
         flexDirection: 'column',
@@ -31,12 +34,14 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
           });
 
       }}>
-        <View className='pt-2 flex items-start'>
+        <View className=' flex items-start'>
           <Text className=' h-8 text-textColor text-base font-interSBold pl-4' >{name}</Text>
           <Card.Content className=''>
             <Text className=' text-textColor font-interRegular pb-3'>{description}</Text>
           </Card.Content>
-          <Button mode='outlined' textColor='black' className='m-1 mr-3 ml-3 rounded-md w-32 border-solid border-sky-600  '>Level: {itemLevel}</Button>
+          {/* <Button   className='m-1 mr-3 ml-3   '>Level: {itemLevel}</Button> */}
+          
+          <MyButton  className='fixed mt-6' mode="contained" title={itemLevel}></MyButton>
         </View>
       </Card>
     </TouchableOpacity>

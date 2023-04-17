@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button, TextInput, ScrollView,StyleSheet,Image ,SafeAreaView} from 'react-native'
 import React,{useLayoutEffect, useState,useEffect, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,6 +9,9 @@ import getAssignments from '../services/assignments';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import  {GetSortOrder}  from '../functions/sortFunctionActivity'; 
+import MyButton from '../components/CustomButton';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const Dashboard = ({route}) => {
   const {name} = useContext(AuthContext);
@@ -50,10 +53,11 @@ const Dashboard = ({route}) => {
     }, [])
 
   return (
-  
-    <View className=" h-full bg-white w-full">
+    <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
+    <SafeAreaView className=" h-full w-full">
+    <Image style={styles.bgImage} source={require('../assets/images/verti.png')} />
     <Header/>
-
+   
     <ScrollView contentContainerStyle={{
         padding:12,
         paddingTop:10
@@ -72,11 +76,23 @@ const Dashboard = ({route}) => {
       </View>
       
     </ScrollView>
-    </View>
-
+    </SafeAreaView>
+</LinearGradient>
     
   )
 }
 
 export default Dashboard;
 
+
+const styles = StyleSheet.create({
+  bgImage: {
+    position: 'absolute',
+    left: '-76%',
+    right: '-20%',
+    top: '16%',
+    bottom: '70.72%',
+    zIndex: -1,
+
+  },
+})

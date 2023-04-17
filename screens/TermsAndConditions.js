@@ -2,7 +2,9 @@ import React, { useLayoutEffect } from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Button, Checkbox } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { color } from 'react-native-reanimated';
+import { LinearGradient } from 'expo-linear-gradient';
+import MyButton from '../components/CustomButton';
+
 
 const TermsAndConditions = () => {
     const [checked, setChecked] = React.useState(false);
@@ -13,8 +15,8 @@ const TermsAndConditions = () => {
         });
     }, [])
     return (
-
-        <SafeAreaView className="p-4 pt-14 relative bg-backgr h-full">
+        <LinearGradient colors={['#C1D2FC', '#FCFDFF']} style={{ flex: 1 }}>
+        <SafeAreaView className="p-4 pt-14 relative  h-full">
             <ScrollView>
                 <Text className='text-xl font-interBold'>Terms and Conditions</Text>
                 <Text className='font-interMedium pt-3 text-sm tracking-normal' >
@@ -54,9 +56,11 @@ const TermsAndConditions = () => {
                     <Text className='font-interMedium  text-sm tracking-normal'>I agree to the terms and conditions.</Text>
                 </View>
 
-                <Button mode='contained' buttonColor='#012148' textColor='white' className='mt-4 mb-2 rounded-md' disabled={!checked} onPress={() => navigation.navigate('Signup')}>Proceed</Button>
+                {/* <Button   textColor='white'   >Proceed</Button> */}
+                <MyButton disabled={!checked} className='w-40 mt-6' mode="contained" onPress={() => navigation.navigate('Signup')} title='Proceed'></MyButton>
             </ScrollView>
         </SafeAreaView>
+        </LinearGradient>
     );
 };
 

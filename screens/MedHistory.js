@@ -1,8 +1,10 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, Button, TextInput,StyleSheet,Image } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
+import MyButton from '../components/CustomButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MedHistory = ({ route }) => {
   const [inputValues, setInputValues] = useState({
@@ -100,10 +102,12 @@ const MedHistory = ({ route }) => {
   }
 
   return (
-    <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
+    <LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
+    <SafeAreaView className="flex justify-center items-center  h-full ">
+    <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
+    <Text className="-top-32 text-textColor text-2xl font-interBold">Better U.</Text>
       <View>
-        <Text>Lets troubleshoot your troubles together</Text>
-
+        
         <Input label="Height" otherProps={{
           onChangeText: inputChangedHandler.bind(this, 'height'),
           placeholder: 'eg: 172',
@@ -131,11 +135,29 @@ const MedHistory = ({ route }) => {
           value: inputValues.diseases
         }} />
 
-        <Button title='Continue' color="#1d253b" onPress={submitHandler} />
+<MyButton className='relative w-40 pt-8' mode="contained" onPress={submitHandler} title='Continue'></MyButton>
       </View>
     </SafeAreaView>
+    </LinearGradient>
   )
 }
 
 export default MedHistory;
 
+
+const styles = StyleSheet.create({
+  bgImage: {
+    position: 'absolute',
+    left: '-76%',
+    right: '-20%',
+    top: '16%',
+    bottom: '70.72%',
+    zIndex: -1,
+
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width:220
+  },
+})

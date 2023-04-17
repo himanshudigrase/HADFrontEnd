@@ -1,11 +1,12 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput,StyleSheet,Image } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import signupService from '../services/signupService'
 import { Button } from 'react-native-paper';
-
+import MyButton from '../components/CustomButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const DemoData = ({ route }) => {
 
@@ -78,12 +79,11 @@ const DemoData = ({ route }) => {
     }
   }
   return (
-
-    <SafeAreaView className="flex justify-center items-center bg-backgr h-full ">
-
+<LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
+    <SafeAreaView className="flex justify-center items-center  h-full ">
+    <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
       <View>
-        <Text>Let's know more about you!</Text>
-
+      <Text className="-top-32 text-textColor text-2xl font-interBold">Better U.</Text>
         <Input label="Enter DOB" otherProps={{
           title: "DOB", onChangeText: inputChangedHandler.bind(this, 'dob'),
           placeholder: "DD/MM/YYYY", value: inputValues.dob
@@ -99,10 +99,29 @@ const DemoData = ({ route }) => {
           placeholder: "Type Y/N", value: doc
         }} />
 
-        <Button title='Continue' color="#1d253b" onPress={submitHandler} />
+<MyButton className='relative w-40 pt-8' mode="contained" onPress={submitHandler} title='Continue'></MyButton>
       </View>
     </SafeAreaView>
+    </LinearGradient>
   )
 }
 
 export default DemoData;
+
+
+const styles = StyleSheet.create({
+  bgImage: {
+    position: 'absolute',
+    left: '-76%',
+    right: '-20%',
+    top: '16%',
+    bottom: '70.72%',
+    zIndex: -1,
+
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width:220
+  },
+})

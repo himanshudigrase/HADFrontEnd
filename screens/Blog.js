@@ -1,14 +1,21 @@
 import { View, Text, Image, ScrollView } from 'react-native'
 import React from 'react'
+import MyButton from '../components/QuestionButton';
+import { LinearGradient } from 'expo-linear-gradient';
+
+
+
+
 
 const Blog = ({ route }) => {
-  console.log(route);
+  //console.log(route);
   const imgUrl = route.params.imgUrl;
   const author = route.params.author;
   const title = route.params.title;
   const publishedAt = route.params.publishedAt;
   const description = route.params.description
   return (
+    <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
     <ScrollView
         
         vertical className=' font-interSBold ' 
@@ -30,6 +37,7 @@ const Blog = ({ route }) => {
 
     </View>
     </ScrollView>
+    </LinearGradient>
   )
 }
 

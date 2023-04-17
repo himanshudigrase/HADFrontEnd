@@ -6,10 +6,11 @@ function Input({onChange, label,otherProps}){
           onChange(text);
         }
       };
-    return<View className='px-4 mb-4'>
-        <Text className='mb-1 text-sm font-interRegular'>{label}</Text>
-        <TextInput onChange={handleChange} className='w-60 p-2 rounded-md font-interRegular bg-white' {...otherProps}/>
-    </View>
+    return(
+    <View className='px-4 mb-2 w-screen'>
+        <Text className='text-sm font-interRegular'>{label}</Text>
+        <TextInput onChange={handleChange} className='w-full pl-1 p-2  rounded-md font-interRegular bg-white' {...otherProps}/>
+    </View>)
 }
 
 export default Input;

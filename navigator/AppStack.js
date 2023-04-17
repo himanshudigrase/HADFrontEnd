@@ -13,7 +13,7 @@ const AppStack = () => {
             <Stack.Navigator options={{headerShown:false}}>
                 <Stack.Screen name="Dashboard" component={BottomNavbar} options={{headerShown:false}}/>           
                 <Stack.Screen name="Blogs" component={Blog} options={{headerShown:false}}/>
-                <Stack.Screen name="Activity" component={Activity}/>
+                <Stack.Screen name="Activity" component={Activity} options={{headerShown:false}}/>
                 <Stack.Screen name="Post" component={Post}/>
             </Stack.Navigator>          
     )
