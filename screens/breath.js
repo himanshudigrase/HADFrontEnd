@@ -1,7 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { StyleSheet, Text, View, Dimensions, Animated } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Animated,Image,SafeAreaView} from "react-native";
 import { Button } from "react-native-paper";
 import { set } from "react-native-reanimated";
+import MyButton from '../components/CustomStart';
+import { LinearGradient } from 'expo-linear-gradient';
+import MyButtonS from '../components/CustomStop';
 
 const { width, height } = Dimensions.get("window");
 const circleWidth = width / 2;
@@ -56,9 +59,13 @@ export default function App() {
 
 
   return (
-    <View className='h-full bg-backgr'>
-    <View style={styles.container}>
-      {startbreath === false  ? <Button mode='contained' style={{marginRight:180,marginBottom:280}} onPress = {()=>setStartbreath(true)} >Start</Button>
+    <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
+      
+    <SafeAreaView className='h-full '>
+    <Image style={styles.bgImage} source={require('../assets/images/verti.png')} />
+    <View className='mt-32 ml-20'>
+    
+      {startbreath === false  ? <MyButton   onPress = {()=>setStartbreath(true)} title='Start'></MyButton>
         : (<>
           <Animated.View
             style={{
@@ -108,7 +115,7 @@ export default function App() {
                 key={item}
                 style={{
                   opacity: 0.1,
-                  backgroundColor: "purple",
+                  backgroundColor: "#7190F9",
                   width: circleWidth,
                   height: circleWidth,
                   borderRadius: circleWidth / 2,
@@ -124,23 +131,27 @@ export default function App() {
               ></Animated.View>
             );
           })}
-      <Button style={{marginRight:180}} mode="contained" onPress={()=>setStartbreath(false)}>Stop</Button>
+      {/* <Button  onPress={()=>setStartbreath(false)}>Stop</Button> */}
+      <MyButtonS  onPress = {()=>setStartbreath(false)} title='Stop'></MyButtonS>
       </>)
    }
         
     </View>
-    </View>
+    </SafeAreaView>
+    </LinearGradient>
     )
     
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f8f2eb",
-    alignItems: "center",
-    justifyContent: "center",
-    left: width / 4,
-    top: height / 4,
+  
+  bgImage: {
+    position: 'absolute',
+    left: '-76%',
+    right: '-20%',
+    top: '40%',
+    bottom: '70.72%',
+    zIndex: 0,
+
   },
 });

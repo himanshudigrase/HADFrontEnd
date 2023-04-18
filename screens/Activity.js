@@ -55,13 +55,13 @@ const Activity = ({ route }) => {
 
   return (
     <>
-<Image style={styles.bgImage} source={require('../assets/images/hori.png')} />
+
       {
 
         !questionsAssigned ? <ActivityIndicator size={40} className='pt-80 ' /> 
         :
         <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
-           
+           <Image style={styles.bgImage} source={require('../assets/images/verti.png')} />
           <View className='h-full'>
           
           <Header/>
@@ -120,11 +120,11 @@ export default Activity;
 const styles = StyleSheet.create({
   bgImage: {
     position: 'absolute',
-    left: '16%',
+    left: '-36%',
     right: '-20%',
-    top: '16%',
+    top: '26%',
     bottom: '10.72%',
-    zIndex: -1,
+    zIndex: 0,
 
   },
 })

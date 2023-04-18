@@ -2,6 +2,8 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Card, Button, Avatar } from 'react-native-paper';
+import MyButton from '../components/DoctorBookButton';
+
 
 
 const DoctorCard = ({
@@ -9,22 +11,22 @@ const DoctorCard = ({
 }) => {
   return (
     <TouchableOpacity className="m-2">
-      <Card className="">
+      <Card className=" h-41 bg-white">
+        <View className='mt-3 flex-row'>
+          <Avatar.Image className="mt-5 ml-5" size={70} source={require('../assets/images/user2.png')} />
 
-        <Card.Title className="m-2" title={name} subtitle={'Qualification : ' + qualification}
-          style={{ alignContent: 'center', margin: 11 }} titleStyle={{ color: 'black', fontFamily: 'inter-bold' }}
-          subtitleStyle={{ fontFamily: 'inter-regular' }}
-          right={() =>
-            <Avatar.Image className="" size={70} source={require('../assets/images/user2.png')}/>}>
-        </Card.Title>
+          <Card.Content className="ml-2">
+            <Text className='font-interBold mb-2'>{name}</Text>
+            <Text className='font-interRegular'>Qualification: {qualification}</Text>
+            <Text className='font-interRegular'>Experience : {experience} yrs</Text>
+            <Text className='font-interRegular'>Specialization : {specialization}</Text>
+            <Card.Actions className='mb-2'>
+              <MyButton className='mr-3 ' mode='contained' title='Book'>Book</MyButton>
+            </Card.Actions>
+          </Card.Content>
+        </View>
 
-        <Card.Content className="ml-2">
-          <Text className='font-interRegular'>Experience : {experience} yrs</Text>
-          <Text className='font-interRegular'>Specialization : {specialization}</Text>
-        </Card.Content>
-        <Card.Actions>
-          <Button mode='contained'>Book</Button>
-        </Card.Actions>
+
       </Card>
 
     </TouchableOpacity>

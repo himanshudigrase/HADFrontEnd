@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     right: '-20%',
     top: '16%',
     bottom: '70.72%',
-    zIndex: -1,
+    zIndex: 0,
 
   },
 })

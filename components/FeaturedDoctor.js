@@ -1,6 +1,8 @@
 import { View } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import DoctorCard from './DoctorCard'
+import DoctorCard from './DoctorCard';
+
+
 const doctorData = require('../dummyData/doctor')
 
 const FeaturedDoctor = () => {

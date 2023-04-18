@@ -30,6 +30,7 @@ module.exports = {
     "./components/MoodCard.{js,jsx,ts,tsx}",
     "./components/FeaturedMood.{js,jsx,ts,tsx}",
     "./components/Button.{js,jsx,ts,tsx}",
+    "./components/CustomStartStop.{js,jsx,ts,tsx}",
 ],
   theme: {
     fontFamily: {
