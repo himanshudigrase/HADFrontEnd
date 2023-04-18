@@ -82,8 +82,9 @@ const DemoData = ({ route }) => {
 <LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
     <SafeAreaView className="flex justify-center items-center  h-full ">
     <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
+      <Text className="-top-52 text-textColor text-2xl font-interBold">Better U.</Text>
       <View>
-      <Text className="-top-32 text-textColor text-2xl font-interBold">Better U.</Text>
+      
         <Input label="Enter DOB" otherProps={{
           title: "DOB", onChangeText: inputChangedHandler.bind(this, 'dob'),
           placeholder: "DD/MM/YYYY", value: inputValues.dob
@@ -94,12 +95,14 @@ const DemoData = ({ route }) => {
           placeholder: "M/F/Others", value: inputValues.sex
         }} />
 
-        <Input label="Do you want Doctor now?" otherProps={{
+        {/* <Input label="Do you want Doctor now?" otherProps={{
           title: "DoctorW", onChangeText: handleDoc,
           placeholder: "Type Y/N", value: doc
-        }} />
+        }} /> */}
+<View className='pt-6'>
+<MyButton mode="contained" onPress={submitHandler} title='Continue'></MyButton>
+</View>
 
-<MyButton className='relative w-40 pt-8' mode="contained" onPress={submitHandler} title='Continue'></MyButton>
       </View>
     </SafeAreaView>
     </LinearGradient>

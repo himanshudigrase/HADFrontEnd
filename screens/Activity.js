@@ -95,7 +95,7 @@ const Activity = ({ route }) => {
 
             <Card className='shadow-none m-10 mt-32 pb-3'>
               <Card.Content>
-                <Text className='text-colorr font-interMedium mb-4'>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
+                <Text className='tracking-wider text-colorr font-interMedium mb-4'>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
               </Card.Content>
               <Card.Actions>
                 <MyButton onPress={() =>{responseToSend["choices"] = choicesSelected; 

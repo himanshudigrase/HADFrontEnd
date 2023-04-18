@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput, ScrollView,StyleSheet,Image ,SafeAreaView} from 'react-native'
+import { View, Text, ScrollView,StyleSheet,Image ,SafeAreaView} from 'react-native'
 import React,{useLayoutEffect, useState,useEffect, useContext} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,6 @@ import getAssignments from '../services/assignments';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import  {GetSortOrder}  from '../functions/sortFunctionActivity'; 
-import MyButton from '../components/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -30,7 +29,7 @@ const Dashboard = ({route}) => {
         
         activitiesToDisplay.forEach(activity =>{
           //console.log(activity);
-          // if (!activitiesToDisplay.find(({assignmentId}) => assignmentId === activity.assignmentId))
+          //  if (activitiesToDisplay ==[] &&  !activitiesToDisplay.find(({assignmentId}) => assignmentId === activity.assignmentId))
           prvsActivities.push(activity);
           
         })
@@ -41,7 +40,7 @@ const Dashboard = ({route}) => {
         console.error(error);
       }
     })();
-  },[activityDisplay])
+  },[])
   
   const navigation = useNavigation();
   
@@ -70,7 +69,7 @@ const Dashboard = ({route}) => {
           <Activities arrayOfActivities = {activityDisplay}/>
       </View> : <Text>Choose from our best doctors</Text>}
       
-      <Text className='ml-2 mb-2 font-interMedium text-lg'>Blogs</Text>
+      <Text className='ml-2 mb-2 font-interMedium text-lg '>Blogs</Text>
       <View className="w-full">  
         <Blogs className="w-screen"/>
       </View>
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: '-76%',
     right: '-20%',
-    top: '16%',
+    top: '26%',
     bottom: '70.72%',
     zIndex: 0,
 

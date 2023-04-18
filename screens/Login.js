@@ -71,7 +71,8 @@ const Login = () => {
 
           <Input label="" otherProps={{
             onChangeText: passwordHandler.bind(password),
-            placeholder: "Password"
+            placeholder: "Password",
+            secureTextEntry: true,
           }} onChange={handlePassword} />
         </View>
         <View className='relative justify-center items-center mr-32 bottom-0 top-6'>

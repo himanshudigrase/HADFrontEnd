@@ -1,10 +1,12 @@
-import { View, Text, Button, TextInput,StyleSheet,Image } from 'react-native'
+import { View, Text, Button, TextInput, StyleSheet, Image } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Input from '../components/Input';
 import MyButton from '../components/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import SInput from '../components/ShortInput';
+
 
 const MedHistory = ({ route }) => {
   const [inputValues, setInputValues] = useState({
@@ -103,41 +105,53 @@ const MedHistory = ({ route }) => {
 
   return (
     <LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
-    <SafeAreaView className="flex justify-center items-center  h-full ">
-    <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
-    <Text className="-top-32 text-textColor text-2xl font-interBold">Better U.</Text>
-      <View>
-        
-        <Input label="Height" otherProps={{
-          onChangeText: inputChangedHandler.bind(this, 'height'),
-          placeholder: 'eg: 172',
-          value: inputValues.height
-        }} />
-        <Input label="Weight" otherProps={{
-          onChangeText: inputChangedHandler.bind(this, 'weight'),
-          placeholder: 'eg: 68',
-          value: inputValues.weight
-        }} />
+      <SafeAreaView className="flex justify-center items-center  h-full ">
+        <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
+        <Text className="-top-40 text-textColor text-2xl font-interBold">Better U.</Text>
+        <View>
+          <View className='flex-row'>
+            <SInput label="Height" otherProps={{
+              onChangeText: inputChangedHandler.bind(this, 'height'),
+              placeholder: 'eg: 172',
+              value: inputValues.height
+            }} />
+            <SInput label="Weight" otherProps={{
+              onChangeText: inputChangedHandler.bind(this, 'weight'),
+              placeholder: 'eg: 68',
+              value: inputValues.weight
+            }} />
+          </View>
 
-        <Input label="Do you Smoke?" otherProps={{
-          onChangeText: handleisSmoker,
-          placeholder: 'Type Y/N',
-          value: isSmoker
-        }} />
-        <Input label="Do you Drink?" otherProps={{
-          onChangeText: handleisDrinker,
-          placeholder: 'Type Y/N',
-          value: drinksAlcohol
-        }} />
-        <Input label="Diseases" otherProps={{
-          onChangeText: inputChangedHandler.bind(this, 'diseases'),
-          placeholder: 'eg: 68',
-          value: inputValues.diseases
-        }} />
 
-<MyButton className='relative w-40 pt-8' mode="contained" onPress={submitHandler} title='Continue'></MyButton>
-      </View>
-    </SafeAreaView>
+          <View className='flex-row'>
+            <SInput label="Do you Smoke?" otherProps={{
+              onChangeText: handleisSmoker,
+              placeholder: 'Type Y/N',
+              value: isSmoker
+            }} />
+            <SInput label="Do you Drink?" otherProps={{
+              onChangeText: handleisDrinker,
+              placeholder: 'Type Y/N',
+              value: drinksAlcohol
+            }} />
+          </View>
+
+
+
+
+
+          <Input label="Diseases" otherProps={{
+            onChangeText: inputChangedHandler.bind(this, 'diseases'),
+            placeholder: 'eg: 68',
+            value: inputValues.diseases
+          }} />
+
+<View className='pt-6'>
+<MyButton  mode="contained" onPress={submitHandler} title='Continue'></MyButton>
+</View>
+          
+        </View>
+      </SafeAreaView>
     </LinearGradient>
   )
 }
@@ -158,6 +172,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width:220
+    width: 220
   },
 })

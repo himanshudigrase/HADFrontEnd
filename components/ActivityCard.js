@@ -15,7 +15,7 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
 
       <Card className='relative  shadow-none bg-white' mode={mode} style={{
         height: 180,
-
+        
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'flex-start',

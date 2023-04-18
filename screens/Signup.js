@@ -7,6 +7,8 @@ import { AuthContext } from '../context/AuthContext';
 import { Button } from 'react-native-paper';
 import MyButton from '../components/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import SInput from '../components/ShortInput';
+
 
 const Signup = () => {
   const { fname, lname, email } = useContext(AuthContext);
@@ -101,10 +103,11 @@ const Signup = () => {
     <LinearGradient colors={['#C1D2FC', '#FCFDFF']} style={{ flex: 1 }}>
       <SafeAreaView className="flex justify-center items-center h-full">
         <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
-        <Text className="-top-32 text-textColor text-2xl font-interBold">Better U.</Text>
+        <Text className="-top-40 text-textColor text-2xl font-interBold">Better U.</Text>
         <View >
           
-          <Input otherProps={{
+          <View className='flex-row'>
+          <SInput otherProps={{
               onChangeText: inputChangedHandler.bind(this, 'fname'),
               placeholder: 'First Name',
               value: inputValues.fname,
@@ -112,13 +115,15 @@ const Signup = () => {
               
             }} />
 
-            <Input  otherProps={{
+            <SInput  otherProps={{
               onChangeText: inputChangedHandler.bind(this, 'lname'),
               placeholder: 'Last Name',
               secureTextEntry: false,
               value: inputValues.lname,
               
             }} />
+          </View>
+         
           
             
         
@@ -126,27 +131,32 @@ const Signup = () => {
 
           <Input otherProps={{
             onChangeText: inputChangedHandler.bind(this, 'email'),
-            placeholder: 'abc@gmail.com',
+            placeholder: 'Email ID',
             value: inputValues.email,
             secureTextEntry: false
           }} />
 
-          <Input otherProps={{
+          <View className='flex-row mr-2'>
+          <SInput otherProps={{
             onChangeText: inputChangedHandler.bind(this, 'password'),
             placeholder: 'Password',
             value: inputValues.password,
             secureTextEntry: true
           }} />
 
-          <Input otherProps={{
+          <SInput otherProps={{
             onChangeText: inputChangedHandler.bind(this, 'confirmPassword'),
             placeholder: 'Confirm Password',
             value: inputValues.confirmPassword,
             secureTextEntry: true
           }} />
+          </View>
+          
 
-
-          <MyButton className='w-40 mt-6' mode="contained" onPress={handleSubmit} title='Continue'></MyButton>
+          <View className='pt-6'>
+          <MyButton  mode="contained" onPress={handleSubmit} title='Continue'></MyButton>
+          </View>
+          
           <View className='flex-row pt-2 ml-4'>
             <Text className="text-xs pl-14 ml-4  pb-2 text-textColor font-regular">Already have an account?</Text>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}><Text className="text-xs font-bold underline underline-offset-2 pl-1  text-textColor font-regular">Login</Text></TouchableWithoutFeedback>

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image,TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import {Button, Modal, Portal } from 'react-native-paper'
 
@@ -41,7 +41,7 @@ const FeaturedMF = () => {
 
     return (
 
-        <View className='flex flex-row w-full flex-wrap m-2 pr-4 justify-evenly'>
+        <View className='flex flex-row w-full flex-wrap m-2  justify-evenly'>
             {
 
                 mfs.map((mf, index) => {
@@ -49,34 +49,42 @@ const FeaturedMF = () => {
                     return (
                         <View key={index}>
                             <TouchableOpacity onPress={() => handleImagePress(mf.id)}>
-                                <Image className='w-16 h-16 mt-2 mb-2 '
-                                    style={{ borderWidth: 1, borderColor: 'black' }} source={require('../assets/images/mfs.png')}
+                                <Image className='w-36 h-32 mt-2 mb-2 mr-5 z-1'
+                                    style={{ borderWidth: 1,borderRadius:8 }} source={mf.image}
                                 />
+                                <Text className='absolute text-white mt-12 ml-6 font-bold text-4xl z-2'>{mf.id}</Text>
                             </TouchableOpacity>
                             {selectedImage === mf.id && (
                                 <Portal className=''>
-                                    <Modal visible={modalVisible} onDismiss={handleModalClose} className=''>
+                                    <Modal visible={modalVisible} onDismiss={handleModalClose} className='m-6'>
                                         <View style={styles.modalContent} className='items-center '>
-                                            <Text className=' pb-6 text-textColor font-interLight'>Myth or Fact ?</Text>
+                                            <View className='flex-row '>
+                                            <Text className='text-xl pb-6 text-textColor font-interMedium mr-60'>{mf.id}.</Text>
+                                            {/* <Button mode='outlined' onPress={hideModal}>X</Button> */}
+                                            <TouchableWithoutFeedback onPress={hideModal}>
+                                                <Text className="text-xl text-textColor font-regular -mt-1">x</Text>
+                                                </TouchableWithoutFeedback>
+                                            </View>
+                                            
                                             <Text className='text-textColor font-interRegular pb-4'>{mf.question}</Text>
-                                            <View className='flex-row items-center '>
-                                                <Button className='backgroundColor-grey mr-3' id='myth' onPress={() => { setIsMythClicked(true); setIsFactClicked(false); setisCorrect('Correct'); }}
+                                            <View className='flex-row mr-20 mt-5 -mb-4 '>
+                                                <Button buttonColor='#9FB9F9' textColor='white' className='mr-2' id='myth' onPress={() => { setIsMythClicked(true); setIsFactClicked(false); setisCorrect('Correct'); }}
                                                     mode='contained-tonal' disabled={isFactClicked}>Myth</Button>
-                                                <Text>-or-</Text>
-                                                <Button id='fact' className='ml-3' onPress={() => { setIsFactClicked(true); setIsMythClicked(false); setisCorrect('Incorrect'); }}
-                                                    mode='contained-tonal' disabled={isMythClicked}>Fact</Button>
+                                                
+                                                <Button buttonColor='#F2CF8C' id='fact' className='ml-3' onPress={() => { setIsFactClicked(true); setIsMythClicked(false); setisCorrect('Incorrect'); }}
+                                                    mode='contained' disabled={isMythClicked}>Fact</Button>
 
                                             </View>
 
                                             {(isCorrect !== null && (isMythClicked || isFactClicked)) ? (
                                                 <View>
-                                                    <Text className=' m-auto pb-4 pt-4 font-interSBold items-center'>{isCorrect}</Text>
+                                                    <Text className=' m-auto pb-4 pt-6 font-interSBold items-center'>{isCorrect}</Text>
                                                     {/* <ScrollView showsVerticalScrollIndicator> */}
                                                     <Text className='mb-4'>{mf.explanation}</Text>
                                                     {/* </ScrollView> */}
                                                 </View>
                                             ) : <Text></Text>}
-                                            <Button mode='outlined' onPress={hideModal}>Close</Button>
+                                            
                                         </View>
                                     </Modal>
                                 </Portal>
