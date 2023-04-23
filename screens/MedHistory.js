@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import MyButton from '../components/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import SInput from '../components/ShortInput';
+import signUpService from '../services/signupService';
 
 
 const MedHistory = ({ route }) => {
@@ -43,9 +44,10 @@ const MedHistory = ({ route }) => {
     wantsDoc: route.params.wants_doc,
     joiningDate: today,
     medicalHistory: {
+      id:0,
       height: inputValues.height,
       weight: inputValues.weight,
-      isSmoker: isSmoker,
+      smoker: isSmoker,
       drinksAlcohol: drinksAlcohol,
       diseases: inputValues.diseases
     }
@@ -81,22 +83,19 @@ const MedHistory = ({ route }) => {
   const submitHandler = async () => {
     try {
 
-      //  res = await signUpService.submiDetails(medHistDet);  //-- uncomment this if checking on backend
-      // console.log(res)                                        
-      //  if(res.success === true){
-      //    console.log("In MedHost");
-      //      (()=>navigation.navigate('Dashboard',{
-      //         demographics:res.response.demographics,
-      //         patient:res.response.patient,
-      //         medicalHistory:res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
-      //         userRole:res.response.userRole
+      res = await signUpService.submiDetails(medHistDet);  //-- uncomment this if checking on backend
+      console.log(res)                                        
+       if(res.success === true){
+         console.log("In MedHost");
+           (()=>navigation.navigate('Login',{
+              demographics:res.response.demographics,
+              patient:res.response.patient,
+              medicalHistory:res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
+              userRole:res.response.userRole
 
 
-      //      }))();
-      //  }
-
-
-      (() => navigation.navigate('Login'))();      // comment this on backend testing
+           }))();
+       }
     } catch (exception) {
       console.log(exception)
 

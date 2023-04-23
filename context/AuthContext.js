@@ -7,14 +7,17 @@ export const AuthProvider = ({ children }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState('');
-    const [fname, setFname] = useState(null);
-    const [lname, setLname] = useState(null);
-    const [isSmoker, setIsSmoker] = useState(false);
-    const [isDrinker, setIsDrinker] = useState(false);
-    const [height, setHeight] = useState(null);
-    const [weight, setWeight] = useState(null);
-    const [dob, setDob] = useState(null);
-    const [email, setEmail] = useState(null);
+    // const [fname, setFname] = useState(null);
+    // const [lname, setLname] = useState(null);
+    // const [isSmoker, setIsSmoker] = useState(false);
+    // const [isDrinker, setIsDrinker] = useState(false);
+    // const [height, setHeight] = useState(null);
+    // const [weight, setWeight] = useState(null);
+    // const [dob, setDob] = useState(null);
+    // const [email, setEmail] = useState(null);
+    const [doctorAssigned, setdoctorAssigned] = useState(false);
+
+
 
     const login = (receivedToken) => {
         setIsLoading(true);
@@ -40,13 +43,23 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const assignDoctor= async(id) =>{
+        try{
+           
+            await AsyncStorage.setItem('doctorId', id.toString());
+            setdoctorAssigned(true);
+        }catch(e){
+            console.log(`Error in assigning doctor ${e}`);
+        }
+    }
+
     useEffect(() => {
         isLoggedIn();
     }, []);
 
     return (
         // with this provider we can pass any value to any screen
-        <AuthContext.Provider value={{ isLoading, userToken, login, logout, fname, lname, isDrinker, isSmoker, height, weight, email,dob }}>
+        <AuthContext.Provider value={{ isLoading, userToken, login, logout, assignDoctor,doctorAssigned }}>
 
             {children}
 

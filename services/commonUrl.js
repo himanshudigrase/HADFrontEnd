@@ -1,1 +1,3 @@
-export const commonUrl = 'https://516d26bb-7412-4c1e-85fc-e89ced1a6cc5.mock.pstmn.io'
+export const commonUrl = 'https://f912-103-156-19-229.ngrok-free.app'
+
+//'https://6463-119-161-98-68.ngrok-free.app'

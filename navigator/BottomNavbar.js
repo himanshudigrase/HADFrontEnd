@@ -6,7 +6,15 @@ import Experts from '../screens/DoctorList';
 import MFList from '../screens/MF';
 import { IconButton } from 'react-native-paper';
 import ChatComponent from '../screens/Chat';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+
+
+
+
+
 export default function BottomNavbar(){
+    const {doctorAssigned} = useContext(AuthContext);
     return(
         <Tab.Navigator screenOptions={({route})=>({
             tabBarActiveTintColor: '#1d253b',
@@ -32,10 +40,13 @@ export default function BottomNavbar(){
             }
         })}>
             <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false,tabBarShowLabel:false}}/>
-            <Tab.Screen name="Breathe" component={breath} options={{headerShown:false}}/>
-            <Tab.Screen name='Experts' component={Experts} options={{headerShown:false}}/>
+            <Tab.Screen name="Breathe" component={breath} options={{headerShown:false}}/>           
             <Tab.Screen name='Myths' component={MFList} options={{headerShown:false}}/>
-            <Tab.Screen name='Chat' component={ChatComponent} />
+            {
+                doctorAssigned?<Tab.Screen name='Chat' component={ChatComponent} />:
+                <Tab.Screen name='Experts' component={Experts} options={{headerShown:false}}/>
+            }
+            
         </Tab.Navigator>
     );
 }

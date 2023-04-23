@@ -39,8 +39,7 @@ const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) =
           <Card.Content className=''>
             <Text className=' text-textColor font-interRegular pb-3'>{description}</Text>
           </Card.Content>
-          {/* <Button   className='m-1 mr-3 ml-3   '>Level: {itemLevel}</Button> */}
-          
+          {/* <Button   className='m-1 mr-3 ml-3   '>Level: {itemLevel}</Button> */}         
           <MyButton  className='fixed mt-6' mode="contained" title={itemLevel}></MyButton>
         </View>
       </Card>

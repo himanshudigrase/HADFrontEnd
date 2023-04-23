@@ -17,7 +17,8 @@ function AppNav (){
 
     return(       
           <NavigationContainer>
-            {userToken !==null  ? <DrawerStack/> : <AuthStack/> }
+            {console.log(userToken)}
+            {userToken !== null  ? <DrawerStack/> : <AuthStack/> }
           </NavigationContainer>       
     )
 }

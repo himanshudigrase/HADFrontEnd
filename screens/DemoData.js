@@ -25,9 +25,7 @@ const DemoData = ({ route }) => {
       };
     });
   }
-  const handleDoc = (text) => {
-    if (text == 'Y') setDoc(true)
-  }
+  
 
   const navigation = useNavigation();
 
@@ -47,9 +45,9 @@ const DemoData = ({ route }) => {
 
     demographics: {
       userId: 0,
-      fname: route.params.fname,
-      lName: route.params.lname,
-      sex: inputValues.sex,
+      firstName: route.params.fname,
+      lastName: route.params.lname,
+      gender: inputValues.sex,
       dob: inputValues.dob,
       age: 0
     }
@@ -62,20 +60,21 @@ const DemoData = ({ route }) => {
       userId = await signupService.signup(detailsObj);
 
       console.log(userId);
-      console.log(userId.response.userId);
+      console.log(userId.userId);
 
-      if (userId.success === true) {
+      if (userId) {
         console.log("here");
         (() => navigation.navigate('MedHistory', {
-          userId: userId.response.userId,
+          userId: userId.userId,
           wants_doc: doc
         }))();
       }
     } catch (exception) {
 
-      (() => navigation.navigate('MedHistory', {
-        wants_doc: doc
-      }))();
+      // (() => navigation.navigate('MedHistory', {
+      //   wants_doc: doc
+      // }))();
+      console.log(exception);
     }
   }
   return (

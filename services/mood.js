@@ -4,10 +4,11 @@ const moodUrl = commonUrl
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-const postMoodService = async (patientId, mood) => {
+const postMoodService = async (mood) => {
   try {
     const savedToken = await AsyncStorage.getItem('token');
-    const response = await axios.post(moodUrl + '/patients' + patientId + '/mood', mood, {
+    console.log(mood);
+    const response = await axios.post(moodUrl + '/patients/set-mood', mood, {
       headers: { Authorization: `Bearer ${savedToken}` }
     });
     return response.data
@@ -15,6 +16,5 @@ const postMoodService = async (patientId, mood) => {
     console.error(e);
   }
 }
-
 
 export default postMoodService

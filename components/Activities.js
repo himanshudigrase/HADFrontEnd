@@ -12,7 +12,7 @@ const Activity = (arrayOfActivities) => {
   //   setActivity(activities);
   //  },[activities])
    arrayOfActivities.arrayOfActivities.forEach(activity => {
-    console.log(activity);
+    //console.log(activity);
    });
   return (
     <ScrollView 

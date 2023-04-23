@@ -16,27 +16,30 @@ const getAssignments = async (patientId) => {
       .then(response => response.data.response);
 
     const assgns = response;
-    console.log(assgns);
-    const doctorId = assgns[0].doctor.doctorId;
+  
 
-    await AsyncStorage.setItem('doctorId', doctorId.toString());
-    console.log(doctorId);
-    let arrOfActivities = [];
+    if(assgns !=Object.keys(assgns).length === 0 ){
+      const doctorId = assgns[0].doctor.doctorId;
 
-    assgns.forEach(assgn => {
-      // here i dont have to bother about item type , considering every item to display
-      arrOfActivities.push(
-        {
-          id: assgn.item.itemId,
-          type: assgn.item.type,
-          name: assgn.item.activity.name,
-          description: assgn.item.activity.description,
-          itemLevel: assgn.itemLevel
-        })
-    });
-
-
-    return arrOfActivities;
+      await AsyncStorage.setItem('doctorId', doctorId.toString());
+      console.log(doctorId);
+      let arrOfActivities = [];
+  
+      assgns.forEach(assgn => {
+        // here i dont have to bother about item type , considering every item to display
+        arrOfActivities.push(
+          {
+            id: assgn.item.itemId,
+            type: assgn.item.type,
+            name: assgn.item.activity.name,
+            description: assgn.item.activity.description,
+            itemLevel: assgn.itemLevel
+          })
+      });
+      return arrOfActivities;
+    }else return [];
+    
+    
   } catch (e) {
     console.log(e);
   }

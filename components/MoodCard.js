@@ -9,12 +9,13 @@ import MyButton from './MoodButton';
 const MoodCard = ({  value,imgUrl,mood }) => {
   let dataToSend = {};
   var today = new Date();
-  dataToSend["mood_value"] = value;
+  dataToSend["moodValue"] = value;
 
   async function postMood() {
     const patientId = await AsyncStorage.getItem('patientId');
-    dataToSend["date"] = today.toString();
-    const res = await postMoodService(patientId, dataToSend);
+    dataToSend["timeStamp"] = today.toString();
+    dataToSend["patientId"] = patientId;
+    const res = await postMoodService(dataToSend);
     if (res.Status === "200 OK") {
       Alert.alert('Great', 'You have successfully recorded your mood for today', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },

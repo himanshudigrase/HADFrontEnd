@@ -29,12 +29,14 @@ const getID = async (email) => {
     }
     )
     const response = await reqInstance.get(loginUrl + '/users/' + email);
-    //console.log('id get' + response.data.response.userId);  -->           Sreekar's config for getting PId
-    return response.data.userId;
+    console.log('id get' + response.data.response.userId);  
+    return response.data.response.userId;
   } catch (e) {
     console.log(e);
   }
 }
+
+
 const exportObject = { loginUser, getID }
 export default exportObject
 
