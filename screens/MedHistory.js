@@ -84,7 +84,7 @@ const MedHistory = ({ route }) => {
     try {
 
       res = await signUpService.submiDetails(medHistDet);  //-- uncomment this if checking on backend
-      console.log(res)                                        
+                                            
        if(res.success === true){
          console.log("In MedHost");
            (()=>navigation.navigate('Login',{

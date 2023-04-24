@@ -1,15 +1,32 @@
 import { View, Text, ImageBackground, TouchableOpacity,StyleSheet,Image } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { Avatar } from 'react-native-paper'
 import { AuthContext} from '../context/AuthContext'
 import { IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import MyButton from '../components/CustomButton';
+
+import getPatientDetails from '../services/getPatientDetails'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const CustomDrawer = (props) => {
+  const [pDetails, setpDetails] = useState({});
   const { logout } = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchUserData(){
+      try{
+        const getPatient = await AsyncStorage.getItem('patientId');
+        const getDetails =  await getPatientDetails(getPatient);
+        
+        setpDetails(getDetails);
+        console.log(pDetails);
+      }catch(e){
+  
+      }
+    }
+    fetchUserData();
+  }, [])
   return (
     <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
       <View className="flex-1 ">
@@ -18,7 +35,7 @@ const CustomDrawer = (props) => {
 
           <ImageBackground className=" p-20">
             <Avatar.Image className="" source={require('../assets/images/user2.png')} />
-            <Text className='mt-4 text-black font-interBold'>User Test</Text>
+            <Text className='mt-4 text-black font-interBold'>User</Text>
           </ImageBackground>
           
           <DrawerItemList {...props} />

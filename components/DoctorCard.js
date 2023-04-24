@@ -9,13 +9,14 @@ import doctorObj from '../services/doctors';
 
 
 const DoctorCard = ({
-  id, name, qualification, specialization, experience, imgUrl
+  id, fname,lname, qualification, specialization, experience, imgUrl
 }) => {
   const {assignDoctor} = useContext(AuthContext);
   const handleDoctor = async(id)=>{
-    
     let response = await doctorObj.assignDoctor(id);
-    //assignDoctor(id);
+    
+    if(response.success == true)
+    assignDoctor(id);
    }
 
 
@@ -26,7 +27,7 @@ const DoctorCard = ({
           <Avatar.Image className="mt-5 ml-5" size={70} source={require('../assets/images/user2.png')} />
 
           <Card.Content className="ml-2">
-            <Text className='font-interBold mb-2'>{name}</Text>
+            <Text className='font-interBold mb-2'>{fname} {lname}</Text>
             <Text className='font-interRegular'>Qualification: {qualification}</Text>
             <Text className='font-interRegular'>Experience : {experience} yrs</Text>
             <Text className='font-interRegular'>Specialization : {specialization}</Text>

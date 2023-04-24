@@ -18,11 +18,11 @@ const getAssignments = async (patientId) => {
     const assgns = response;
   
 
-    if(assgns !=Object.keys(assgns).length === 0 ){
+    if(assgns!=null && assgns !=Object.keys(assgns).length === 0 ){
       const doctorId = assgns[0].doctor.doctorId;
 
       await AsyncStorage.setItem('doctorId', doctorId.toString());
-      console.log(doctorId);
+
       let arrOfActivities = [];
   
       assgns.forEach(assgn => {

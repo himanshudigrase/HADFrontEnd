@@ -9,6 +9,8 @@ import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GetSortOrder } from '../functions/sortFunctionActivity';
 import { LinearGradient } from 'expo-linear-gradient';
+import ChooseDoctorCard from '../components/ChooseDoctorCard';
+import YetToAssignActivityCard from '../components/YetToAssignActivityCard';
 
 
 const Dashboard = ({ route }) => {
@@ -72,14 +74,19 @@ const Dashboard = ({ route }) => {
           vertical
           showsVerticalScrollIndicator={true}>
           {doctorAssigned ? yetToAssign ? 
-          <Text>Please be patient, activities will appear soon.</Text>
+          <View className="ml-2">
+          <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
+          
+          <YetToAssignActivityCard/>
+        </View> 
+          
           :
             <View className="ml-2">
               <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
               <Activities arrayOfActivities={activityDisplay} />
             </View> 
             : 
-            <Text>Choose from our best doctors</Text> }
+            <ChooseDoctorCard/> }
 
           <Text className='ml-2 mb-2 font-interMedium text-lg '>Blogs</Text>
           <View className="w-full">

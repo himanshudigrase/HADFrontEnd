@@ -5,9 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const doctorUrl = commonUrl;
 
-const getDoctors = async (patientId,doctorId) => {
+const getDoctors = async () => {
   const savedToken = await AsyncStorage.getItem('token');
-  let response = await axios.get(doctorUrl +'/doctors/get-all',{
+  let response = await axios.get(doctorUrl +'/users/get-doctors',{
     headers: { Authorization: `Bearer ${savedToken}` }
   }).then(response => response.data);
   
@@ -15,17 +15,16 @@ const getDoctors = async (patientId,doctorId) => {
 
   response.forEach(res =>{
     doctorsList.push({
-      id: res.doctorId,
-      experience: res.doctorDetails.experienceInYears,
-      qualification: res.doctorDetails.qualification,
-      specialization: res.doctorDetails.specialization,
-      name:'DOCTOR'
+      id: res.doctor.doctorId,
+      experience: res.doctor.doctorDetails.experienceInYears,
+      qualification: res.doctor.doctorDetails.qualification,
+      specialization: res.doctor.doctorDetails.specialization,
+      fname:res.demographics.firstName,
+      lname:res.demographics.lastName,
     }
       
     )
   })
-  console.log(response);
-
 
   return doctorsList;
 }
@@ -35,12 +34,11 @@ const assignDoctor = async(doctorId)=>{
   const savedToken = await AsyncStorage.getItem('token');
   const patientId = await AsyncStorage.getItem('patientId');
   const data = {patientId: patientId, doctorId: doctorId};
-  let response = await axios.post(doctorUrl +'/assignDoctorToPatient',data,{
+  
+  let response = await axios.post(doctorUrl +'/admin/assignDoctorToPatient',data,{
     headers: { Authorization: `Bearer ${savedToken}` }
   }).then(response => response.data);
 
-
-  console.log(response);
 
   return response;
 }

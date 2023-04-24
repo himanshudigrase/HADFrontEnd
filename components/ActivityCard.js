@@ -8,7 +8,7 @@ import MyButton from '../components/ActivityButton';
 
 
 const ActivityCard = ({ activityId,type, description, name, itemLevel, mode }) => {
-//console.log("key"+activityId);
+
   const navigation = useNavigation();
   return (
     <TouchableOpacity className="mr-3 mb-3" >

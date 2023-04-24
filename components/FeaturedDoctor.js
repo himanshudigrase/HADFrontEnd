@@ -30,7 +30,9 @@ const FeaturedDoctor = () => {
           return (
             <DoctorCard
               key={doctor.id}
-              name={doctor.name}
+              id={doctor.id}
+              fname={doctor.fname}
+              lname={doctor.lname}
               qualification={doctor.qualification}
               experience={doctor.experience}
               imgUrl={doctor.image}

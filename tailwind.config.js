@@ -33,7 +33,9 @@ module.exports = {
     "./components/FeaturedMood.{js,jsx,ts,tsx}",
     "./components/Button.{js,jsx,ts,tsx}",
     "./components/CustomStartStop.{js,jsx,ts,tsx}",
-],
+    "./components/ChooseDoctorCard.{js,jsx,ts,tsx}",
+    "./components/YetToAssignActivityCard.{js,jsx,ts,tsx}"
+  ],
   theme: {
     fontFamily: {
       'sans': ['ui-sans-serif', 'system-ui'],

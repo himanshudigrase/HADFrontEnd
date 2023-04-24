@@ -59,8 +59,6 @@ const DemoData = ({ route }) => {
       console.log(detailsObj)
       userId = await signupService.signup(detailsObj);
 
-      console.log(userId);
-      console.log(userId.userId);
 
       if (userId) {
         console.log("here");

@@ -154,7 +154,7 @@ const Signup = () => {
           
 
           <View className='pt-6'>
-          <MyButton  mode="contained" onPress={handleSubmit} title='Continue'></MyButton>
+          <MyButton  mode="contained" onPress={handleSubmit} title='Continue'/>
           </View>
           
           <View className='flex-row pt-2 ml-4'>

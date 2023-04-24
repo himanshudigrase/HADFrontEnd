@@ -17,8 +17,7 @@ export default function ChatComponent(props) {
     })();
   }, []);
 
-  console.log('doc ID'+doctorId);
-  console.log('patientId'+patientId);
+
  
 //  const imageId = require('../assets/images/user.jpg');
 //  console.log(imageId);

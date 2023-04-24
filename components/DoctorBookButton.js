@@ -11,7 +11,7 @@ const MyButton = (props) => {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
         >
-            {console.log(props.title)}
+            
             <Button
                 buttonColor='transparent'
                 {...props}
