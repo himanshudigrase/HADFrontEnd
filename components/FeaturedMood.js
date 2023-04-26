@@ -1,7 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import MoodCard from './MoodCard';
 import { ActivityIndicator } from 'react-native-paper'
+import { AuthContext } from '../context/AuthContext';
 const moodData = require('../dummyData/moods')
 
 
@@ -9,11 +10,12 @@ const moodData = require('../dummyData/moods')
 const FeaturedMood = () => {
   const [moods, setMoods] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const {logout} = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
     let moods = moodData.moods;
+    if(moods == 401)logout();
     setMoods(moods);
   })
   return (

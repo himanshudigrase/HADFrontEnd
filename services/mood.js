@@ -10,7 +10,9 @@ const postMoodService = async (mood) => {
     console.log(mood);
     const response = await axios.post(moodUrl + '/patients/set-mood', mood, {
       headers: { Authorization: `Bearer ${savedToken}` }
-    });
+    }).then(response=>response);
+
+    if(response.status == 401)return response.status;
     return response.data
   } catch (e) {
     console.error(e);

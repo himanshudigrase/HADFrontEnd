@@ -13,9 +13,13 @@ const getAssignments = async (patientId) => {
     const response = await axios.get(assignmentsUrl + '/patients/' + patientId + '/assignments', {
       headers: { Authorization: `Bearer ${savedToken}` }
     })
-      .then(response => response.data.response);
-
-    const assgns = response;
+      .then(response => response);
+    console.log(response);
+      if(response.status === 401){
+        console.log(response.status);
+        return response.status;
+      }
+    const assgns = response.data.response;
   
 
     if(assgns!=null && assgns !=Object.keys(assgns).length === 0 ){

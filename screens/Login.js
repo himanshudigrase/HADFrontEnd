@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, Alert } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -40,16 +40,23 @@ const Login = () => {
   async function getToken() {
     try {
       const token = await loginService.loginUser(email, password);
-      await AsyncStorage.setItem('token', token);
+      if(token == null || token == 'undefined') Alert.alert('Login Failed', 'Please provide correct Email and Password', [
+        { text: 'OK' },
+      ])
+      else{
+        await AsyncStorage.setItem('token', token);
 
-      const patientId = await loginService.getID(email);
-      await AsyncStorage.setItem('patientId', patientId.toString());
-
-      const from_storage = await AsyncStorage.getItem('token');
-
-      login(from_storage)
+        const patientId = await loginService.getID(email);
+        await AsyncStorage.setItem('patientId', patientId.toString());
+  
+        const from_storage = await AsyncStorage.getItem('token');
+  
+        login(from_storage);
+      }
+      
     } catch (e) {
       console.error(e);
+      
     }
   }
 

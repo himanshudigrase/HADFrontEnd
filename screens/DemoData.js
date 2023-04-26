@@ -55,26 +55,30 @@ const DemoData = ({ route }) => {
   let userId = 0;
 
   const submitHandler = async () => {
+    if (inputValues.sex === '' || inputValues.dob === '' ) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    if(inputValues.sex!='M' && inputValues.sex!='F' && inputValues.sex!='O' ){
+      alert('Please specify gender correctly.');
+      return;
+    }
     try {
-      console.log(detailsObj)
       userId = await signupService.signup(detailsObj);
 
-
       if (userId) {
-        console.log("here");
         (() => navigation.navigate('MedHistory', {
           userId: userId.userId,
           wants_doc: doc
         }))();
       }
     } catch (exception) {
-
-      // (() => navigation.navigate('MedHistory', {
-      //   wants_doc: doc
-      // }))();
       console.log(exception);
     }
   }
+
+
+
   return (
 <LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
     <SafeAreaView className="flex justify-center items-center  h-full ">

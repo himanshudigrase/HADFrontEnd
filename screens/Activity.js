@@ -1,11 +1,12 @@
 import { View, Text,Image,StyleSheet } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import getQuestions from '../services/getQuestions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ActivityIndicator, Button, Card, RadioButton } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient';
 import MyButton from '../components/QuestionButton';
 import Header from '../components/Header';
+import { AuthContext } from '../context/AuthContext'
 
 const Activity = ({ route }) => {
 
@@ -21,7 +22,7 @@ const Activity = ({ route }) => {
   let responseToSend = {};                                                // to store response which needs to send
   const activityId = route.params.activityId;
   let getPatient;
-
+  const {logout} = useContext(AuthContext);
 
   // this function handles the put request of choices
   async function handleSubmit(responseToSend){
@@ -34,7 +35,7 @@ const Activity = ({ route }) => {
       try {
         getPatient = await AsyncStorage.getItem('patientId');
         questionsToDisplay = await getQuestions(getPatient, activityId);
-        
+        if(questionDisplay == 401) logout();
         // waiting until we get response
         if (questionsToDisplay != [] && questionsToDisplay != undefined && questionsToDisplay != '') {
           setQuestionDisplay(questionsToDisplay);

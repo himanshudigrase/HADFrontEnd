@@ -1,12 +1,13 @@
 import { View, Text,ScrollView,StyleSheet,Image ,SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../components/Header'
 import FeaturedDoctor from '../components/FeaturedDoctor'
 import { LinearGradient } from 'expo-linear-gradient';
-import MyButton from '../components/CustomButton';
+
 
 
 const DoctorList = () => {
+  
   return (
     <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
     <View className=" h-full ">

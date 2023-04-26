@@ -11,15 +11,15 @@ const getPatientDetails = async (patientId) => {
     const response = await axios.get(detailsUrl + '/users/get/' + patientId, {
       headers: { Authorization: `Bearer ${savedToken}` }
     })
-      .then(response => response.data);
-    
+      .then(response => response);
+    if(response.status == 401)return response.status;
     //console.log(response.patient);
     // const Medresponse = await axios.get(detailsUrl + '/patients/' +patientId+'/medical-history', {
     //   headers: { Authorization: `Bearer ${savedToken}` }
     // })
     //   .then(Medresponse => Medresponse.data);
     // console.log(Medresponse);
-    return response;
+    return response.data;
   } catch (e) {
     console.log(e);
   }

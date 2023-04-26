@@ -13,7 +13,7 @@ const AuthStack = () => {
         <Stack.Navigator options={{headerShown:false}}>
             <Stack.Screen name="Home" component={Home}/>
             <Stack.Screen name="Login" component={Login}/>
-            <Stack.Screen name="Signup" component={Signup}/>
+            <Stack.Screen name="Signup" component={Signup}options={{headerShown:false}}/>
             <Stack.Screen name="DemoData" component={DemoData}/>
             <Stack.Screen name="MedHistory" component={MedHistory}/>
             <Stack.Screen name='TandC' component={TermsAndConditions} options={{headerShown:false}}/>

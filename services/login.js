@@ -10,9 +10,11 @@ const loginUser = async (email, password) => {
     password: password
   }
   try {
-    const response = await axios.post(loginUrl + '/auth/login', data);
-    //console.log(response.data);
+    const response = await axios.post(loginUrl + '/auth/login', data).then(response=>response);
+    console.log(response);
+    // if(response.status === '200 OK')
     return response.data.token;
+
   } catch (e) {
     console.error(e);
   }

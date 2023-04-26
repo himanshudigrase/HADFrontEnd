@@ -14,7 +14,7 @@ import YetToAssignActivityCard from '../components/YetToAssignActivityCard';
 
 
 const Dashboard = ({ route }) => {
-  const { name } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   //const [doctorAssigned, setdoctorAssigned] = useState(false);
   const [activityDisplay, setActivityDisplay] = useState([]);
   const {doctorAssigned} = useContext(AuthContext);
@@ -30,6 +30,7 @@ const Dashboard = ({ route }) => {
       try {
         const getPatient = await AsyncStorage.getItem('patientId');
         activitiesToDisplay = await getAssignments(getPatient);
+        if(activitiesToDisplay === 401)logout();
         if(activitiesToDisplay !=[] && activitiesToDisplay!=undefined && activitiesToDisplay !='') {
 
           activitiesToDisplay.forEach(activity => {

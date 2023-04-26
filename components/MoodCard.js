@@ -16,6 +16,7 @@ const MoodCard = ({  value,imgUrl,mood }) => {
     dataToSend["timeStamp"] = today.toString();
     dataToSend["patientId"] = patientId;
     const res = await postMoodService(dataToSend);
+    console.log(res);
     if (res.Status === "200 OK") {
       Alert.alert('Great', 'You have successfully recorded your mood for today', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },

@@ -15,8 +15,8 @@ const MedHistory = ({ route }) => {
     weight: '',
     diseases: ''
   })
-  const [isSmoker, setIsSmoker] = useState(false);
-  const [drinksAlcohol, setdrinkAlcohol] = useState(false);
+  const [isSmoker, setIsSmoker] = useState(null);
+  const [drinksAlcohol, setdrinkAlcohol] = useState(null);
 
   // Following code is for importing date in dd/mm/yyyy format
   var today = new Date();
@@ -35,16 +35,12 @@ const MedHistory = ({ route }) => {
     });
   }
 
-
-
-
-
   const medHistDet = {
     patientId: route.params.userId,
     wantsDoc: route.params.wants_doc,
     joiningDate: today,
     medicalHistory: {
-      id:0,
+      id: 0,
       height: inputValues.height,
       weight: inputValues.weight,
       smoker: isSmoker,
@@ -52,7 +48,6 @@ const MedHistory = ({ route }) => {
       diseases: inputValues.diseases
     }
   }
-  //console.log(medHistDet);
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
     setInputValues((curInputValues) => {
@@ -63,7 +58,6 @@ const MedHistory = ({ route }) => {
     });
   }
 
-
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -73,31 +67,60 @@ const MedHistory = ({ route }) => {
 
   }, [])
 
+
+
   const handleisSmoker = (text) => {
-    if (text == 'Y') setIsSmoker(true)
+    if(text!='Y' && text!='N'){
+      alert('Please specify only Y/N.');
+      return;
+    }  
+    if (text == 'Y') setIsSmoker(true);
+    if (text == 'N') setIsSmoker(false); 
   }
+
+
   const handleisDrinker = (text) => {
-    if (text == 'Y') setdrinkAlcohol(true)
+    if(text!='Y' && text!='N'){
+      alert('Please specify only Y/N.');
+      return;
+    }
+    if (text == 'Y') setdrinkAlcohol(true); 
+    if (text == 'N') setdrinkAlcohol(false); 
   }
 
   const submitHandler = async () => {
+
+    if(isNaN(inputValues.height) || inputValues.height==''){
+      alert('Please specify height(in cms) only in number.');
+      return;
+    }
+    if(isNaN(inputValues.weight) || inputValues.weight==''){
+      alert('Please specify weight(in kgs) only in number.');
+      return;
+    }
+    if(isSmoker == null){
+      alert('Please specify whether you smoke or not.');
+      return;
+    }
+    if(drinksAlcohol == null){
+      alert('Please specify whether you drink alcohol or not.');
+      return;
+    }
+
     try {
 
-      res = await signUpService.submiDetails(medHistDet);  //-- uncomment this if checking on backend
-                                            
-       if(res.success === true){
-         console.log("In MedHost");
-           (()=>navigation.navigate('Login',{
-              demographics:res.response.demographics,
-              patient:res.response.patient,
-              medicalHistory:res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
-              userRole:res.response.userRole
+     const res = await signUpService.submiDetails(medHistDet);  
+console.log(res);
+        (() => navigation.navigate('Login', {
+          demographics: res.response.demographics,
+          patient: res.response.patient,
+          medicalHistory: res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
+          userRole: res.response.userRole
 
-
-           }))();
-       }
-    } catch (exception) {
-      console.log(exception)
+        }))();
+      }
+     catch (exception) {
+      console.log(exception);
 
     }
   }
@@ -135,20 +158,16 @@ const MedHistory = ({ route }) => {
             }} />
           </View>
 
-
-
-
-
           <Input label="Diseases" otherProps={{
             onChangeText: inputChangedHandler.bind(this, 'diseases'),
-            placeholder: 'eg: 68',
+            placeholder: 'eg: Cancer, Asthama, etc..',
             value: inputValues.diseases
           }} />
 
-<View className='pt-6'>
-<MyButton  mode="contained" onPress={submitHandler} title='Continue'></MyButton>
-</View>
-          
+          <View className='pt-6'>
+            <MyButton mode="contained" onPress={submitHandler} title='Continue'></MyButton>
+          </View>
+
         </View>
       </SafeAreaView>
     </LinearGradient>

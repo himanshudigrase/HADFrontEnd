@@ -20,12 +20,14 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   })
-
+  const navigation = useNavigation();
   const demoObj = {
     email: inputValues.email,
     password: inputValues.password,
     roleID: 3
   }
+
+
   // Generic way to handle input changes
   function inputChangedHandler(inputIdentifier, enteredValue) {
     setInputValues((curInputValues) => {
@@ -38,6 +40,7 @@ const Signup = () => {
 
 
   const handleSubmit = () => {
+    
     // Perform validation
     if (inputValues.fname === '' || inputValues.lname === '' || inputValues.email === '' || inputValues.password === '' || inputValues.confirmPassword === '') {
       alert('Please fill in all fields.');
@@ -64,13 +67,11 @@ const Signup = () => {
 
     if (isValid) {
       // here we try yo store the data in Storage using AsyncStorage
-
       navigation.navigate('DemoData', {
 
         demodet: demoObj,
         fname: inputValues.fname,
         lname: inputValues.lname,
-
 
       }
       )
@@ -89,14 +90,14 @@ const Signup = () => {
   };
 
 
-  const navigation = useNavigation();
+  
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false
-    });
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerShown: false
+  //   });
 
-  }, [])
+  // }, [])
 
 
   return (
@@ -154,7 +155,7 @@ const Signup = () => {
           
 
           <View className='pt-6'>
-          <MyButton  mode="contained" onPress={handleSubmit} title='Continue'/>
+          <MyButton  onPress={()=>handleSubmit()} title='Continue'/>
           </View>
           
           <View className='flex-row pt-2 ml-4'>

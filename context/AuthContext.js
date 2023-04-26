@@ -4,17 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
+    const LOGOUT_TIME = 30 * 60 * 1000;
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState('');
-    // const [fname, setFname] = useState(null);
-    // const [lname, setLname] = useState(null);
-    // const [isSmoker, setIsSmoker] = useState(false);
-    // const [isDrinker, setIsDrinker] = useState(false);
-    // const [height, setHeight] = useState(null);
-    // const [weight, setWeight] = useState(null);
-    // const [dob, setDob] = useState(null);
-    // const [email, setEmail] = useState(null);
     const [doctorAssigned, setdoctorAssigned] = useState(false);
 
 

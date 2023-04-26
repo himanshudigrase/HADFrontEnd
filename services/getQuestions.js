@@ -6,7 +6,7 @@ const questionUrl = commonUrl;
 const getQuestions = async (patientId,activityId) => {
   let response = await axios.get(questionUrl +'/patients'+ patientId+'/activity'+activityId,{
     headers: { Authorization: `Bearer ${savedToken}` }
-  }).then(response => response.data.response);
+  }).then(response => response.data.response).catch(e);
 
   
   return response.data;

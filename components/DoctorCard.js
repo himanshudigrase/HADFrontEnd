@@ -11,10 +11,10 @@ import doctorObj from '../services/doctors';
 const DoctorCard = ({
   id, fname,lname, qualification, specialization, experience, imgUrl
 }) => {
-  const {assignDoctor} = useContext(AuthContext);
+  const {assignDoctor,logout} = useContext(AuthContext);
   const handleDoctor = async(id)=>{
     let response = await doctorObj.assignDoctor(id);
-    
+    if(response === 401)logout();
     if(response.success == true)
     assignDoctor(id);
    }

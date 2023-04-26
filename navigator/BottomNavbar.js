@@ -39,7 +39,7 @@ export default function BottomNavbar(){
                 return <IconButton icon={iconName} size={24} color={color}/>
             }
         })}>
-            <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false,tabBarShowLabel:false}}/>
+            <Tab.Screen name="Home" component={Dashboard} options={{headerShown:false}}/>
             <Tab.Screen name="Breathe" component={breath} options={{headerShown:false}}/>           
             <Tab.Screen name='Myths' component={MFList} options={{headerShown:false}}/>
             {
