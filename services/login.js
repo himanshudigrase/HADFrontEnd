@@ -31,7 +31,8 @@ const getID = async (email) => {
     }
     )
     const response = await reqInstance.get(loginUrl + '/users/' + email);
-    console.log('id get' + response.data.response.userId);  
+    console.log('id get' );
+    console.log(response.data.response);   
     return response.data.response.userId;
   } catch (e) {
     console.log(e);

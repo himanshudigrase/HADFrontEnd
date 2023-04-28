@@ -12,7 +12,7 @@ const getDoctors = async () => {
     response = await axios.get(doctorUrl + '/users/get-doctors', {
       headers: { Authorization: `Bearer ${savedToken}` }
     });
-    
+    console.log(response.data);
   } catch (e) {
   
     await AsyncStorage.removeItem('token');
@@ -47,9 +47,10 @@ const assignDoctor = async (doctorId) => {
       headers: { Authorization: `Bearer ${savedToken}` }
 
     });
+    await AsyncStorage.setItem('doctorId',doctorId.toString());
     return response.data;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
 
     if (error.response && error.response.status === 401) {
       return error.response.status;

@@ -13,13 +13,15 @@ const signup = async (details) => {
   }
 }
 
-const submiDetails = async(details) =>{
-  const response = await axios.post(loginBaseUrl + '/users/add-patient',details)
+const submiDetails = async(details,fcmToken) =>{
   
+  console.log('error here');
+  const response = await axios.post(loginBaseUrl + '/users/add-patient',details)
+ 
   if (response.status === 200) {
     return response.data
   } else {
-    throw new Error('Error submitting details')
+    throw new Error('Error submitting details');
   }
 }
 

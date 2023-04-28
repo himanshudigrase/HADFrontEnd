@@ -6,16 +6,18 @@ import MyButton from '../components/DoctorBookButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../context/AuthContext';
 import doctorObj from '../services/doctors';
+import { useNavigation } from '@react-navigation/native';
 
 
 const DoctorCard = ({
   id, fname,lname, qualification, specialization, experience, imgUrl
 }) => {
+  const navigate = useNavigation();
   const {assignDoctor,logout} = useContext(AuthContext);
   const handleDoctor = async(id)=>{
+    
     let response = await doctorObj.assignDoctor(id);
     if(response === 401)logout();
-    if(response.success == true)
     assignDoctor(id);
    }
 
@@ -24,7 +26,7 @@ const DoctorCard = ({
     <TouchableOpacity className="m-2">
       <Card className=" h-41 bg-white">
         <View className='mt-3 flex-row'>
-          <Avatar.Image className="mt-5 ml-5" size={70} source={require('../assets/images/user2.png')} />
+          <Image className="mt-5 ml-5 h-20 w-20 rounded-lg" source={require('../assets/images/doctor-avatar.jpg')} />
 
           <Card.Content className="ml-2">
             <Text className='font-interBold mb-2'>{fname} {lname}</Text>

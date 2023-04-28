@@ -45,10 +45,9 @@ const Login = () => {
       ])
       else{
         await AsyncStorage.setItem('token', token);
-
         const patientId = await loginService.getID(email);
+        
         await AsyncStorage.setItem('patientId', patientId.toString());
-  
         const from_storage = await AsyncStorage.getItem('token');
   
         login(from_storage);
@@ -83,7 +82,7 @@ const Login = () => {
           }} onChange={handlePassword} />
         </View>
         <View className='relative justify-center items-center mr-32 bottom-0 top-6'>
-          <MyButton className='w-40' mode="contained" onPress={handleSubmit} title='Login'></MyButton>
+          <MyButton className='w-40' mode="contained" onPress={handleSubmit} title='Login'/>
           <View className='flex-row pt-2 ml-8'>
             <Text className="text-xs pl-14 ml-4 pb-2 text-textColor font-regular">Don't have an account?</Text>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Signup')}><Text className="text-xs font-bold underline underline-offset-2 pl-1  text-textColor font-regular">Sign Up</Text></TouchableWithoutFeedback>

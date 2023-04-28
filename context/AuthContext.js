@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     const [userToken, setuserToken] = useState('');
     const [doctorAssigned, setdoctorAssigned] = useState(false);
 
-
+console.log('Auth context',doctorAssigned);
 
     const login = (receivedToken) => {
         setIsLoading(true);
@@ -21,7 +21,10 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
         setuserToken(null);
         await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('patientId');
+        await AsyncStorage.removeItem('doctorId');
         setIsLoading(false);
+        //setdoctorAssigned(false);
     }
 
     const isLoggedIn = async () => {
@@ -36,8 +39,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     const assignDoctor= async(id) =>{
-        try{
-           
+        try{   
+            console.log('Assign doctor getting called');
             await AsyncStorage.setItem('doctorId', id.toString());
             setdoctorAssigned(true);
         }catch(e){

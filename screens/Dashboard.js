@@ -11,11 +11,16 @@ import { GetSortOrder } from '../functions/sortFunctionActivity';
 import { LinearGradient } from 'expo-linear-gradient';
 import ChooseDoctorCard from '../components/ChooseDoctorCard';
 import YetToAssignActivityCard from '../components/YetToAssignActivityCard';
+import patientObj from '../services/getPatientDetails';
+import messaging from '@react-native-firebase/messaging';
+import { doctor } from '../dummyData/doctor';
+
+
 
 
 const Dashboard = ({ route }) => {
   const { logout } = useContext(AuthContext);
-  //const [doctorAssigned, setdoctorAssigned] = useState(false);
+  const [doctorAssignedlogin, setdoctorAssigned] = useState(false);
   const [activityDisplay, setActivityDisplay] = useState([]);
   const {doctorAssigned} = useContext(AuthContext);
   const [yetToAssign, setYetToAssign] = useState(true);
@@ -28,24 +33,38 @@ const Dashboard = ({ route }) => {
     async function fetchData(){
     
       try {
+        
         const getPatient = await AsyncStorage.getItem('patientId');
-        activitiesToDisplay = await getAssignments(getPatient);
-        if(activitiesToDisplay === 401)logout();
-        if(activitiesToDisplay !=[] && activitiesToDisplay!=undefined && activitiesToDisplay !='') {
+        const getDoctorId = await AsyncStorage.getItem('doctorId');
+        console.log('doctor',getDoctorId);
+        if(getDoctorId!=null && getDoctorId!=undefined || doctorAssigned) {setdoctorAssigned(true)}
 
-          activitiesToDisplay.forEach(activity => {
-            console.log(activity);
-            //  if (activitiesToDisplay ==[] &&  !activitiesToDisplay.find(({assignmentId}) => assignmentId === activity.assignmentId))
-            if (!prvsActivities.find(item => item.id === activity.id)) prvsActivities.push(activity);
-  
-          })
-          prvsActivities.sort(GetSortOrder("itemLevel"));
-          setActivityDisplay(prvsActivities);
-          setYetToAssign(false)
+        const fcmToken = await messaging().getToken();
+        const getfcmToken = await patientObj.getToken(getPatient);
+
+        if(fcmToken!=getfcmToken.fcmToken){
+          const reqBody = {fcmToken:fcmToken}
+          await patientObj.putToken(getPatient, reqBody);
         }
 
-        // condition here to check whether to set doctorAssigned to true or not
-        //setdoctorAssigned(true);
+        activitiesToDisplay = await getAssignments(getPatient);
+        if(activitiesToDisplay === 401)logout();
+      
+        if(activitiesToDisplay !=[] && activitiesToDisplay!=undefined && activitiesToDisplay !='') {
+
+          
+          activitiesToDisplay.forEach(activity => {
+            console.log('This will be pushed');
+            
+             if (!prvsActivities.find(item => item.id == activity.id)) prvsActivities.push(activity);
+  
+          });
+       console.log(prvsActivities);
+          prvsActivities.sort(GetSortOrder("itemLevel"));
+          setActivityDisplay(prvsActivities);
+          setYetToAssign(false);
+        }
+
       } catch (error) {
         console.error(error);
       }
@@ -74,8 +93,10 @@ const Dashboard = ({ route }) => {
         }}
           vertical
           showsVerticalScrollIndicator={true}>
-          {doctorAssigned ? yetToAssign ? 
+          {
+          (doctorAssignedlogin || doctorAssigned) ? yetToAssign ? 
           <View className="ml-2">
+            { console.log(doctorAssigned)}
           <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
           
           <YetToAssignActivityCard/>

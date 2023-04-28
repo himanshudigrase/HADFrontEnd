@@ -13,26 +13,18 @@ const getAssignments = async (patientId) => {
     const response = await axios.get(assignmentsUrl + '/patients/' + patientId + '/assignments', {
       headers: { Authorization: `Bearer ${savedToken}` }
     })
-      .then(response => response);
-    console.log(response);
-      if(response.status === 401){
-        console.log(response.status);
-        return response.status;
-      }
+      .then(response => response);  
     const assgns = response.data.response;
-  
-
-    if(assgns!=null && assgns !=Object.keys(assgns).length === 0 ){
+    if(Object.keys(assgns).length != 0 ){
       const doctorId = assgns[0].doctor.doctorId;
-
-      await AsyncStorage.setItem('doctorId', doctorId.toString());
-
+      if(doctorId!=null) await AsyncStorage.setItem('doctorId', doctorId.toString());
+      
       let arrOfActivities = [];
-  
+  //console.log(assgns);
       assgns.forEach(assgn => {
-        // here i dont have to bother about item type , considering every item to display
         arrOfActivities.push(
           {
+            assignmentId: assgn.assignmentId,
             id: assgn.item.itemId,
             type: assgn.item.type,
             name: assgn.item.activity.name,
@@ -40,12 +32,15 @@ const getAssignments = async (patientId) => {
             itemLevel: assgn.itemLevel
           })
       });
+      //console.log('Assignemnt Id below');
+      //console.log(arrOfActivities);
       return arrOfActivities;
     }else return [];
     
     
   } catch (e) {
     console.log(e);
+    return false;
   }
 
 }

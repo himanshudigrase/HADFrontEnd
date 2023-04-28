@@ -5,15 +5,7 @@ import ActivityCard from './ActivityCard'
 
 const Activity = (arrayOfActivities) => {
  
-  //  const [activities,setActivity] = useState([]);
   
-  //  useEffect(()=>{
-  //   let activities = arrayOfActivities.arrayOfActivities;
-  //   setActivity(activities);
-  //  },[activities])
-   arrayOfActivities.arrayOfActivities.forEach(activity => {
-    //console.log(activity);
-   });
   return (
     <ScrollView 
     contentContainerStyle={{
@@ -30,13 +22,14 @@ const Activity = (arrayOfActivities) => {
           return(
            
             <ActivityCard
+            assignmentId = {activity.assignmentId}
             key ={activity.id}
             activityId = {activity.id}
             type = {activity.type}
             name = {activity.name}
             description = {activity.description}
             itemLevel = {activity.itemLevel}
-            mode = {activity.itemLevel == 1 ? 'elevated': 'contained'}
+            mode = {activity.itemLevel == 1 ? 'elevated':'contained'}
             />
           )
         })

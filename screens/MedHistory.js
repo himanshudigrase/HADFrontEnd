@@ -7,7 +7,7 @@ import MyButton from '../components/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import SInput from '../components/ShortInput';
 import signUpService from '../services/signupService';
-
+import messaging from '@react-native-firebase/messaging';
 
 const MedHistory = ({ route }) => {
   const [inputValues, setInputValues] = useState({
@@ -35,7 +35,7 @@ const MedHistory = ({ route }) => {
     });
   }
 
-  const medHistDet = {
+  let medHistDet = {
     patientId: route.params.userId,
     wantsDoc: route.params.wants_doc,
     joiningDate: today,
@@ -46,7 +46,7 @@ const MedHistory = ({ route }) => {
       smoker: isSmoker,
       drinksAlcohol: drinksAlcohol,
       diseases: inputValues.diseases
-    }
+    },
   }
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
@@ -108,15 +108,18 @@ const MedHistory = ({ route }) => {
     }
 
     try {
-
+      // add FCM token
+      const token = await messaging().getToken();
+      medHistDet = Object.assign({fcmToken : token},medHistDet);
+     
      const res = await signUpService.submiDetails(medHistDet);  
-console.log(res);
+
         (() => navigation.navigate('Login', {
           demographics: res.response.demographics,
           patient: res.response.patient,
           medicalHistory: res.response.patient.medicalHistory,        // uncomment these lines the whole try block during backend testing
-          userRole: res.response.userRole
-
+          userRole: res.response.userRole,
+  
         }))();
       }
      catch (exception) {

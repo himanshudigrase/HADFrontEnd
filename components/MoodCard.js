@@ -14,22 +14,20 @@ const MoodCard = ({  value,imgUrl,mood }) => {
   async function postMood() {
     const patientId = await AsyncStorage.getItem('patientId');
     dataToSend["timeStamp"] = today.toString();
+    console.log();
     dataToSend["patientId"] = patientId;
-    const res = await postMoodService(dataToSend);
-    console.log(res);
-    if (res.Status === "200 OK") {
+    const res = await postMoodService(dataToSend).then(()=> {
       Alert.alert('Great', 'You have successfully recorded your mood for today', [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
       ])
-    }
-
+    }).catch((e)=>console.error(e)); 
   }
 
 
 
   return (
     <View className=' mr-2 mb-10'>
-      <Image  source={imgUrl}/>
+      <Image className='h-40 w-40' source={imgUrl}/>
       {/* <TouchableOpacity onPress={() => postMood()}>
         <Card className='w-36 mb-3 mt-3 h-18 bg-backgr'>
           <Card.Content>

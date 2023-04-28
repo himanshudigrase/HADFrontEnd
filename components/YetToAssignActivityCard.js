@@ -17,7 +17,7 @@ const YetToAssignActivityCard = () => {
         
           <Card.Content className='flex'>
             <View className=''>
-              <Text className=' text-colorr font-interSBold mb-8'>Please be patient, activities will appear soon.</Text>
+              <Text className=' text-colorr font-interSBold mb-8'>Congratulations !! You have been assigned a doctor. Your activities will appear here</Text>
               
             </View>
           </Card.Content>

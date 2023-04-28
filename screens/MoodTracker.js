@@ -8,7 +8,7 @@ import FeaturedMood from '../components/FeaturedMood'
 const MoodTracker = () => {
   return (
     <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
-    <SafeAreaView  className="top-12 items-center h-full w-full">
+    <View  className="top-12 items-center h-full w-full">
     <Image style={styles.bgImage} source={require('../assets/images/bg2.png')} />
     <Text className=" text-white text-2xl mb-10 font-interBold">Better U.</Text>
         
@@ -25,7 +25,7 @@ const MoodTracker = () => {
         <FeaturedMood className="w-screen"/>
       </View>
     </ScrollView>
-    </SafeAreaView>
+    </View>
     </LinearGradient>
   )
 }

@@ -15,6 +15,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function BottomNavbar(){
     const {doctorAssigned} = useContext(AuthContext);
+    
     return(
         <Tab.Navigator screenOptions={({route})=>({
             tabBarActiveTintColor: '#1d253b',

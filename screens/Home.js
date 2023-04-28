@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: '-11.77%',
     right: '-10%',
-    top: '-0%',
+    top: '-2%',
     bottom: '70.72%',
     zIndex: 2
   }, logo: {

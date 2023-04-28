@@ -1,15 +1,16 @@
 import { View, Text,Image,StyleSheet } from 'react-native'
 import React, { useState, useEffect, useContext } from 'react'
-import getQuestions from '../services/getQuestions'
+import questions from '../services/getQuestions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ActivityIndicator, Button, Card, RadioButton } from 'react-native-paper'
 import { LinearGradient } from 'expo-linear-gradient';
 import MyButton from '../components/QuestionButton';
 import Header from '../components/Header';
 import { AuthContext } from '../context/AuthContext'
+import { useNavigation } from '@react-navigation/native'
 
 const Activity = ({ route }) => {
-
+  const navigation = useNavigation();
   const [questionsAssigned, setQuestionsAssigned] = useState(false);      // to check if questions are loaded yet or not
   const [questionDisplay, setQuestionDisplay] = useState([]);             // to dynamically dispaly question  , was not necessay
   const [currentIndex, setCurrentIndex] = useState(0);                    // to dynamically display the question card according to question Index
@@ -21,12 +22,18 @@ const Activity = ({ route }) => {
   let choicesSelectedTillNow = [];
   let responseToSend = {};                                                // to store response which needs to send
   const activityId = route.params.activityId;
+  const assignmentId = route.params.assignmentId;
+  //console.log(assignmentId);
   let getPatient;
   const {logout} = useContext(AuthContext);
 
   // this function handles the put request of choices
   async function handleSubmit(responseToSend){
     
+    await questions.sendAnswers(assignmentId,responseToSend);
+    await questions.putAnswers(assignmentId,responseToSend);
+
+    navigation.navigate('Dashboard');
   }
 
   // this hook fetches our questions for a particular patientId and activityId
@@ -34,14 +41,15 @@ const Activity = ({ route }) => {
     (async function toFetchQuestions() {
       try {
         getPatient = await AsyncStorage.getItem('patientId');
-        questionsToDisplay = await getQuestions(getPatient, activityId);
+        questionsToDisplay = await questions.getQuestions(getPatient, activityId);
+        
         if(questionDisplay == 401) logout();
-        // waiting until we get response
+      
         if (questionsToDisplay != [] && questionsToDisplay != undefined && questionsToDisplay != '') {
           setQuestionDisplay(questionsToDisplay);
-
+         
           setPid(getPatient);
-         // console.log(responseToSend);
+        
           setQuestionsAssigned(true);
         }
 
@@ -86,7 +94,7 @@ const Activity = ({ route }) => {
                 {checked === null ? disabledB = true : disabledB = false}
                 <MyButton disabled={disabledB} onPress={() => { 
                   choicesSelectedTillNow = choicesSelected
-                  choicesSelectedTillNow.push({"questionId":currentIndex+1,"choice":checked}); 
+                  choicesSelectedTillNow.push({"questionId":questionDisplay[currentIndex].questionId,"choice":checked}); 
                   setChoicesSelected(choicesSelectedTillNow);
                    setCurrentIndex(currentIndex + 1);
                     setChecked(null); }} title='Next'></MyButton>
@@ -99,9 +107,10 @@ const Activity = ({ route }) => {
                 <Text className='tracking-wider text-colorr font-interMedium mb-4'>Congratulations!! You have completed the activity. Click Submit to submit the responses. Do not forget to record your mood for today!!</Text>
               </Card.Content>
               <Card.Actions>
-                <MyButton onPress={() =>{responseToSend["choices"] = choicesSelected; 
+                <MyButton onPress={async () =>{responseToSend["choices"] = choicesSelected; 
                 responseToSend["patientId"] = parseInt(pId);         
                 responseToSend["activityId"] = activityId;
+                handleSubmit(responseToSend);
                 console.log(responseToSend);}} title='Submit'></MyButton>
               </Card.Actions>
 

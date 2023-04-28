@@ -1,7 +1,7 @@
 import * as TalkRn from '@talkjs/expo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View, Text, Button, TextInput } from 'react-native'
+
 
 export default function ChatComponent(props) {
   const [loadChat, setLoadChat] = useState(false);
@@ -16,12 +16,6 @@ export default function ChatComponent(props) {
       setDoctorId(getDoctor);
     })();
   }, []);
-
-
- 
-//  const imageId = require('../assets/images/user.jpg');
-//  console.log(imageId);
-
 
 
   const me = {
