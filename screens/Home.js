@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image,TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -32,11 +32,18 @@ const Home = () => {
     <LinearGradient colors={['#9FB9F9', '#FCFDFF']} style={{ flex: 1 }}>
       <SafeAreaView className="h-full" style={{ zIndex: 4 }}>
         <Image style={styles.bgImage} source={require('../assets/images/bg.png')} />
-        <View className="fixed pt-20 pb-5 mt-20 ml-6 z-2" style={{ zIndex: 3 }}>
-          <Image className='' style={styles.logo} source={require('../assets/images/logo.png')} />
+        <View className="fixed pt-20 pb-5 mt-20 ml-4 z-2" style={{ zIndex: 3 }}>
+          <Image className='ml-2' style={styles.logo} source={require('../assets/images/logo.png')} />
           {/* <Text className="text-3xl pb-1 text-textColor font-interSBold tracking-wide" style={styles.titleText}>better U.</Text> */}
 
-          <Text style={styles.typoText} className=" font-interELight">{disArr[index % disArr.length]}</Text>
+          <Text style={styles.typoText} className=" font-interELight">
+            {disArr[index % disArr.length].split(' ').map((word, i, arr) => {
+              if (i === arr.length - 1) {
+                return <Text key={i} style={{ fontWeight: 'bold' }}>{word}</Text>;
+              }
+              return `${word} `;
+            })}
+          </Text>
         </View>
         <View className='relative top-80 pt-20'>
           <MyButton className='left-20 w-40' mode="contained" onPress={() => navigation.navigate('TandC')} title='Sign Up'>Sign Up</MyButton>

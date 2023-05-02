@@ -18,7 +18,7 @@ const getQuestions = async (patientId,activityId) => {
 const putAnswers = async(assignmentId,responseToSend) =>{
   const savedToken = await AsyncStorage.getItem('token');
   
-  let response = await axios.put(questionUrl +'/assignment/'+ assignmentId+'/mark-as-completed',{
+  let response = await axios.put(questionUrl +'/assignment/'+ assignmentId+'/mark-as-completed',responseToSend,{
     headers: { Authorization: `Bearer ${savedToken}` }
   }).then(response => response).catch((e)=>{
 

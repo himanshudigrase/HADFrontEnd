@@ -11,7 +11,7 @@ const getPatientDetails = async (patientId) => {
     const response = await axios.get(detailsUrl + '/users/get/' + patientId, {
       headers: { Authorization: `Bearer ${savedToken}` }
     })
-    console.log(response);
+    //console.log(response);
     return response.data;
   } catch (e) {
     await AsyncStorage.removeItem('token');

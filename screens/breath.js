@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions, Animated,Image,SafeAreaView} from "react-native";
-import { Button } from "react-native-paper";
-import { set } from "react-native-reanimated";
 import MyButton from '../components/CustomStart';
 import { LinearGradient } from 'expo-linear-gradient';
 import MyButtonS from '../components/CustomStop';

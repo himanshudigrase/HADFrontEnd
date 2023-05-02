@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { NativeWindStyleSheet } from "nativewind";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import 'react-native-gesture-handler';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen'
 import { Provider as PaperProvider } from 'react-native-paper';
-import { AuthProvider } from './context/AuthContext';
+import { AuthContext, AuthProvider } from './context/AuthContext';
 import AppNav from './navigator/AppNav';
 import messaging from '@react-native-firebase/messaging';
 import { Alert } from 'react-native';
@@ -18,6 +18,8 @@ NativeWindStyleSheet.setOutput({
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
+
   const [appIsReady, setAppIsReady] = useState(false);
   //PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
   const requestUserPermission = async () => {
@@ -33,13 +35,13 @@ export default function App() {
     }
   }
 
-
+  // const {updateDash} = useContext(AuthContext);
 
 
   useEffect(() => {
     async function prepare() {
       try {
-       
+        
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
           'inter-black': require('./assets/fonts/Inter-Black.ttf'),
@@ -96,7 +98,9 @@ export default function App() {
 
 
         const unsubscribe = messaging().onMessage(async remoteMessage => {
+          
           Alert.alert('Congratulations!!', JSON.stringify(remoteMessage.notification.body));
+          // updateDash(true);
         });
     
         return unsubscribe;

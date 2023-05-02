@@ -17,6 +17,10 @@ const Activity = ({ route }) => {
   const [checked, setChecked] = useState(null);                           // to check status of radio button
   const [choicesSelected, setChoicesSelected] = useState([]);
   const [pId,setPid] = useState(null);
+  const [completed,setCompleted] = useState(false);
+
+
+
   let disabledB;                                                         // to disable the button unless user selects an option
   let questionsToDisplay = [];                                            // to store response of API call 
   let choicesSelectedTillNow = [];
@@ -32,7 +36,7 @@ const Activity = ({ route }) => {
     
     await questions.sendAnswers(assignmentId,responseToSend);
     await questions.putAnswers(assignmentId,responseToSend);
-
+    
     navigation.navigate('Dashboard');
   }
 

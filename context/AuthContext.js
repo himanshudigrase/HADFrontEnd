@@ -8,8 +8,10 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setuserToken] = useState('');
     const [doctorAssigned, setdoctorAssigned] = useState(false);
+    const [loadActivity, setLoadActivity] = useState(false);
 
-console.log('Auth context',doctorAssigned);
+
+//console.log('Auth context',doctorAssigned);
 
     const login = (receivedToken) => {
         setIsLoading(true);
@@ -48,13 +50,17 @@ console.log('Auth context',doctorAssigned);
         }
     }
 
+    const updateDash = (value)=>{
+        setLoadActivity(value);
+    }
     useEffect(() => {
         isLoggedIn();
+        updateDash(false);
     }, []);
 
     return (
         // with this provider we can pass any value to any screen
-        <AuthContext.Provider value={{ isLoading, userToken, login, logout, assignDoctor,doctorAssigned }}>
+        <AuthContext.Provider value={{ isLoading, userToken, login, logout, assignDoctor,doctorAssigned,updateDash }}>
 
             {children}
 

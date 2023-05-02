@@ -29,8 +29,9 @@ const getAssignments = async (patientId) => {
             type: assgn.item.type,
             name: assgn.item.activity.name,
             description: assgn.item.activity.description,
-            itemLevel: assgn.itemLevel
-          })
+            itemLevel: assgn.itemLevel,
+            status:assgn.completed
+          });
       });
       //console.log('Assignemnt Id below');
       //console.log(arrOfActivities);

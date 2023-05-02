@@ -7,7 +7,7 @@ import MyButton from '../components/ActivityButton';
 
 
 
-const ActivityCard = ({assignmentId, activityId,type, description, name, itemLevel, mode }) => {
+const ActivityCard = ({assignmentId, activityId,type, description, name, itemLevel, mode,status }) => {
 console.log('AssignmentId',assignmentId);
   const navigation = useNavigation();
   return (
@@ -31,7 +31,8 @@ console.log('AssignmentId',assignmentId);
             name: name,
             description: description,
             type: type,
-            itemLevel: itemLevel
+            itemLevel: itemLevel,
+            status: status
           });
 
       }}>

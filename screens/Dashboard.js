@@ -18,59 +18,93 @@ import { doctor } from '../dummyData/doctor';
 
 
 
-const Dashboard = ({ route }) => {
+function Dashboard({ route }){
   const { logout } = useContext(AuthContext);
   const [doctorAssignedlogin, setdoctorAssigned] = useState(false);
   const [activityDisplay, setActivityDisplay] = useState([]);
-  const {doctorAssigned} = useContext(AuthContext);
+  const { doctorAssigned } = useContext(AuthContext);
   const [yetToAssign, setYetToAssign] = useState(true);
-
-  let activitiesToDisplay = [];
+  // let activitiesToDisplay = [];
   let prvsActivities = activityDisplay;
 
 
-  useEffect(()=>{
-    async function fetchData(){
-    
+  const [hash_completed, setHashCompleted] = useState({
+    1:true,
+    2:false,
+    3:false,
+    4:false,
+    5:false,
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+
       try {
-        
+
         const getPatient = await AsyncStorage.getItem('patientId');
         const getDoctorId = await AsyncStorage.getItem('doctorId');
-        console.log('doctor',getDoctorId);
-        if(getDoctorId!=null && getDoctorId!=undefined || doctorAssigned) {setdoctorAssigned(true)}
-
         const fcmToken = await messaging().getToken();
         const getfcmToken = await patientObj.getToken(getPatient);
 
-        if(fcmToken!=getfcmToken.fcmToken){
-          const reqBody = {fcmToken:fcmToken}
+        if (getDoctorId != null && getDoctorId != undefined || doctorAssigned) { setdoctorAssigned(true) }
+        if (fcmToken != getfcmToken.fcmToken) {
+          const reqBody = { fcmToken: fcmToken }
           await patientObj.putToken(getPatient, reqBody);
         }
 
-        activitiesToDisplay = await getAssignments(getPatient);
-        if(activitiesToDisplay === 401)logout();
-      
-        if(activitiesToDisplay !=[] && activitiesToDisplay!=undefined && activitiesToDisplay !='') {
-
-          
-          activitiesToDisplay.forEach(activity => {
-            console.log('This will be pushed');
-            
-             if (!prvsActivities.find(item => item.id == activity.id)) prvsActivities.push(activity);
-  
-          });
-       console.log(prvsActivities);
-          prvsActivities.sort(GetSortOrder("itemLevel"));
-          setActivityDisplay(prvsActivities);
+        const activitiesToDisplay = await getAssignments(getPatient);
+        setActivityDisplay(activitiesToDisplay);
+        console.log(activityDisplay);
+        
+        console.log("length = ", activityDisplay.length);
+        if(activitiesToDisplay != [] && activitiesToDisplay != undefined && activitiesToDisplay != '') {
           setYetToAssign(false);
         }
+
+
+        let copyAssignments = activityDisplay;
+        copyAssignments.sort(GetSortOrder("itemLevel"));
+        console.log("hash_completed = ",hash_completed);
+
+
+        // if (activitiesToDisplay === 401) logout();
+
+        // if (activitiesToDisplay != [] && activitiesToDisplay != undefined && activitiesToDisplay != '') {
+        //   activitiesToDisplay.forEach(activity => {
+        //     if (!prvsActivities.find(item => item.id == activity.id && item.itemLevel == activity.itemLevel && item.status == activity.status)) prvsActivities.push(activity);
+        //   });
+
+        //   prvsActivities.sort(GetSortOrder("itemLevel"));
+        //   console.log(prvsActivities);
+        //   setActivityDisplay(prvsActivities);
+        //   setYetToAssign(false);
+        // }
+
+        let curAssignmentNum = 0;
+        let updatedHash = JSON.parse(JSON.stringify(hash_completed));
+
+        while(copyAssignments[curAssignmentNum].status) {
+          curAssignmentNum++;
+        }
+
+        let prevAssingmentNum = curAssignmentNum - 1;
+        let curItemLevel = copyAssignments[curAssignmentNum].itemLevel;
+        if(copyAssignments[prevAssingmentNum].itemLevel != curItemLevel) {
+          updatedHash[curItemLevel] = true; 
+        }
+
+        setHashCompleted(updatedHash);
+        console.log("updatedHash : ", updatedHash);
+
 
       } catch (error) {
         console.error(error);
       }
     }
+    // setLoadActivity(false);
     fetchData();
-}, [])
+    console.log(hash_completed);
+  }, [])
 
   const navigation = useNavigation();
 
@@ -82,7 +116,7 @@ const Dashboard = ({ route }) => {
   }, [])
 
   return (
-    
+
     <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
       <SafeAreaView className=" h-full w-full">
         <Image style={styles.bgImage} source={require('../assets/images/verti.png')} />
@@ -94,21 +128,21 @@ const Dashboard = ({ route }) => {
           vertical
           showsVerticalScrollIndicator={true}>
           {
-          (doctorAssignedlogin || doctorAssigned) ? yetToAssign ? 
-          <View className="ml-2">
-            { console.log(doctorAssigned)}
-          <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
-          
-          <YetToAssignActivityCard/>
-        </View> 
-          
-          :
-            <View className="ml-2">
-              <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
-              <Activities arrayOfActivities={activityDisplay} />
-            </View> 
-            : 
-            <ChooseDoctorCard/> }
+            (doctorAssignedlogin || doctorAssigned) ? yetToAssign ?
+              <View className="ml-2">
+                {console.log(doctorAssigned)}
+                <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
+
+                <YetToAssignActivityCard />
+              </View>
+
+              :
+              <View className="ml-2">
+                <Text className='mb-2 font-interMedium text-lg'>My Assignments</Text>
+                <Activities arrayOfActivities={activityDisplay} hash_completed={hash_completed} />
+              </View>
+              :
+              <ChooseDoctorCard />}
 
           <Text className='ml-2 mb-2 font-interMedium text-lg '>Blogs</Text>
           <View className="w-full">
