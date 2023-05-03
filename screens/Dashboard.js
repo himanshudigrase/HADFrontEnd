@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, StyleSheet, Image, SafeAreaView } from 'react-native'
-import React, { useLayoutEffect, useState, useEffect, useContext } from 'react'
+import { View, Text, ScrollView, StyleSheet, Image, SafeAreaView, RefreshControl } from 'react-native'
+import React, { useLayoutEffect, useState, useEffect, useContext, useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Activities from '../components/Activities';
 import Header from '../components/Header';
@@ -14,26 +14,36 @@ import YetToAssignActivityCard from '../components/YetToAssignActivityCard';
 import patientObj from '../services/getPatientDetails';
 import messaging from '@react-native-firebase/messaging';
 import { doctor } from '../dummyData/doctor';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 
 
-function Dashboard({ route }){
-  const { logout } = useContext(AuthContext);
+function Dashboard({ route }) {
+  const { logout,assignDoctor } = useContext(AuthContext);
   const [doctorAssignedlogin, setdoctorAssigned] = useState(false);
   const [activityDisplay, setActivityDisplay] = useState([]);
   const { doctorAssigned } = useContext(AuthContext);
   const [yetToAssign, setYetToAssign] = useState(true);
+  const [dummy, setDummy] = useState(false);
   // let activitiesToDisplay = [];
-  let prvsActivities = activityDisplay;
+  //let prvsActivities = activityDisplay;
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [start,setStart] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
 
+  }, []);
 
   const [hash_completed, setHashCompleted] = useState({
-    1:true,
-    2:false,
-    3:false,
-    4:false,
-    5:false,
+    1: true,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
   });
 
   useEffect(() => {
@@ -46,7 +56,8 @@ function Dashboard({ route }){
         const fcmToken = await messaging().getToken();
         const getfcmToken = await patientObj.getToken(getPatient);
 
-        if (getDoctorId != null && getDoctorId != undefined || doctorAssigned) { setdoctorAssigned(true) }
+        if (getDoctorId != null && getDoctorId != undefined || doctorAssigned) { setdoctorAssigned(true) ;
+         assignDoctor(id); console.log('Assigned');}
         if (fcmToken != getfcmToken.fcmToken) {
           const reqBody = { fcmToken: fcmToken }
           await patientObj.putToken(getPatient, reqBody);
@@ -54,19 +65,23 @@ function Dashboard({ route }){
 
         const activitiesToDisplay = await getAssignments(getPatient);
         setActivityDisplay(activitiesToDisplay);
-        console.log(activityDisplay);
-        
+       // console.log(activityDisplay);
+
         console.log("length = ", activityDisplay.length);
-        if(activitiesToDisplay != [] && activitiesToDisplay != undefined && activitiesToDisplay != '') {
+        if (activitiesToDisplay != [] && activitiesToDisplay != undefined && activitiesToDisplay != '') {
           setYetToAssign(false);
         }
 
 
+
         let copyAssignments = activityDisplay;
         copyAssignments.sort(GetSortOrder("itemLevel"));
-        console.log("hash_completed = ",hash_completed);
+        console.log("hash_completed = ", hash_completed);
 
-
+        let hash_completedFromStorage;
+        await AsyncStorage.getItem('hashCompleted').then((dataAsString) => { hash_completedFromStorage = JSON.parse(dataAsString) })
+        if (hash_completedFromStorage != null) { setHashCompleted(hash_completedFromStorage) }
+        console.log("hash from local = ", hash_completed);
         // if (activitiesToDisplay === 401) logout();
 
         // if (activitiesToDisplay != [] && activitiesToDisplay != undefined && activitiesToDisplay != '') {
@@ -79,24 +94,26 @@ function Dashboard({ route }){
         //   setActivityDisplay(prvsActivities);
         //   setYetToAssign(false);
         // }
+        if (copyAssignments != [] && copyAssignments != undefined && copyAssignments != '') {
+          let curAssignmentNum = 0;
+          let updatedHash = JSON.parse(JSON.stringify(hash_completed));
 
-        let curAssignmentNum = 0;
-        let updatedHash = JSON.parse(JSON.stringify(hash_completed));
+          while (copyAssignments[curAssignmentNum].status) {
+            updatedHash[copyAssignments[curAssignmentNum].itemLevel] = true;
+            curAssignmentNum++;
+          }
+          // console.log("currentIndex after while = " + curAssignmentNum);
 
-        while(copyAssignments[curAssignmentNum].status) {
-          curAssignmentNum++;
+          let prevAssingmentNum = curAssignmentNum - 1;
+          let curItemLevel = copyAssignments[curAssignmentNum].itemLevel;
+          if (copyAssignments[prevAssingmentNum].itemLevel != curItemLevel) {
+            updatedHash[curItemLevel] = true;
+          }
+
+          setHashCompleted(updatedHash);
+          console.log("updatedHash : ", updatedHash);
+          AsyncStorage.setItem('hashCompleted', JSON.stringify(updatedHash));
         }
-
-        let prevAssingmentNum = curAssignmentNum - 1;
-        let curItemLevel = copyAssignments[curAssignmentNum].itemLevel;
-        if(copyAssignments[prevAssingmentNum].itemLevel != curItemLevel) {
-          updatedHash[curItemLevel] = true; 
-        }
-
-        setHashCompleted(updatedHash);
-        console.log("updatedHash : ", updatedHash);
-
-
       } catch (error) {
         console.error(error);
       }
@@ -112,9 +129,10 @@ function Dashboard({ route }){
     navigation.setOptions({
       headerShown: false
     });
-
+    setStart(true);
   }, [])
-
+  if(start == false)return <ActivityIndicator/>
+  
   return (
 
     <LinearGradient colors={['#C1D3FD', '#FCFDFF']} style={{ flex: 1 }}>
@@ -126,7 +144,10 @@ function Dashboard({ route }){
           paddingTop: 10
         }}
           vertical
-          showsVerticalScrollIndicator={true}>
+          showsVerticalScrollIndicator={true}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           {
             (doctorAssignedlogin || doctorAssigned) ? yetToAssign ?
               <View className="ml-2">
